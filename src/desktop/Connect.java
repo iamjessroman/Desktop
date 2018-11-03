@@ -22,7 +22,6 @@ public class Connect extends javax.swing.JFrame {
     public Connect(){
         initComponents();
         Cliente cl = new Cliente();
-        cl.downloadImage();
         cl.downloadJson();
     }
 

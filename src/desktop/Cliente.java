@@ -48,18 +48,6 @@ public class Cliente {
         }
     }
 
-    public void downloadImage() {
-        String BASE_URL = "http://localhost:8080/Servidor/app/descarga/image";
-        try {
-            URL website = new URL(BASE_URL);
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream("classes.jpg");
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void close() {
         client.close();
     }
