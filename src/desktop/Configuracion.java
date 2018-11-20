@@ -165,9 +165,9 @@ public class Configuracion extends javax.swing.JFrame {
             img.getImage(rj.jsonFileRead());
 
         } catch (JSONException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

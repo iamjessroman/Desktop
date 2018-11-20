@@ -27,12 +27,12 @@ import javafx.stage.Stage;
  *
  * @author jessi
  */
-public class Connect extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form Conect
      */
-    public Connect() {
+    public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -79,27 +79,19 @@ public class Connect extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(79, 79, 79)
                 .addComponent(btnconfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
-
-         new Thread() {
-            @Override
-            public void run() {
-                javafx.application.Application.launch(MyApplication.class);
-            }
-        }.start();
-         
-        this.setVisible(false);
-
+        Windows s=new Windows();
+        s.setVisible(true);
     }//GEN-LAST:event_btnconfiguracionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -118,7 +110,7 @@ public class Connect extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Connect().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
