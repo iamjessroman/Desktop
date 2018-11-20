@@ -5,26 +5,37 @@
  */
 package desktop;
 
+import static desktop.ARFFfile.dataRaw;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 /**
  *
  * @author jessi
  */
 public class Connect extends javax.swing.JFrame {
+
     /**
      * Creates new form Conect
      */
-    public Connect(){
+    public Connect() {
         initComponents();
-        Cliente cl = new Cliente();
-        cl.downloadJson();
+        this.setLocationRelativeTo(null);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,14 +46,22 @@ public class Connect extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnstart = new javax.swing.JButton();
+        btnconfiguracion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnstart.setText("Start");
-        btnstart.addActionListener(new java.awt.event.ActionListener() {
+        btnconfiguracion.setText("Configuración Previa");
+        btnconfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnstartActionPerformed(evt);
+                btnconfiguracionActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Configuración General");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -51,33 +70,42 @@ public class Connect extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(btnstart)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addGap(153, 153, 153)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnconfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnstart)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(btnconfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnstartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstartActionPerformed
-        ReadJson rj = new ReadJson();
-        try {
-            Images img = new Images();
-            img.getImage(rj.jsonFileRead());
-        } catch (JSONException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnstartActionPerformed
+    private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
+
+         new Thread() {
+            @Override
+            public void run() {
+                javafx.application.Application.launch(MyApplication.class);
+            }
+        }.start();
+         
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btnconfiguracionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Configuracion s=new Configuracion();
+        s.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +124,7 @@ public class Connect extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnstart;
+    private javax.swing.JButton btnconfiguracion;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

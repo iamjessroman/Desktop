@@ -1,0 +1,8 @@
+  4,ocupado 
+  1,libre 
+  6,ocupado 
+  5,ocupado 
+  8,ocupado 
+  2,libre 
+  7,ocupado 
+  3,ocupado 

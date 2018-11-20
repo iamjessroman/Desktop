@@ -74,7 +74,9 @@ public class Images {
         int restante = number % numberthreads;
 
         int n = 1;
-
+        
+        ARFFfile arff = new ARFFfile(50,100);
+        
         if (restante == 0) {
             for (int i = 0; i < cycles; i++) {
                 
