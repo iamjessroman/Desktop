@@ -17,13 +17,13 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class SwingBrowser extends JFXPanel {
+public class ClassWebView extends JFXPanel {
 //Variable encargada de renderizar el website
 
     private WebEngine engine;
 
     //Constructor de la clase
-    public SwingBrowser() {
+    public ClassWebView() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

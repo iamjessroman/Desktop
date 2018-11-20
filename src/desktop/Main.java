@@ -90,7 +90,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
-        Windows s=new Windows();
+        JFrameWebView s=new JFrameWebView();
         s.setVisible(true);
     }//GEN-LAST:event_btnconfiguracionActionPerformed
 
