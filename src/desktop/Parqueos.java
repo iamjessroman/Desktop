@@ -41,7 +41,7 @@ public class Parqueos extends javax.swing.JFrame {
 
     public void images() throws MalformedURLException, IOException {
 
-        String fichero = "C:\\Users\\jessi\\Desktop\\archivo.txt";
+        String fichero = "./data/archivo.txt";
         String url = "";
         try {
             FileReader fr = new FileReader(fichero);
@@ -62,7 +62,7 @@ public class Parqueos extends javax.swing.JFrame {
         for (int j = 1; j < parts.length; j++) {
             //convert base64 string to binary data
             byte[] data = DatatypeConverter.parseBase64Binary(parts[j]);
-            String path = "C:\\Users\\jessi\\Desktop\\test_image" + j + ".png";
+            String path = "./data/image" + j + ".png";
             File file = new File(path);
             try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                 outputStream.write(data);
@@ -73,7 +73,7 @@ public class Parqueos extends javax.swing.JFrame {
         JPanel panel = new JPanel();
 
             for (int i = 1; i <= 8; i++) {
-            ImageIcon icon = new ImageIcon("C:\\Users\\jessi\\Desktop\\test_image" + i + ".png");
+            ImageIcon icon = new ImageIcon("./data/image" + i + ".png");
             String nombre = String.valueOf(i);
             JLabel templabel = new JLabel(nombre);
             templabel.setSize(300, 300);
@@ -157,7 +157,7 @@ public class Parqueos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-            Main st = new Main();
+            JFrameMain st = new JFrameMain();
             st.setVisible(true);
             this.setVisible(false);
     }//GEN-LAST:event_jMenu2MouseClicked
@@ -183,7 +183,7 @@ public class Parqueos extends javax.swing.JFrame {
         }
         //convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-        String path = "C:\\Users\\jessi\\Desktop\\test_image." + extension;
+        String path = "./data/image." + extension;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);

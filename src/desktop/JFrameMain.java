@@ -27,12 +27,12 @@ import javafx.stage.Stage;
  *
  * @author jessi
  */
-public class Main extends javax.swing.JFrame {
+public class JFrameMain extends javax.swing.JFrame {
 
     /**
      * Creates new form Conect
      */
-    public Main() {
+    public JFrameMain() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -91,11 +91,13 @@ public class Main extends javax.swing.JFrame {
 
     private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
         JFrameWebView s=new JFrameWebView();
+        this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_btnconfiguracionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Configuracion s=new Configuracion();
+        JFrameGeneral s=new JFrameGeneral();
+        this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -110,7 +112,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new JFrameMain().setVisible(true);
             }
         });
     }

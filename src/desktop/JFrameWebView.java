@@ -90,12 +90,12 @@ public class JFrameWebView extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
                 Conexion c = new Conexion();
-                
                 String string = c.data();
                 Parqueos p = new Parqueos();
+                this.setVisible(false);
                 p.setVisible(true);
 
-                String ruta = "C:\\Users\\jessi\\Desktop\\archivo.txt";
+                String ruta = "./data/archivo.txt";
                 File archivo = new File(ruta);
                 BufferedWriter bw;
                 try {
