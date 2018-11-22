@@ -90,6 +90,7 @@ public class JFrameParkings extends javax.swing.JFrame {
             JComboBox combo = new JComboBox();
             combo.addItem("Ocupado");
             combo.addItem("Libre");
+            estados.add(combo);
             this.jPanel2.add(combo);
             indice++;
             this.jPanel1.updateUI();
@@ -197,7 +198,7 @@ public class JFrameParkings extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

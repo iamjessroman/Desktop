@@ -17,9 +17,9 @@ public class Conexion {
         String nombre = null;
         try {
 
-            String url = "jdbc:mysql://localhost/data";
-            String username = "jessica";
-            String password = "1234";
+            String url = "jdbc:mysql://box595.bluehost.com:2083/mecatro1_data";
+            String username = "mecatro1_automot";
+            String password = "cedula@0602442592";
 
             Connection connection = DriverManager.getConnection(url, username, password);
 
