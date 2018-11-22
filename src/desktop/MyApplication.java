@@ -56,7 +56,7 @@ public class MyApplication extends Application implements EventHandler {
                 Conexion c = new Conexion();
                 
                 String string = c.data();
-                Parqueos p = new Parqueos();
+                JFrameParkings p = new JFrameParkings();
                 p.setVisible(true);
 
                 String ruta = "C:\\Users\\jessi\\Desktop\\archivo.txt";

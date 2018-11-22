@@ -17,11 +17,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.xml.bind.DatatypeConverter;
@@ -30,13 +34,22 @@ import javax.xml.bind.DatatypeConverter;
  *
  * @author Tesis
  */
-public class Parqueos extends javax.swing.JFrame {
+public class JFrameParkings extends javax.swing.JFrame {
+
+    private List<JLabel> imagenes;
+    private List<JLabel> titulos;
+    private List<JComboBox> estados;
+    private int indice;
 
     /**
      * Creates new form Parqueos
      */
-    public Parqueos() {
+    public JFrameParkings() {
         initComponents();
+        imagenes = new ArrayList<>();
+        estados = new ArrayList<>();
+        titulos = new ArrayList<>();
+        indice = 0;
     }
 
     public void images() throws MalformedURLException, IOException {
@@ -64,26 +77,29 @@ public class Parqueos extends javax.swing.JFrame {
             byte[] data = DatatypeConverter.parseBase64Binary(parts[j]);
             String path = "./data/image" + j + ".png";
             File file = new File(path);
+            ImageIcon icon = new ImageIcon("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\image" + j + ".png");
+            JLabel etiqueta = new JLabel("Etiqueta " + indice);
+            etiqueta.setText(null);
+            etiqueta.setSize(300, 300);
+            Icon icono = new ImageIcon(icon.getImage().getScaledInstance(etiqueta.getWidth(), etiqueta.getHeight(), Image.SCALE_DEFAULT));
+            etiqueta.setIcon(icono);
+            this.jPanel1.add(etiqueta);
+            imagenes.add(etiqueta);
+            JLabel titulo = new JLabel("Parqueo: " + indice);
+            this.jPanel2.add(titulo);
+            JComboBox combo = new JComboBox();
+            combo.addItem("Ocupado");
+            combo.addItem("Libre");
+            this.jPanel2.add(combo);
+            indice++;
+            this.jPanel1.updateUI();
+            this.jPanel2.updateUI();
             try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                 outputStream.write(data);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        JPanel panel = new JPanel();
-
-            for (int i = 1; i <= 8; i++) {
-            ImageIcon icon = new ImageIcon("./data/image" + i + ".png");
-            String nombre = String.valueOf(i);
-            JLabel templabel = new JLabel(nombre);
-            templabel.setSize(300, 300);
-            
-            Icon icono = new ImageIcon(icon.getImage().getScaledInstance(templabel.getWidth(), templabel.getHeight(), Image.SCALE_DEFAULT));
-            templabel.setIcon(icono);
-            panel.add(templabel);
-            
-        }
-        
 
     }
 
@@ -96,13 +112,30 @@ public class Parqueos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Cargar Imágenes");
+        jButton1.setText("Continuar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setLayout(new java.awt.GridLayout(0, 3));
+        jScrollPane1.setViewportView(jPanel1);
+
+        jPanel2.setLayout(new java.awt.GridLayout(0, 2));
+        jScrollPane2.setViewportView(jPanel2);
+
+        jMenu1.setText("Cargar");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -115,25 +148,32 @@ public class Parqueos extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Continuar");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 423, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -143,7 +183,7 @@ public class Parqueos extends javax.swing.JFrame {
         try {
             this.images();
         } catch (IOException ex) {
-            Logger.getLogger(Parqueos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jMenu1ActionPerformed
@@ -152,15 +192,13 @@ public class Parqueos extends javax.swing.JFrame {
         try {
             this.images();
         } catch (IOException ex) {
-            Logger.getLogger(Parqueos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-            JFrameMain st = new JFrameMain();
-            st.setVisible(true);
-            this.setVisible(false);
-    }//GEN-LAST:event_jMenu2MouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,27 +241,32 @@ public class Parqueos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Parqueos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameParkings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Parqueos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameParkings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Parqueos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameParkings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Parqueos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameParkings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Parqueos().setVisible(true);
+                new JFrameParkings().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
