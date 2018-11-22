@@ -91,7 +91,7 @@ public class JFrameWebView extends javax.swing.JFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
                 Conexion c = new Conexion();
                 String string = c.data();
-                Parqueos p = new Parqueos();
+                JFrameParkings p = new JFrameParkings();
                 this.setVisible(false);
                 p.setVisible(true);
 
