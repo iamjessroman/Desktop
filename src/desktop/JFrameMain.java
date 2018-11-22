@@ -624,18 +624,17 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jListFiltersMouseClicked
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
-        try {
-            ClassMain cm = new ClassMain();
-
-            String ruta = "./data/mix.txt";
-            mix = cm.ReadArray(ruta);
-            if (mix != null) {
-                this.jListMix.setListData(mix);
-                this.jListMix.remove(mix.length);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            ClassMain cm = new ClassMain();
+//            String ruta = "./data/mix.txt";
+////            mix = cm.ReadArray(ruta);
+////            if (mix != null) {
+////                this.jListMix.setListData(mix);
+////                this.jListMix.remove(mix.length);
+////            }
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
@@ -664,26 +663,26 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveFiltersActionPerformed
 
     private void btnSaveMixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveMixActionPerformed
-//        try {
-//            String ruta = "./data/mix.txt";
-//            String text = "";
-//            String namemix = "";
-//            String name[] = null;
-//            for (int i = 0; i < model.getSize(); i++) {
-//                text += model.getElementAt(i) + ",";
-//            }
-//            text += this.jTextNameMix.getText();
-//            ClassMain cm = new ClassMain();
-//            cm.WriteMix(text, ruta);
-//            this.jListFiltersMix.removeAll();
-//            String mix[] = cm.ReadMix(ruta);
-//            for (int i = 0; i < mix.length; i++) {
-//                name = mix[i].split(",");
-//                System.out.println(name);
-//            }
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            String ruta = "./data/mix.txt";
+            String text = "";
+
+            for (int i = 0; i < model.getSize(); i++) {
+                text += model.getElementAt(i) + ",";
+            }
+            text += this.jTextNameMix.getText();
+            cm.WriteMix(text, ruta);
+            mix=cm.ReadMix(ruta);
+            for (int i = 0; i < 10; i++) {
+                if (mix[i]!=null) {
+                    System.out.println(mix[i]);
+                }
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_btnSaveMixActionPerformed

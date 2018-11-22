@@ -77,6 +77,7 @@ public class ClassMain {
                 bw.write(Text);
 
             } else {
+                archivo.createNewFile();
                 bw = new BufferedWriter(new FileWriter(archivo));
                 bw.write(Text);
             }
@@ -87,20 +88,16 @@ public class ClassMain {
     }
 
     public void WriteMix(String Text, String ruta) {
-        File archivo = new File(ruta);
-        BufferedWriter bw;
         try {
-            if (archivo.exists()) {
-                bw = new BufferedWriter(new FileWriter(archivo, true));
-                bw.write(Text);
-
-            } else {
-                bw = new BufferedWriter(new FileWriter(archivo));
-                bw.write(Text);
-            }
+            File archivo = new File(ruta);
+            BufferedWriter bw;
+            FileWriter fw;
+            fw = new FileWriter(archivo.getAbsoluteFile(), true);
+            bw = new BufferedWriter(fw);
+            bw.write("\n"+Text);
             bw.close();
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClassMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

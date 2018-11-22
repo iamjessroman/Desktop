@@ -1,1 +1,16 @@
-Gaussian,BrightnessCoBrightnessContrast(Photoshop) Channels,Desaturate,StackBlur,Box,Dither,StackBlur,hola23BrightnessCoBrightnessContrast(Photoshop) Channels,xvzxvzvBrightnessCoBrightnessContrast(Photoshop) Channels,BrightnBrightnessContrast(GIMP),vxvvDither,BrightnBrightnessContrast(GIMP),holaDither,BrightnBrightnessContrast(GIMP),StackBlur,ColorColorTransform,holaDither,BrightnBrightnessContrast(GIMP),StackBlur,ColorColorTransform,holaDither,BrightnBrightnessContrast(GIMP),StackBlur,ColorColorTransform,hola
+BrightnBrightnessContrast(GIMP), vcbcvbcvbc
+StackBlur,Desaturate, vbvbvc
+StackBlur,Desaturate, vbvbvc
+StackBlur,Desaturate, vbvbvc
+StackBlur,Desaturate, vbvbvc
+StackBlur,Desaturate, vbvbvc
+StackBlur,Desaturate, vbvbvc
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnBrightnessContrast(GIMP),xvdvxcbx
+BrightnessCoBrightnessContrast(Photoshop) Channels,Gaussian,bcbxcb
+BrightnessCoBrightnessContrast(Photoshop) Channels,Gaussian,ColorColorTransform,Gaussian,Box,bcbxcb
