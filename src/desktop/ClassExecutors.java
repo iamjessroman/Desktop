@@ -9,80 +9,42 @@ package desktop;
  *
  * @author jessi
  */
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JLabel;
 
 public class ClassExecutors {
 
-    public static void main(String[] args) {
+    public void RUN() throws FileNotFoundException{
+        List<Runnable> tasks = new ArrayList<>();
         System.out.println("Inside : " + Thread.currentThread().getName());
+        ClassMain cm = new ClassMain();
+        String ruta = "./data/configuraciones.txt";
+        String number[] = cm.ReadArray(ruta);
+        System.out.println("Creating Executor Service with a thread pool of Size " + number[0]);
+        ExecutorService executorService = Executors.newFixedThreadPool(Integer.valueOf(number[0]));
 
-        System.out.println("Creating Executor Service with a thread pool of Size 8");
-        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        for (int i = 0; i < Integer.valueOf(number[0]); i++) {
+            Runnable task = () -> {
+                System.out.println("Executing Task inside : " + Thread.currentThread().getName());
+                try {
+                    Images img = new Images();
 
-        Runnable task1 = () -> {
-            System.out.println("Executing Task1 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        Runnable task2 = () -> {
-            System.out.println("Executing Task2 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(4);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        Runnable task3 = () -> {
-            System.out.println("Executing Task3 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        Runnable task4 = () -> {
-            System.out.println("Executing Task4 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        Runnable task5 = () -> {
-            System.out.println("Executing Task5 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(6);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        Runnable task6 = () -> {
-            System.out.println("Executing Task6 inside : " + Thread.currentThread().getName());
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ex) {
-                throw new IllegalStateException(ex);
-            }
-        };
-
-        System.out.println("Submitting the tasks for execution...");
-        executorService.submit(task1);
-        executorService.submit(task2);
-        executorService.submit(task3);
-        executorService.submit(task4);
-        executorService.submit(task5);
-        executorService.submit(task6);
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                    throw new IllegalStateException(ex);
+                }
+            };
+            tasks.add(task);
+        }
         
+        for (int i = 0; i < tasks.size(); i++) {
+            executorService.submit(tasks.get(i));
+        }
 
         executorService.shutdown();
     }

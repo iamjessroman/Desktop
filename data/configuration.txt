@@ -1,1 +1,1 @@
-6,8,modelo.model
+8,10,modelo.model

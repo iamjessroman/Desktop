@@ -10,6 +10,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,6 +30,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.xml.bind.DatatypeConverter;
+import org.json.JSONException;
 
 /**
  *
@@ -40,12 +42,16 @@ public class JFrameParkings extends javax.swing.JFrame {
     private List<JLabel> titulos;
     private List<JComboBox> estados;
     private int indice;
+    String[] mix = null;
+    String[] namemixs = null;
+    ClassMain cm = new ClassMain();
 
     /**
      * Creates new form Parqueos
      */
     public JFrameParkings() {
         initComponents();
+
         imagenes = new ArrayList<>();
         estados = new ArrayList<>();
         titulos = new ArrayList<>();
@@ -53,6 +59,27 @@ public class JFrameParkings extends javax.swing.JFrame {
     }
 
     public void images() throws MalformedURLException, IOException {
+        try {
+            String ruta = "./data/mix.txt";
+            String text = "";
+            String[] mixs = null;
+            int n = 0;
+
+            mix = cm.ReadMix(ruta);
+            for (int i = 0; i < mix.length; i++) {
+                if (mix[i] != null) {
+                    n++;
+                }
+            }
+            namemixs = new String[n];
+
+            for (int i = 0; i < n; i++) {
+                mixs = mix[i].split(",");
+                this.jComboBox1.addItem(mixs[mixs.length - 1]);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String fichero = "./data/archivo.txt";
         String url = "";
@@ -75,9 +102,14 @@ public class JFrameParkings extends javax.swing.JFrame {
         for (int j = 1; j < parts.length; j++) {
             //convert base64 string to binary data
             byte[] data = DatatypeConverter.parseBase64Binary(parts[j]);
-            String path = "./data/image" + j + ".png";
+            String path = "./data/image" + (j - 1) + ".png";
             File file = new File(path);
-            ImageIcon icon = new ImageIcon("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\image" + j + ".png");
+            try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+                outputStream.write(data);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ImageIcon icon = new ImageIcon("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\image" + (j - 1) + ".png");
             JLabel etiqueta = new JLabel("Etiqueta " + indice);
             etiqueta.setText(null);
             etiqueta.setSize(300, 300);
@@ -95,11 +127,7 @@ public class JFrameParkings extends javax.swing.JFrame {
             indice++;
             this.jPanel1.updateUI();
             this.jPanel2.updateUI();
-            try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-                outputStream.write(data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
 
     }
@@ -118,6 +146,8 @@ public class JFrameParkings extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -135,6 +165,8 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(0, 2));
         jScrollPane2.setViewportView(jPanel2);
+
+        jLabel1.setText("Combinación de Filtro");
 
         jMenu1.setText("Cargar");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,12 +189,17 @@ public class JFrameParkings extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -170,11 +207,15 @@ public class JFrameParkings extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -198,7 +239,35 @@ public class JFrameParkings extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+        Conexion c = new Conexion();
+        c.delete();
+        try {
+            String ruta = "./data/estados.txt";
+            String Text = "";
+            Binary bn = new Binary();
+            for (int i = 0; i < estados.size(); i++) {
+                try {
+                    JComboBox est = estados.get(i);
+                    Text += est.getSelectedItem() + ",";
+
+                } catch (Exception ex) {
+                    Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            cm.WriteEstados(Text, ruta);
+            ReadJson rj = new ReadJson();
+            Images img = new Images();
+            Images.getImage(rj.jsonFileRead());
+
+            JFrameMain s = new JFrameMain();
+            this.setVisible(false);
+            s.setVisible(true);
+        } catch (JSONException ex) {
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -263,6 +332,8 @@ public class JFrameParkings extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

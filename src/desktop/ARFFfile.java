@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -67,7 +66,7 @@ public class ARFFfile {
         instanceValue1[0] = dataRaw.attribute(0).addStringValue(String.valueOf(l));
         for (int i = 0; i < image.getHeight(); i++) {
             for (int j = 0; j < image.getWidth(); j++) {
-                int number = 112;
+                int number = 175;
                 if (image.getColor(j, i).getRed() > number) {
                     libre++;
                 } else {
@@ -79,28 +78,25 @@ public class ARFFfile {
                 p++;
             }
         }
-        
-        
-        Conexion c = new Conexion();
-        
-        if (libre > ocupado) {
-            instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("libre"));
-            c.datos(l,"libre");
-        } else {
-            instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("ocupado"));
-            c.datos(l,"ocupado");
-        }
 
+        Conexion c = new Conexion();
+        ClassMain cm = new ClassMain();
+        String ruta = "./data/estados.txt";
+        String est[]=cm.ReadArray(ruta);
+        instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("libre"));
+        c.datos(l,est[(int) (Math.random() * 6) + 1]);
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
-        System.out.println(dataRaw);
-        ArffSaver saver = new ArffSaver();
-        saver.setInstances(dataRaw);
-        saver.setFile(new File("./data/test.arff"));
-        saver.writeBatch();
+        String text = dataRaw.toString();
+        System.out.println(text);
+        cm.Write(text, "./data/test.arff");
+//        ArffSaver saver = new ArffSaver();
+//        saver.setInstances(dataRaw);
+//        saver.setFile(new File("./data/test.arff"));
+//        saver.writeBatch();
 //        System.out.println(cadena);
 //        getPred(image,l);
 //
-        
+
     }
 
 }

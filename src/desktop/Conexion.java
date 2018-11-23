@@ -17,14 +17,14 @@ public class Conexion {
         String nombre = null;
         try {
 
-            String url = "jdbc:mysql://box595.bluehost.com:2083/mecatro1_data";
-            String username = "mecatro1_automot";
-            String password = "cedula@0602442592";
+            String url = "jdbc:mysql://localhost/data";
+            String username = "jessica";
+            String password = "1234";
 
             Connection connection = DriverManager.getConnection(url, username, password);
 
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM `images` ORDER BY `ID` DESC LIMIT 1");
+            ResultSet rs = statement.executeQuery("SELECT * FROM `images`");
             while (rs.next()) {
 
                 int id = rs.getInt("ID");
@@ -51,7 +51,7 @@ public class Conexion {
             Statement st = conn.createStatement();
 
             int i = st.executeUpdate("insert into `estados`(`number`, `estado`) values(" + id + ",'" + estado + "')");
-            out.println("Data is successfully inserted!");
+            out.println("Estado Insertado");
         } catch (Exception e) {
             System.out.print(e);
             e.printStackTrace();

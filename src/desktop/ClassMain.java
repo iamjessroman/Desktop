@@ -88,16 +88,27 @@ public class ClassMain {
     }
 
     public void WriteMix(String Text, String ruta) {
+
         try {
+
             File archivo = new File(ruta);
             BufferedWriter bw;
             FileWriter fw;
-            fw = new FileWriter(archivo.getAbsoluteFile(), true);
-            bw = new BufferedWriter(fw);
-            bw.write("\n"+Text);
+
+            if (archivo.exists()) {
+                fw = new FileWriter(archivo.getAbsoluteFile(), true);
+                bw = new BufferedWriter(fw);
+                bw.write(Text+"\n");
+
+            } else {
+                archivo.createNewFile();
+                fw = new FileWriter(archivo.getAbsoluteFile(), true);
+                bw = new BufferedWriter(fw);
+                bw.write(Text);
+            }
             bw.close();
         } catch (IOException ex) {
-            Logger.getLogger(ClassMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -125,5 +136,33 @@ public class ClassMain {
             Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
         return config;
+    }
+    
+        public void WriteEstados(String Text, String ruta) {
+
+        try {
+
+            File archivo = new File(ruta);
+            BufferedWriter bw;
+            FileWriter fw;
+
+            if (archivo.exists()) {
+                archivo.delete();
+                archivo.createNewFile();
+                fw = new FileWriter(archivo.getAbsoluteFile(), true);
+                bw = new BufferedWriter(fw);
+                bw.write(Text+"\n");
+
+            } else {
+                archivo.createNewFile();
+                fw = new FileWriter(archivo.getAbsoluteFile(), true);
+                bw = new BufferedWriter(fw);
+                bw.write(Text);
+            }
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

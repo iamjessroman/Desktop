@@ -36,8 +36,8 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("descarga");
     }
 
-    public void downloadJson() {
-        String BASE_URL = "http://localhost:8080/Servidor/app/descarga/json";
+    public void downloadJson(String url) {
+        String BASE_URL = url;
         try {
             URL website = new URL(BASE_URL);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
