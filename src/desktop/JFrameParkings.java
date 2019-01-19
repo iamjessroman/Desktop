@@ -255,6 +255,8 @@ public class JFrameParkings extends javax.swing.JFrame {
                 }
             }
             cm.WriteEstados(Text, ruta);
+            Conexion cn = new Conexion();
+            cn.datos();
             ReadJson rj = new ReadJson();
             Images img = new Images();
             Images.getImage(rj.jsonFileRead());

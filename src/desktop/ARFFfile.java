@@ -84,11 +84,11 @@ public class ARFFfile {
         String ruta = "./data/estados.txt";
         String est[]=cm.ReadArray(ruta);
         instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("libre"));
-        c.datos(l,est[(int) (Math.random() * 6) + 1]);
+        c.datos();
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
         String text = dataRaw.toString();
         System.out.println(text);
-        cm.Write(text, "./data/test.arff");
+        cm.Write(text, "./data/test.arff",false);
 //        ArffSaver saver = new ArffSaver();
 //        saver.setInstances(dataRaw);
 //        saver.setFile(new File("./data/test.arff"));

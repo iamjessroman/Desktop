@@ -21,6 +21,56 @@ import java.util.logging.Logger;
  */
 public class ClassMain {
 
+    public String[] ReadArray(String ruta) throws FileNotFoundException {
+        String[] arrays = null;
+        File archivo = new File(ruta);
+        FileReader fr = new FileReader(ruta);
+        BufferedReader br = new BufferedReader(fr);
+
+        try {
+            if (archivo.exists()) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    arrays = linea.split(",");
+                }
+
+            } else {
+                arrays = null;
+            }
+            fr.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrays;
+    }
+
+    public void Write(String Text, String ruta, boolean b) {
+        try {
+            File archivo = new File(ruta);
+            BufferedWriter bw;
+            FileWriter fw;
+            
+            //Test
+//            System.out.println(Text);
+
+            if (archivo.exists()) {
+                fw = new FileWriter(archivo.getAbsoluteFile(), b);
+                bw = new BufferedWriter(fw);
+                bw.write(Text + "\n");
+
+            } else {
+                archivo.createNewFile();
+                fw = new FileWriter(archivo.getAbsoluteFile(), b);
+                bw = new BufferedWriter(fw);
+                bw.write(Text + "\n");
+            }
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public String Read(String ruta) throws FileNotFoundException {
         String config = null;
 
@@ -45,52 +95,9 @@ public class ClassMain {
         return config;
     }
 
-    public String[] ReadArray(String ruta) throws FileNotFoundException {
-        String[] filters = null;
-        File archivo = new File(ruta);
-        FileReader fr = new FileReader(ruta);
-        BufferedReader br = new BufferedReader(fr);
-
-        try {
-            if (archivo.exists()) {
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    filters = linea.split(",");
-                }
-
-            } else {
-                filters = null;
-            }
-            fr.close();
-        } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return filters;
-    }
-
-    public void Write(String Text, String ruta) {
-        File archivo = new File(ruta);
-        BufferedWriter bw;
-        try {
-            if (archivo.exists()) {
-                bw = new BufferedWriter(new FileWriter(archivo));
-                bw.write(Text);
-
-            } else {
-                archivo.createNewFile();
-                bw = new BufferedWriter(new FileWriter(archivo));
-                bw.write(Text);
-            }
-            bw.close();
-        } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void WriteMix(String Text, String ruta) {
 
         try {
-
             File archivo = new File(ruta);
             BufferedWriter bw;
             FileWriter fw;
@@ -98,7 +105,7 @@ public class ClassMain {
             if (archivo.exists()) {
                 fw = new FileWriter(archivo.getAbsoluteFile(), true);
                 bw = new BufferedWriter(fw);
-                bw.write(Text+"\n");
+                bw.write(Text + "\n");
 
             } else {
                 archivo.createNewFile();
@@ -107,8 +114,10 @@ public class ClassMain {
                 bw.write(Text);
             }
             bw.close();
+
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyApplication.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -132,13 +141,15 @@ public class ClassMain {
                 config = null;
             }
             fr.close();
+
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyApplication.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return config;
     }
-    
-        public void WriteEstados(String Text, String ruta) {
+
+    public void WriteEstados(String Text, String ruta) {
 
         try {
 
@@ -151,7 +162,7 @@ public class ClassMain {
                 archivo.createNewFile();
                 fw = new FileWriter(archivo.getAbsoluteFile(), true);
                 bw = new BufferedWriter(fw);
-                bw.write(Text+"\n");
+                bw.write(Text + "\n");
 
             } else {
                 archivo.createNewFile();
@@ -160,8 +171,10 @@ public class ClassMain {
                 bw.write(Text);
             }
             bw.close();
+
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyApplication.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }

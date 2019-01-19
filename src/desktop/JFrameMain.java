@@ -6,11 +6,17 @@
 package desktop;
 
 import static desktop.ARFFfile.dataRaw;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,6 +38,7 @@ import javafx.stage.Stage;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -41,6 +48,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class JFrameMain extends javax.swing.JFrame {
 
     ClassMain cm = new ClassMain();
+    Conexion cx = new Conexion();
+    String[] conexion = null;
     String[] config = null;
     String[] filters = null;
     String[] mix = null;
@@ -55,20 +64,22 @@ public class JFrameMain extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public void read() throws FileNotFoundException {
-        ClassMain cm = new ClassMain();
-        String ruta = "./data/configuration.txt";
-        config = cm.ReadArray(ruta);
-        if (config != null) {
-            this.cbThreads.setSelectedIndex(Integer.valueOf(config[0]));
-            this.jLabel4.setText(config[2]);
-        }
-        ruta = "./data/filters.txt";
-        filters = cm.ReadArray(ruta);
-        if (filters != null) {
-            this.jListFilters.setListData(filters);
-            this.jListFiltersMix.setListData(filters);
-        }
+    public void read(String ruta) throws FileNotFoundException {
+//        cm.Read(ruta);
+//        conexion=cm.ReadArray(ruta);
+//        ClassMain cm = new ClassMain();
+//        String ruta = "./data/configuration.txt";
+//        config = cm.ReadArray(ruta);
+//        if (config != null) {
+//            this.cbThreads.setSelectedIndex(Integer.valueOf(config[0]));
+//            this.jLabel4.setText(config[2]);
+//        }
+//        ruta = "./data/filters.txt";
+//        filters = cm.ReadArray(ruta);
+//        if (filters != null) {
+//            this.jListFilters.setListData(filters);
+//            this.jListFiltersMix.setListData(filters);
+//        }
 
 //        ruta = "./data/mix.txt";
 //        mix = cm.ReadArray(ruta);
@@ -93,6 +104,10 @@ public class JFrameMain extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnconfiguracion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -109,9 +124,6 @@ public class JFrameMain extends javax.swing.JFrame {
         btnchooser = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListFilters = new javax.swing.JList<>();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -138,6 +150,42 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jListFiltersMix1 = new javax.swing.JList<>();
+        jPanel17 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListFilters = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        Local_IP = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        Local_Puerto = new javax.swing.JTextField();
+        Local_Name = new javax.swing.JTextField();
+        Local_Save = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        Local_User = new javax.swing.JTextField();
+        Local_Pass = new javax.swing.JPasswordField();
+        jLabel29 = new javax.swing.JLabel();
+        Conexion_MyIP = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        Remote_IP = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        Remote_Puerto = new javax.swing.JTextField();
+        Remote_Name = new javax.swing.JTextField();
+        Remote_Save = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        Remote_User = new javax.swing.JTextField();
+        Remote_Pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,20 +206,34 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTextField2.setText("http://localhost:8080/Servidor/app/descarga/json");
 
+        jLabel17.setText("Fecha");
+
+        jTextField1.setText("17/12/2018");
+
+        jLabel18.setText("Hora");
+
+        jTextField3.setText("12:00");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(554, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(554, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,9 +242,16 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(28, 28, 28))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
         jTabbedPane1.addTab("Principal", jPanel1);
@@ -225,7 +294,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(APIRESTCLASIFICADOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
                 .addComponent(btnconfiguracion)
                 .addContainerGap())
         );
@@ -327,7 +396,7 @@ public class JFrameMain extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
                 .addComponent(btnSave)
                 .addGap(35, 35, 35))
         );
@@ -339,15 +408,6 @@ public class JFrameMain extends javax.swing.JFrame {
                 jTabbedPane2MouseClicked(evt);
             }
         });
-
-        jLabel5.setText("Filtros");
-
-        jListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListFiltersMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jListFilters);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -388,8 +448,8 @@ public class JFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(TextNameFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         btnSaveFilters.setText("Guardar");
@@ -404,35 +464,25 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSaveFilters, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(851, Short.MAX_VALUE)
+                .addComponent(btnSaveFilters)
                 .addGap(25, 25, 25))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(41, 41, 41))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSaveFilters)
-                        .addContainerGap())))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(btnSaveFilters)
+                .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Filtros", jPanel6);
+        jTabbedPane2.addTab("Crear", jPanel6);
 
         btnSaveMix.setText("Guardar");
         btnSaveMix.addActionListener(new java.awt.event.ActionListener() {
@@ -572,22 +622,333 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Combinación de Filtros", jPanel7);
 
+        jListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListFiltersMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListFilters);
+
+        jLabel5.setText("Filtros");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(759, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addGap(234, 234, 234))
+        );
+
+        jTabbedPane2.addTab("Ver", jPanel17);
+
         jTabbedPane1.addTab("Configuración Filtros", jTabbedPane2);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel22.setText("Nombre de la Base de Datos");
+
+        jLabel19.setText("URL");
+
+        Local_IP.setText("166.62.78.1");
+
+        jLabel20.setText("Puerto");
+
+        Local_Puerto.setText("3306");
+
+        Local_Name.setText("server-administrator");
+
+        Local_Save.setText("Guardar");
+        Local_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Local_SaveActionPerformed(evt);
+            }
+        });
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setText("USERNAME");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setText("PASSWORD");
+
+        Local_User.setText("jessicaroman");
+
+        Local_Pass.setText("12345");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel23))
+                .addGap(99, 99, 99)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Local_User, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(Local_Pass))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(Local_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(Local_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel29.setText("My IP");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Local_IP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                .addComponent(Local_Name))
+                            .addComponent(Local_Puerto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Conexion_MyIP, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Local_Save)))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(Local_IP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Local_Puerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Local_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Local_Save)
+                    .addComponent(Conexion_MyIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(538, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Programa Interno", jPanel10);
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel24.setText("Nombre de la Base de Datos");
+
+        jLabel25.setText("URL");
+
+        Remote_IP.setText("127.0.0.1");
+
+        jLabel26.setText("Puerto");
+
+        Remote_Puerto.setText("3306");
+
+        Remote_Name.setText("parkingdb");
+
+        Remote_Save.setText("Guardar");
+        Remote_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Remote_SaveActionPerformed(evt);
+            }
+        });
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel27.setText("USERNAME");
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel28.setText("PASSWORD");
+
+        Remote_User.setText("root");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28))
+                .addGap(99, 99, 99)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Remote_User, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(Remote_Pass))
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(Remote_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(Remote_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Remote_IP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                .addComponent(Remote_Name))
+                            .addComponent(Remote_Puerto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Remote_Save)))
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(Remote_IP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Remote_Puerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Remote_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Remote_Save)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(538, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Programa Externo", jPanel15);
+
+        jTabbedPane1.addTab("Conexión a Base de Datos", jTabbedPane3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -609,99 +970,46 @@ public class JFrameMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
-        Cliente cl = new Cliente();
-        cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
-        JFrameWebView s = new JFrameWebView();
-        this.setVisible(false);
-        s.setVisible(true);
-    }//GEN-LAST:event_btnconfiguracionActionPerformed
-
-    private void btnchooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchooserActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("./data"));
-        chooser.setFileFilter(new FileNameExtensionFilter("model", "MODEL"));
-        int value = chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String filename = f.getName();
-        this.jLabel4.setText(filename);
-    }//GEN-LAST:event_btnchooserActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String ruta = "./data/configuration.txt";
-        File archivo = new File(ruta);
-        BufferedWriter bw;
-        try {
-            if (archivo.exists()) {
-                bw = new BufferedWriter(new FileWriter(archivo));
-                int index = this.cbThreads.getSelectedIndex();
-                bw.write(index + "," + this.cbThreads.getItemAt(index) + "," + this.jLabel4.getText());
-
-            } else {
-                bw = new BufferedWriter(new FileWriter(archivo));
-                int index = this.cbThreads.getSelectedIndex();
-                bw.write(index + "," + this.cbThreads.getItemAt(index) + "," + this.jLabel4.getText());
-            }
-            bw.close();
-        } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void cbThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThreadsActionPerformed
-
-    }//GEN-LAST:event_cbThreadsActionPerformed
-
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+
         try {
-            String ruta = "./data/filters.txt";
-            filters = cm.ReadArray(ruta);
-            if (filters != null) {
-                this.jListFilters.setListData(filters);
+
+            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+
+            String ip = in.readLine(); //you get the IP as a String
+            this.Conexion_MyIP.setText(ip);
+
+            String ruta = "./config/conexion.txt";
+            conexion = cm.ReadArray(ruta);
+
+            if (conexion == null) {
+                JOptionPane.showMessageDialog(null, "No se ha configurado la conexión \n Ir a Pestaña 'Conexión'", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String passRemote = (conexion[5].equals("NONE")) ? "" : conexion[5];
+                String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+                this.Remote_IP.setText(conexion[1]);
+                this.Remote_Puerto.setText(conexion[2]);
+                this.Remote_Name.setText(conexion[3]);
+                this.Remote_User.setText(conexion[4]);
+                this.Remote_Pass.setText(passRemote);
+                this.Local_IP.setText(conexion[7]);
+                this.Local_Puerto.setText(conexion[8]);
+                this.Local_Name.setText(conexion[9]);
+                this.Local_User.setText(conexion[10]);
+                this.Local_Pass.setText(passLocal);
             }
-            read();
         } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha configurado la conexión a base de datos \n Ir a Pestaña 'Conexión a Base de Datos' y 'Guardar'", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-    private void jListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMouseClicked
-
-        JList list = (JList) evt.getSource();
-        if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint());
-            String ruta = "./data/filters.txt";
-            String text = "";
-            String[] filters = null;
-            try {
-                filters = cm.ReadArray(ruta);
-                for (int i = 0; i < filters.length; i++) {
-                    if (index != i) {
-                        text += "," + filters[i];
-                    }
-                }
-                cm.Write(text, ruta);
-                this.jListFilters.removeAll();
-                try {
-                    read();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.jListFilters.updateUI();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Path origenPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\filters.txt");
-            Path destinoPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Cliente\\filters.txt");
-
-            try {
-                Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                System.err.println(e);
-            }
-        }
-    }//GEN-LAST:event_jListFiltersMouseClicked
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         try {
@@ -726,41 +1034,46 @@ public class JFrameMain extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
-    private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
+    private void jListFiltersMix1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMix1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jListFiltersMix1MouseClicked
 
-        String ruta = "./data/filters.txt";
-        String text = "";
-        try {
-            text = cm.Read(ruta) + "," + this.TextNameFilter.getText();
-            cm.Write(text, ruta);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+    private void jListFiltersMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMixMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            model.addElement(this.jListFiltersMix.getSelectedValue());
+            System.out.println(model.size());
+            this.jListNewCombinacion.setModel(model);
+            System.out.println(this.jListFiltersMix.getSelectedValue());
         }
-        this.jListFilters.removeAll();
-        try {
-            read();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+    }//GEN-LAST:event_jListFiltersMixMouseClicked
+
+    private void jListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMixMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 1) {
+            int index = list.locationToIndex(evt.getPoint());
+            try {
+                String ruta = "./data/mix.txt";
+                String[] mixs = null;
+                String[] mixes = null;
+                int n = 0;
+                mix = cm.ReadMix(ruta);
+                mixs = mix[index].split(",");
+                mixes = new String[mixs.length];
+                for (int i = 0; i < mixs.length - 1; i++) {
+                    mixes[i] = mixs[i];
+                }
+                this.jListFiltersMix1.removeAll();
+                this.jListFiltersMix1.setListData(mixes);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        this.jListFilters.updateUI();
-
-        this.TextNameFilter.setText("");
-        this.textNewFilter.setText("");
-
-        Path origenPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\filters.txt");
-        Path destinoPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Cliente\\filters.txt");
-
-        try {
-            Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            System.err.println(e);
-        }
-
-
-    }//GEN-LAST:event_btnSaveFiltersActionPerformed
+    }//GEN-LAST:event_jListMixMouseClicked
 
     private void btnSaveMixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveMixActionPerformed
         try {
@@ -792,56 +1105,131 @@ public class JFrameMain extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_btnSaveMixActionPerformed
 
-    private void jListFiltersMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMixMouseClicked
+    private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
+
+//        String ruta = "./data/filters.txt";
+//        String text = "";
+//        try {
+//            text = cm.Read(ruta) + "," + this.TextNameFilter.getText();
+//            cm.Write(text, ruta, false);
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        this.jListFilters.removeAll();
+//        try {
+//            read(ruta);
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        this.jListFilters.updateUI();
+//
+//        this.TextNameFilter.setText("");
+//        this.textNewFilter.setText("");
+//
+//        Path origenPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\filters.txt");
+//        Path destinoPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Cliente\\filters.txt");
+//
+//        try {
+//            Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//            System.err.println(e);
+//        }
+    }//GEN-LAST:event_btnSaveFiltersActionPerformed
+
+    private void jListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMouseClicked
+
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             int index = list.locationToIndex(evt.getPoint());
-            model.addElement(this.jListFiltersMix.getSelectedValue());
-            System.out.println(model.size());
-            this.jListNewCombinacion.setModel(model);
-            System.out.println(this.jListFiltersMix.getSelectedValue());
-        }
-    }//GEN-LAST:event_jListFiltersMixMouseClicked
-
-    private void jListFiltersMix1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMix1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jListFiltersMix1MouseClicked
-
-    private void jListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMixMouseClicked
-        JList list = (JList) evt.getSource();
-        if (evt.getClickCount() == 1) {
-            int index = list.locationToIndex(evt.getPoint());
+            String ruta = "./data/filters.txt";
+            String text = "";
+            String[] filters = null;
             try {
-                String ruta = "./data/mix.txt";
-                String[] mixs = null;
-                String[] mixes = null;
-                int n = 0;
-                mix = cm.ReadMix(ruta);
-                mixs = mix[index].split(",");
-                mixes = new String[mixs.length];
-                for (int i = 0; i < mixs.length - 1; i++) {
-                    mixes[i] = mixs[i];
+                filters = cm.ReadArray(ruta);
+                for (int i = 0; i < filters.length; i++) {
+                    if (index != i) {
+                        text += "," + filters[i];
+                    }
                 }
-                this.jListFiltersMix1.removeAll();
-                this.jListFiltersMix1.setListData(mixes);
-
+                cm.Write(text, ruta, false);
+                this.jListFilters.removeAll();
+                try {
+                    read(ruta);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.jListFilters.updateUI();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            Path origenPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\filters.txt");
+            Path destinoPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Cliente\\filters.txt");
+
+            try {
+                Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
         }
-    }//GEN-LAST:event_jListMixMouseClicked
+    }//GEN-LAST:event_jListFiltersMouseClicked
+
+    private void btnchooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchooserActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File("./data"));
+        chooser.setFileFilter(new FileNameExtensionFilter("model", "MODEL"));
+        int value = chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String filename = f.getName();
+        this.jLabel4.setText(filename);
+    }//GEN-LAST:event_btnchooserActionPerformed
+
+    private void cbThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThreadsActionPerformed
+
+    }//GEN-LAST:event_cbThreadsActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String ruta = "./data/configuration.txt";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            if (archivo.exists()) {
+                bw = new BufferedWriter(new FileWriter(archivo));
+                int index = this.cbThreads.getSelectedIndex();
+                bw.write(index + "," + this.cbThreads.getItemAt(index) + "," + this.jLabel4.getText());
+
+            } else {
+                bw = new BufferedWriter(new FileWriter(archivo));
+                int index = this.cbThreads.getSelectedIndex();
+                bw.write(index + "," + this.cbThreads.getItemAt(index) + "," + this.jLabel4.getText());
+            }
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void APIRESTCLASIFICADORActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APIRESTCLASIFICADORActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_APIRESTCLASIFICADORActionPerformed
+
+    private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
+        Cliente cl = new Cliente();
+        cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
+        JFrameWebView s = new JFrameWebView();
+        this.setVisible(false);
+        s.setVisible(true);
+    }//GEN-LAST:event_btnconfiguracionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Conexion c = new Conexion();
-        c.delete();
+        Conexion cn = new Conexion();
+        cn.datos();
         ReadJson rj = new ReadJson();
         Images img = new Images();
         try {
-            img.getImage(rj.jsonFileRead());
+            Images.getImage(rj.jsonFileRead());
         } catch (JSONException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -849,9 +1237,61 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void APIRESTCLASIFICADORActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APIRESTCLASIFICADORActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_APIRESTCLASIFICADORActionPerformed
+    private void Remote_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Remote_SaveActionPerformed
+        String ruta = "./config/conexion.txt";
+        String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
+        String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
+        cm.Write("Remote,"
+                + this.Remote_IP.getText() + ","
+                + this.Remote_Puerto.getText() + ","
+                + this.Remote_Name.getText() + ","
+                + this.Remote_User.getText() + ","
+                + passRemote + ","
+                + "Local,"
+                + this.Local_IP.getText() + ","
+                + this.Local_Puerto.getText() + ","
+                + this.Local_Name.getText() + ","
+                + this.Local_User.getText() + ","
+                + passLocal, ruta, false);
+
+       String sql = "UPDATE `config` SET "
+               + "`ip`='" + this.Remote_IP.getText() + "', "
+               + "`puerto`='" + this.Remote_Puerto.getText() + "', "
+               + "`name_db`='" + this.Remote_Name.getText() + "', "
+               + "`username`='" + this.Remote_User.getText() + "', "
+               + "`password`='" + passRemote
+                + "'WHERE `type`='externo'";
+        String msg = "la configuración de base de datos externa";
+        cx.update(sql, msg);
+    }//GEN-LAST:event_Remote_SaveActionPerformed
+
+    private void Local_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Local_SaveActionPerformed
+        String ruta = "./config/conexion.txt";
+        String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
+        String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
+        cm.Write("Remote,"
+                + this.Remote_IP.getText() + ","
+                + this.Remote_Puerto.getText() + ","
+                + this.Remote_Name.getText() + ","
+                + this.Remote_User.getText() + ","
+                + passRemote + ","
+                + "Local,"
+                + this.Local_IP.getText() + ","
+                + this.Local_Puerto.getText() + ","
+                + this.Local_Name.getText() + ","
+                + this.Local_User.getText() + ","
+                + passLocal, ruta, false);
+
+        String sql = "UPDATE `config` SET "
+                + "`ip`='" + this.Local_IP.getText() + "', "
+                + "`puerto`='" + this.Local_Puerto.getText() + "', "
+                + "`name_db`='" + this.Local_Name.getText() + "', "
+                + "`username`='" + this.Local_User.getText() + "', "
+                + "`password`='" + passLocal
+                + "'WHERE `type`='interno'";
+        String msg = "la configuración de base de datos interna";
+        cx.update(sql, msg);
+    }//GEN-LAST:event_Local_SaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -871,6 +1311,19 @@ public class JFrameMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField APIRESTCLASIFICADOR;
+    private javax.swing.JTextField Conexion_MyIP;
+    private javax.swing.JTextField Local_IP;
+    private javax.swing.JTextField Local_Name;
+    private javax.swing.JPasswordField Local_Pass;
+    private javax.swing.JTextField Local_Puerto;
+    private javax.swing.JButton Local_Save;
+    private javax.swing.JTextField Local_User;
+    private javax.swing.JTextField Remote_IP;
+    private javax.swing.JTextField Remote_Name;
+    private javax.swing.JPasswordField Remote_Pass;
+    private javax.swing.JTextField Remote_Puerto;
+    private javax.swing.JButton Remote_Save;
+    private javax.swing.JTextField Remote_User;
     private javax.swing.JTextField TextNameFilter;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveFilters;
@@ -888,7 +1341,20 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -902,6 +1368,14 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JList<String> jListMix;
     private javax.swing.JList<String> jListNewCombinacion;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -918,7 +1392,10 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextNameMix;
     private javax.swing.JTextArea textNewFilter;
     // End of variables declaration//GEN-END:variables

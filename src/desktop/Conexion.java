@@ -1,5 +1,7 @@
 package desktop;
 
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,8 +10,63 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Conexion {
+
+    ClassMain cm = new ClassMain();
+    String[] conexion = null;
+
+    @SuppressWarnings("empty-statement")
+    public void getCrediantials() {
+        String ruta = "./config/conexion.txt";
+        try {
+            conexion = cm.ReadArray(ruta);
+//            Test
+//            for (int i = 0; i < conexion.length; i++) {
+//                System.out.println(conexion[i]);
+//            }
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha configurado la conexión \n Ir a Pestaña 'Conexión'", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void update(String sql, String msg) {
+        testMySQLDriver();
+        getCrediantials();
+        String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://"
+                    + conexion[7] + ":"
+                    + conexion[8] + "/"
+                    + conexion[9],
+                    conexion[10],
+                    passLocal);
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Se ha actualizado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException | SQLException e) {
+            System.out.print(e);
+            JOptionPane.showMessageDialog(null, "No se ha actualizado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    public void insertar() {
+        testMySQLDriver();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/parkingdb", "root", "");
+            Statement st = conn.createStatement();
+
+//            int i = st.executeUpdate("INSERT INTO `detailparklot` (`id_DetailParklot`, `pathImg_DetailParklot`, `pathSegm_DetailParklot`, `id_Park`, `status_DetailParklot`, `dateCreate_DetailParklot`) VALUES ('1', ' " + path + ".jpg', '" + path + ".json', '" + id + "', '1', CURRENT_TIMESTAMP);");
+            out.println("Estado Insertado");
+        } catch (Exception e) {
+            System.out.print(e);
+            e.printStackTrace();
+        }
+    }
 
     public String data() {
 
@@ -43,14 +100,50 @@ public class Conexion {
         return nombre;
     }
 
-    public void datos(int id, String estado) {
+    public int getParking() {
+
         testMySQLDriver();
+        String nombre = null;
+        int id = 0;
         try {
 
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/parqueos", "jessica", "1234");
+            String url = "jdbc:mysql://localhost/parkingdb";
+            String username = "root";
+            String password = "";
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM `parklot` ORDER by `id_Parklot` DESC");
+            while (rs.next()) {
+
+                id = rs.getInt("id_Parklot");
+                nombre = rs.getString("name_Parklot");
+
+                System.out.println(String.format("%d, %s", id, nombre));
+            }
+
+            rs.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return id;
+    }
+
+    public void datos() {
+        testMySQLDriver();
+        try {
+            delete();
+            GetNames gn = new GetNames();
+            String path = gn.listFolder();
+            int id = getParking();
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/parkingdb", "root", "");
             Statement st = conn.createStatement();
 
-            int i = st.executeUpdate("insert into `estados`(`number`, `estado`) values(" + id + ",'" + estado + "')");
+            int i = st.executeUpdate("INSERT INTO `detailparklot` (`id_DetailParklot`, `pathImg_DetailParklot`, `pathSegm_DetailParklot`, `id_Park`, `status_DetailParklot`, `dateCreate_DetailParklot`) VALUES ('1', ' " + path + ".jpg', '" + path + ".json', '" + id + "', '1', CURRENT_TIMESTAMP);");
             out.println("Estado Insertado");
         } catch (Exception e) {
             System.out.print(e);
@@ -62,14 +155,14 @@ public class Conexion {
         try {
             // create the mysql database connection
             String myDriver = "org.gjt.mm.mysql.Driver";
-            String myUrl = "jdbc:mysql://localhost/parqueos";
+            String myUrl = "jdbc:mysql://localhost/parkingdb";
             Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "jessica", "1234");
+            Connection conn = DriverManager.getConnection(myUrl, "root", "");
 
             // create the mysql delete statement.
             // i'm deleting the row where the id is "3", which corresponds to my
             // "Barney Rubble" record.
-            String query = "delete from estados";
+            String query = "delete from detailparklot";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
 
             // execute the preparedstatement
