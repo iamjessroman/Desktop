@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
 
 public class Conexion {
@@ -51,6 +52,30 @@ public class Conexion {
             System.out.print(e);
             JOptionPane.showMessageDialog(null, "No se ha actualizado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
 
+        }
+    }
+    
+        public void insert(String sql, String[] columns, String msg) {
+        testMySQLDriver();
+        getCrediantials();
+        String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://"
+                    + conexion[7] + ":"
+                    + conexion[8] + "/"
+                    + conexion[9],
+                    conexion[10],
+                    passLocal);
+            PreparedStatement ps= conn.prepareStatement(sql);
+            
+            for (int i = 1; i <= columns.length; i++) {
+                ps.setString(i, columns[i-1]);
+            }
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Se ha guardado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException | SQLException e) {
+            System.out.print(e);
+            JOptionPane.showMessageDialog(null, "No se ha guardado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
