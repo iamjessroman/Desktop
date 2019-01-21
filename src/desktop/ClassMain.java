@@ -21,6 +21,11 @@ import java.util.logging.Logger;
  */
 public class ClassMain {
 
+    public boolean isEmpty(String w) {
+        boolean r = w.length() < 1 ? true : false;
+        return r;
+    }
+
     public String[] ReadArray(String ruta) throws FileNotFoundException {
         String[] arrays = null;
         File archivo = new File(ruta);
@@ -49,10 +54,9 @@ public class ClassMain {
             File archivo = new File(ruta);
             BufferedWriter bw;
             FileWriter fw;
-            
+
             //Test
 //            System.out.println(Text);
-
             if (archivo.exists()) {
                 fw = new FileWriter(archivo.getAbsoluteFile(), b);
                 bw = new BufferedWriter(fw);
