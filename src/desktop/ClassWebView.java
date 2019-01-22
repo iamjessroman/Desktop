@@ -18,6 +18,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class ClassWebView extends JFXPanel {
+    
 //Variable encargada de renderizar el website
 
     private WebEngine engine;
@@ -44,6 +45,7 @@ public class ClassWebView extends JFXPanel {
                 if (tmp == null) {
                     tmp = toURL(url);
                 }
+                
                 engine.load(tmp);
 
             }

@@ -25,7 +25,7 @@ public class JFrameWebView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         ClassWebView browser = new ClassWebView();
-        browser.loadURL("http://localhost:8080/Cliente/");
+        browser.loadURL("http://localhost:8080/Servidor/");
         browser.setBounds(1, 1, jPanel1.getWidth() - 1, jPanel1.getHeight() - 1);
         jPanel1.add(browser);
     }
