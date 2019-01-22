@@ -70,14 +70,17 @@ public class Conexion {
                 ps.setString(i, columns[i - 1]);
             }
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se ha guardado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            if (!" ".equals(msg)) {
+                JOptionPane.showMessageDialog(null, "Se ha guardado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } catch (HeadlessException | SQLException e) {
             System.out.print(e);
             JOptionPane.showMessageDialog(null, "No se ha guardado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public String[] select(String sql, int n) throws SQLException {
+    public String[] select(String sql, int columns) throws SQLException {
 
         testMySQLDriver();
         getCrediantials();
@@ -96,7 +99,7 @@ public class Conexion {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
-                for (int i = 1; i <= n; i++) {
+                for (int i = 1; i <= columns; i++) {
                     result += rs.getString(i) + " columns ";
                 }
                 result += " rows ";
@@ -110,6 +113,31 @@ public class Conexion {
         }
         String[] select = result.split(" rows ");
         return select;
+    }
+
+    public void delete(String sql, String msg) {
+        testMySQLDriver();
+        getCrediantials();
+        String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://"
+                    + conexion[7] + ":"
+                    + conexion[8] + "/"
+                    + conexion[9],
+                    conexion[10],
+                    passLocal);
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            
+            if (!" ".equals(msg)) {
+                JOptionPane.showMessageDialog(null, "Se ha borrado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (HeadlessException | SQLException e) {
+            System.out.print(e);
+            JOptionPane.showMessageDialog(null, "No se ha borrado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
     }
 
     public void insertar() {
@@ -194,7 +222,7 @@ public class Conexion {
     public void datos() {
         testMySQLDriver();
         try {
-            delete();
+//            delete();
             GetNames gn = new GetNames();
             String path = gn.listFolder();
             int id = getParking();
@@ -206,30 +234,6 @@ public class Conexion {
         } catch (Exception e) {
             System.out.print(e);
             e.printStackTrace();
-        }
-    }
-
-    public void delete() {
-        try {
-            // create the mysql database connection
-            String myDriver = "org.gjt.mm.mysql.Driver";
-            String myUrl = "jdbc:mysql://localhost/parkingdb";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "root", "");
-
-            // create the mysql delete statement.
-            // i'm deleting the row where the id is "3", which corresponds to my
-            // "Barney Rubble" record.
-            String query = "delete from detailparklot";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-            // execute the preparedstatement
-            preparedStmt.execute();
-
-            conn.close();
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
         }
     }
 

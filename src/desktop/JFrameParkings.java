@@ -240,7 +240,7 @@ public class JFrameParkings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Conexion c = new Conexion();
-        c.delete();
+//        c.delete();
         try {
             String ruta = "./data/estados.txt";
             String Text = "";

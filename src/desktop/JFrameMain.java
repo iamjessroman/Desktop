@@ -53,8 +53,8 @@ public class JFrameMain extends javax.swing.JFrame {
     String[] conexion = null;
     String[] config = null;
     String[] filters = null;
-    String[] mix = null;
     String[] namemixs = null;
+    DefaultListModel<String> mix = new DefaultListModel<String>();
     DefaultListModel<String> model = new DefaultListModel<String>();
     String beforeNameFilter = "";
 
@@ -174,10 +174,20 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateMixFilters_ListMix = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         CreateMixFilters_Save = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListFilters = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        EditMixFilters_ListMix = new javax.swing.JList<>();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        EditMixFilters_ListFilters = new javax.swing.JList<>();
+        EditMixFilters_Name = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        EditMixFilters_Save = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        EditMixFilters_Filters = new javax.swing.JList<>();
+        jLabel13 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         TabConexion = new javax.swing.JTabbedPane();
         TabLocalConexion = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -253,7 +263,7 @@ public class JFrameMain extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(802, Short.MAX_VALUE))
+                .addContainerGap(836, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,7 +311,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(1081, Short.MAX_VALUE)
+                .addContainerGap(1116, Short.MAX_VALUE)
                 .addComponent(btnconfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -407,7 +417,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(1095, Short.MAX_VALUE)
+                .addContainerGap(1124, Short.MAX_VALUE)
                 .addComponent(btnSave)
                 .addGap(34, 34, 34))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -446,6 +456,11 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel10.setText("NOMBRE DEL FILTRO");
 
         CreateFilter_Name.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        CreateFilter_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CreateFilter_NameKeyTyped(evt);
+            }
+        });
 
         jLabel30.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel30.setText("Código");
@@ -529,7 +544,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                         .addGap(12, 12, 12))
                     .addGroup(TabCreateFilterLayout.createSequentialGroup()
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -575,7 +590,7 @@ public class JFrameMain extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSaveFilters)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TabFilters.addTab("Crear", TabCreateFilter);
@@ -671,7 +686,7 @@ public class JFrameMain extends javax.swing.JFrame {
                                 .addComponent(EditFilters_JComboFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                             .addGroup(TabEditFilterLayout.createSequentialGroup()
                                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -727,7 +742,14 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("FILTROS");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Nombre Combinación");
+
+        CreateMixFilters_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CreateMixFilters_NameKeyTyped(evt);
+            }
+        });
 
         CreateMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -736,34 +758,42 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(CreateMixFilters_ListMix);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel8.setText(">>");
 
         CreateMixFilters_Save.setText("Guardar");
+        CreateMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateMixFilters_SaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(154, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CreateMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(71, 71, 71)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(CreateMixFilters_Name)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(CreateMixFilters_Save)
-                .addContainerGap())
+                .addGap(125, 125, 125))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,32 +805,145 @@ public class JFrameMain extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CreateMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CreateMixFilters_Save)
+                        .addGap(19, 19, 19))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(144, 144, 144)
-                                .addComponent(jLabel8))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CreateMixFilters_Save)
-                        .addGap(19, 19, 19))))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addComponent(jLabel8)))
+                        .addGap(40, 40, 40))))
         );
 
         TabCreateMix.addTab("Crear Combinación", jPanel5);
+
+        EditMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditMixFilters_ListMixMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(EditMixFilters_ListMix);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("MIX FILTROS");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel11.setText(">>");
+
+        EditMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditMixFilters_ListFiltersMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(EditMixFilters_ListFilters);
+
+        EditMixFilters_Name.setEnabled(false);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel12.setText("Nombre Combinación");
+
+        EditMixFilters_Save.setText("Guardar");
+        EditMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditMixFilters_SaveActionPerformed(evt);
+            }
+        });
+
+        EditMixFilters_Filters.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditMixFilters_FiltersMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(EditMixFilters_Filters);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("FILTROS");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88)
+                                .addComponent(jLabel11)
+                                .addGap(86, 86, 86))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(EditMixFilters_Name)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(EditMixFilters_Save)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(EditMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(EditMixFilters_Save)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel13)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(142, 142, 142)
+                                        .addComponent(jLabel11))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(40, 40, 40))
+        );
+
+        TabCreateMix.addTab("Editar Combinación", jPanel4);
 
         javax.swing.GroupLayout TabMixFilterLayout = new javax.swing.GroupLayout(TabMixFilter);
         TabMixFilter.setLayout(TabMixFilterLayout);
         TabMixFilterLayout.setHorizontalGroup(
             TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TabMixFilterLayout.createSequentialGroup()
-                .addComponent(TabCreateMix)
-                .addContainerGap())
+                .addComponent(TabCreateMix, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 294, Short.MAX_VALUE))
         );
         TabMixFilterLayout.setVerticalGroup(
             TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,38 +951,6 @@ public class JFrameMain extends javax.swing.JFrame {
         );
 
         TabFilters.addTab("Combinación de Filtros", TabMixFilter);
-
-        jListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListFiltersMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jListFilters);
-
-        jLabel5.setText("Filtros");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                .addGap(234, 234, 234))
-        );
-
-        TabFilters.addTab("Ver", jPanel17);
 
         jTabbedPane1.addTab("Configuración Filtros", TabFilters);
 
@@ -968,7 +1079,7 @@ public class JFrameMain extends javax.swing.JFrame {
             .addGroup(TabLocalConexionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(786, Short.MAX_VALUE))
+                .addContainerGap(813, Short.MAX_VALUE))
         );
         TabLocalConexionLayout.setVerticalGroup(
             TabLocalConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1181,70 +1292,6 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-    private void TabFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFiltersMouseClicked
-        try {
-            String sql = "SELECT `name` FROM `filters`";
-            int n = 1;
-            String[] temp = cx.select(sql, n);
-            filters = new String[(temp.length) + 1];
-            this.EditFilters_JComboFilters.removeAllItems();
-            filters[0] = "";
-            this.EditFilters_JComboFilters.addItem(filters[0]);
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                filters[i + 1] = substring[0];
-                this.EditFilters_JComboFilters.addItem(filters[i + 1]);
-            }
-            filters = new String[(temp.length) + 1];
-            this.CreateMixFilters_ListFilters.removeAll();
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                filters[i] = substring[0];
-            }
-            this.CreateMixFilters_ListFilters.setListData(filters);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_TabFiltersMouseClicked
-
-    private void jListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListFiltersMouseClicked
-
-        JList list = (JList) evt.getSource();
-        if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint());
-            String ruta = "./data/filters.txt";
-            String text = "";
-            String[] filters = null;
-            try {
-                filters = cm.ReadArray(ruta);
-                for (int i = 0; i < filters.length; i++) {
-                    if (index != i) {
-                        text += "," + filters[i];
-                    }
-                }
-                cm.Write(text, ruta, false);
-                this.jListFilters.removeAll();
-                try {
-                    read(ruta);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.jListFilters.updateUI();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            Path origenPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Desktop\\data\\filters.txt");
-            Path destinoPath = FileSystems.getDefault().getPath("C:\\Users\\jessi\\Documents\\NetBeansProjects\\Cliente\\filters.txt");
-
-            try {
-                Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                System.err.println(e);
-            }
-        }
-    }//GEN-LAST:event_jListFiltersMouseClicked
-
     private void btnchooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchooserActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("./data"));
@@ -1362,32 +1409,225 @@ public class JFrameMain extends javax.swing.JFrame {
         cx.update(sql, msg);
     }//GEN-LAST:event_Local_SaveActionPerformed
 
-    private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
+    private void TabFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFiltersMouseClicked
+        try {
+            String sql = "SELECT `name` FROM `filters`";
+            int n = 1;
+            String[] temp = cx.select(sql, n);
+            filters = new String[(temp.length) + 1];
+            this.EditFilters_JComboFilters.removeAllItems();
+            filters[0] = "";
+            this.EditFilters_JComboFilters.addItem(filters[0]);
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                filters[i + 1] = substring[0];
+                this.EditFilters_JComboFilters.addItem(filters[i + 1]);
+            }
+            sql = "SELECT `name` FROM `filters` WHERE `use_gui`='false'";
+            n = 1;
+            temp = cx.select(sql, n);
+            filters = new String[(temp.length) + 1];
+            this.CreateMixFilters_ListFilters.removeAll();
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                filters[i] = substring[0];
+            }
+            this.CreateMixFilters_ListFilters.setListData(filters);
+            this.EditMixFilters_Filters.setListData(filters);
+            sql = "SELECT `name` FROM `mix`";
+            n = 1;
+            temp = cx.select(sql, n);
+            filters = new String[(temp.length) + 1];
+            this.EditMixFilters_ListMix.removeAll();
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                filters[i] = substring[0];
+            }
+            this.EditMixFilters_ListMix.setListData(filters);
 
-        String sql = "INSERT INTO `filters`(`name`, `use_gui`, `init`, `gui`, `apply`, `imagefilters_function`) VALUES (?,?,?,?,?,?);";
-        if (cm.isEmpty(this.CreateFilter_Name.getText())
-                || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
-                || cm.isEmpty(this.CreateFilter_Init.getText())
-                || cm.isEmpty(this.CreateFilter_Gui.getText())
-                || cm.isEmpty(this.CreateFilter_Apply.getText())
-                || cm.isEmpty(this.CreateFilter_Code.getText())) {
-            JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_TabFiltersMouseClicked
 
-            String[] columns = {
-                this.CreateFilter_Name.getText(),
-                this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()),
-                this.CreateFilter_Init.getText(),
-                this.CreateFilter_Gui.getText(),
-                this.CreateFilter_Apply.getText(),
-                this.CreateFilter_Code.getText()
-            };
-            String msg = "el nuevo filtro";
-            cx.insert(sql, columns, msg);
+    private void EditMixFilters_FiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_FiltersMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            mix.addElement(this.EditMixFilters_Filters.getSelectedValue());
+            //Test
+            //            System.out.println(model.size());
+            this.CreateMixFilters_ListMix.setModel(mix);
+        }
+    }//GEN-LAST:event_EditMixFilters_FiltersMouseClicked
 
+    private void EditMixFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMixFilters_SaveActionPerformed
+        try {
+            String sql = "SELECT `id` FROM `mix` WHERE `name`='" + this.EditMixFilters_Name.getText() + "'";
+            String temp[] = cx.select(sql, 1);
+            if (this.EditMixFilters_ListFilters.getModel().getSize() <= 1) {
+                JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String[] id = temp[0].split(" columns ");
+                sql="DELETE FROM mix_filters WHERE mixID="+id[0]+";";
+                cx.delete(sql, " ");
+                for (int i = 0; i < this.EditMixFilters_ListFilters.getModel().getSize(); i++) {
+                    sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.EditMixFilters_ListFilters.getModel().getElementAt(i) + "'";
+                    temp = cx.select(sql, 1);
+                    String[] subs = temp[0].split(" columns ");
+                    sql = "INSERT INTO `mix_filters`(`mixID`,`filterID`) VALUES (?,?);";
+                    String[] c = {
+                        id[0],
+                        subs[0]
+                    };
+                    String msg = " ";
+                    cx.insert(sql, c, msg);
+                }
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la combinación de filtro", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_EditMixFilters_SaveActionPerformed
+
+    private void EditMixFilters_ListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_ListFiltersMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            mix.removeElementAt(this.EditMixFilters_ListFilters.getSelectedIndex());
+            //Test
+            //            System.out.println(model.size());
+            this.EditMixFilters_ListFilters.setModel(mix);
         }
 
-    }//GEN-LAST:event_btnSaveFiltersActionPerformed
+    }//GEN-LAST:event_EditMixFilters_ListFiltersMouseClicked
+
+    private void EditMixFilters_ListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_ListMixMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 1) {
+            try {
+                mix.clear();
+                int index = list.locationToIndex(evt.getPoint());
+                String name = this.EditMixFilters_ListMix.getSelectedValue();
+                this.EditMixFilters_Name.setText(name);
+                String sql = "SELECT filters.name FROM filters JOIN mix_filters ON filters.id=mix_filters.filterID JOIN mix ON mix.id=mix_filters.mixID WHERE mix.name='" + name + "';";
+                //Test
+                //            System.out.println(model.size());
+                String[] temp = cx.select(sql, 1);
+                for (int i = 0; i < temp.length; i++) {
+                    String[] subs = temp[i].split(" columns ");
+                    mix.addElement(subs[0]);
+                }
+                this.EditMixFilters_ListFilters.setModel(mix);
+            } catch (SQLException ex) {
+                Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_EditMixFilters_ListMixMouseClicked
+
+    private void CreateMixFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateMixFilters_SaveActionPerformed
+        try {
+            String sql = "SELECT `id` FROM `mix` WHERE `name`='" + this.CreateMixFilters_Name.getText() + "'";
+            String temp[] = cx.select(sql, 1);
+
+            //Test
+            //            System.out.println(temp[0]);
+            if (temp[0].isEmpty()) {
+                if (cm.isEmpty(this.CreateMixFilters_Name.getText())
+                    && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
+                    JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    sql = "INSERT INTO `mix`(`name`) VALUES (?);";
+                    String[] columns = {
+                        this.CreateMixFilters_Name.getText()
+                    };
+                    String msg = "la nueva combinacion de filtro";
+                    cx.insert(sql, columns, msg);
+                    sql = "SELECT MAX(`id`) FROM `mix`";
+                    temp = cx.select(sql, 1);
+                    String[] max = temp[0].split(" columns ");
+
+                    for (int i = 0; i < this.CreateMixFilters_ListMix.getModel().getSize(); i++) {
+                        sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.CreateMixFilters_ListMix.getModel().getElementAt(i) + "'";
+                        temp = cx.select(sql, 1);
+                        String[] subs = temp[0].split(" columns ");
+                        sql = "INSERT INTO `mix_filters`(`mixID`,`filterID`) VALUES (?,?);";
+                        String[] c = {
+                            max[0],
+                            subs[0]
+                        };
+                        msg = " ";
+                        cx.insert(sql, c, msg);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El nombre de filtro ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CreateMixFilters_SaveActionPerformed
+
+    private void CreateMixFilters_ListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListMixMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            model.removeElementAt(this.CreateMixFilters_ListMix.getSelectedIndex());
+            //Test
+            //            System.out.println(model.size());
+            this.CreateMixFilters_ListMix.setModel(model);
+        }
+    }//GEN-LAST:event_CreateMixFilters_ListMixMouseClicked
+
+    private void CreateMixFilters_NameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CreateMixFilters_NameKeyTyped
+        this.CreateMixFilters_Name.setText(this.CreateMixFilters_Name.getText().trim());
+    }//GEN-LAST:event_CreateMixFilters_NameKeyTyped
+
+    private void CreateMixFilters_ListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListFiltersMouseClicked
+        JList list = (JList) evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            model.addElement(this.CreateMixFilters_ListFilters.getSelectedValue());
+            //Test
+            //            System.out.println(model.size());
+            this.CreateMixFilters_ListMix.setModel(model);
+        }
+    }//GEN-LAST:event_CreateMixFilters_ListFiltersMouseClicked
+
+    private void UpdateFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFiltersActionPerformed
+        String sql = "UPDATE `filters` SET "
+        + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
+        + "`init`='" + this.EditFilter_Init.getText() + "', "
+        + "`gui`='" + this.EditFilter_Gui.getText() + "', "
+        + "`apply`='" + this.EditFilter_Apply.getText() + "', "
+        + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
+        + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
+        String msg = "el filtro";
+        //        System.out.println(sql);
+        cx.update(sql, msg);
+    }//GEN-LAST:event_UpdateFiltersActionPerformed
+
+    private void EditFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EditFilters_JComboFiltersItemStateChanged
+        String nameFilter = this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex());
+        String sql = "SELECT * FROM `filters` WHERE `name`='" + nameFilter + "';";
+        try {
+            String temp[] = cx.select(sql, 7);
+            String[] substring = temp[0].split(" columns ");
+            //Test
+            //                System.out.println(temp.length);
+            //                System.out.println(substring.length);
+            if (substring.length > 1) {
+                this.EditFilter_UseGui.setSelectedIndex(substring[2].equals("true") ? 0 : 1);
+                this.EditFilter_Init.setText(substring[3]);
+                this.EditFilter_Gui.setText(substring[4]);
+                this.EditFilter_Apply.setText(substring[5]);
+                this.EditFilter_Code.setText(substring[6]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_EditFilters_JComboFiltersItemStateChanged
 
     private void CreateFilter_GenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFilter_GenerateActionPerformed
         if (this.CreateFilter_Name.getText().length() > 3) {
@@ -1441,66 +1681,49 @@ public class JFrameMain extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Se debe llenar el Campo 'Nombre de Filtro' con mínimo 6 caractéres", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_CreateFilter_GenerateActionPerformed
 
-    private void UpdateFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFiltersActionPerformed
-        String sql = "UPDATE `filters` SET "
-                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
-                + "`init`='" + this.EditFilter_Init.getText() + "', "
-                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
-                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
-                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
-                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
-        String msg = "el filtro";
-//        System.out.println(sql);
-        cx.update(sql, msg);
-    }//GEN-LAST:event_UpdateFiltersActionPerformed
+    private void CreateFilter_NameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CreateFilter_NameKeyTyped
+        this.CreateFilter_Name.setText(this.CreateFilter_Name.getText().trim());
+    }//GEN-LAST:event_CreateFilter_NameKeyTyped
 
-    private void EditFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EditFilters_JComboFiltersItemStateChanged
-        String nameFilter = this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex());
-        String sql = "SELECT * FROM `filters` WHERE `name`='" + nameFilter + "';";
+    private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
         try {
-            String temp[] = cx.select(sql, 7);
-            String[] substring = temp[0].split(" columns ");
-            //Test
-//                System.out.println(temp.length);
-//                System.out.println(substring.length);
-            if (substring.length > 1) {
-                this.EditFilter_UseGui.setSelectedIndex(substring[2].equals("true") ? 0 : 1);
-                this.EditFilter_Init.setText(substring[3]);
-                this.EditFilter_Gui.setText(substring[4]);
-                this.EditFilter_Apply.setText(substring[5]);
-                this.EditFilter_Code.setText(substring[6]);
-            }
+            String sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.CreateFilter_Name.getText() + "'";
+            String temp[] = cx.select(sql, 1);
 
+            //Test
+            //            System.out.println(temp[0]);
+            if (temp[0].isEmpty()) {
+                sql = "INSERT INTO `filters`(`name`, `use_gui`, `init`, `gui`, `apply`, `imagefilters_function`) VALUES (?,?,?,?,?,?);";
+                if (cm.isEmpty(this.CreateFilter_Name.getText())
+                    || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
+                    || cm.isEmpty(this.CreateFilter_Init.getText())
+                    || cm.isEmpty(this.CreateFilter_Gui.getText())
+                    || cm.isEmpty(this.CreateFilter_Apply.getText())
+                    || cm.isEmpty(this.CreateFilter_Code.getText())) {
+                    JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+
+                    String[] columns = {
+                        this.CreateFilter_Name.getText(),
+                        this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()),
+                        this.CreateFilter_Init.getText(),
+                        this.CreateFilter_Gui.getText(),
+                        this.CreateFilter_Apply.getText(),
+                        this.CreateFilter_Code.getText()
+                    };
+                    String msg = "el nuevo filtro";
+                    cx.insert(sql, columns, msg);
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El nombre de filtro ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_EditFilters_JComboFiltersItemStateChanged
-
-    private void CreateMixFilters_ListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListFiltersMouseClicked
-         JList list = (JList) evt.getSource();
-        if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint());
-            model.addElement(this.CreateMixFilters_ListFilters.getSelectedValue());
-            //Test
-//            System.out.println(model.size());
-            this.CreateMixFilters_ListMix.setModel(model);
-        }
-    }//GEN-LAST:event_CreateMixFilters_ListFiltersMouseClicked
-
-    private void CreateMixFilters_ListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListMixMouseClicked
-                JList list = (JList) evt.getSource();
-        if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint());
-            model.removeElementAt(this.CreateMixFilters_ListMix.getSelectedIndex());
-            //Test
-//            System.out.println(model.size());
-            this.CreateMixFilters_ListMix.setModel(model);
-        }
-    }//GEN-LAST:event_CreateMixFilters_ListMixMouseClicked
+    }//GEN-LAST:event_btnSaveFiltersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1538,6 +1761,11 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextArea EditFilter_Init;
     private javax.swing.JComboBox<String> EditFilter_UseGui;
     private javax.swing.JComboBox<String> EditFilters_JComboFilters;
+    private javax.swing.JList<String> EditMixFilters_Filters;
+    private javax.swing.JList<String> EditMixFilters_ListFilters;
+    private javax.swing.JList<String> EditMixFilters_ListMix;
+    private javax.swing.JTextField EditMixFilters_Name;
+    private javax.swing.JButton EditMixFilters_Save;
     private javax.swing.JTextField Local_IP;
     private javax.swing.JTextField Local_Name;
     private javax.swing.JPasswordField Local_Pass;
@@ -1568,6 +1796,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1598,33 +1829,35 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jListFilters;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
