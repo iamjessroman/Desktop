@@ -13,24 +13,45 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class ClassWebView extends JFXPanel {
-    
-//Variable encargada de renderizar el website
 
+//Variable encargada de renderizar el website
     private WebEngine engine;
 
     //Constructor de la clase
-    public ClassWebView() {
+    public ClassWebView(String url) {
+        
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                Button button = new Button("Cargar");
                 WebView view = new WebView();
                 engine = view.getEngine();
-                setScene(new Scene(view));
+                engine.setJavaScriptEnabled(true);
+                button.setOnAction(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event) {
+                        // Call a JavaScript function of the current page
+                        engine.executeScript("upload('"+url+"');");
+                    }
+                });
+
+                VBox root = new VBox();
+                root.setPadding(new Insets(5));
+                root.setSpacing(5);
+                root.getChildren().addAll(view,button);
+
+                setScene(new Scene(root));
             }
         });
         setVisible(true);
@@ -45,7 +66,7 @@ public class ClassWebView extends JFXPanel {
                 if (tmp == null) {
                     tmp = toURL(url);
                 }
-                
+
                 engine.load(tmp);
 
             }

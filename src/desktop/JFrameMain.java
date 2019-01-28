@@ -54,6 +54,7 @@ public class JFrameMain extends javax.swing.JFrame {
     String[] config = null;
     String[] filters = null;
     String[] parklots = null;
+    String[] id_parklots = null;
     String[] namemixs = null;
     DefaultListModel<String> mix = new DefaultListModel<String>();
     DefaultListModel<String> model = new DefaultListModel<String>();
@@ -351,12 +352,6 @@ public class JFrameMain extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Configuración Clasificador", jPanel3);
-
-        TabModelARFF.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabModelARFFMouseClicked(evt);
-            }
-        });
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1355,6 +1350,25 @@ public class JFrameMain extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+            String sql = "SELECT `id_Parklot`,`name_Parklot` FROM `parklot`";
+            int n = 2;
+            String[] temp = cx.select(sql, n, 1);
+            parklots = new String[temp.length];
+            id_parklots = new String[temp.length];
+            this.CreateModel_Parkings.removeAllItems();
+
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                id_parklots[i] = substring[0];
+                parklots[i] = substring[1];
+                this.CreateModel_Parkings.addItem(parklots[i]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void APIRESTCLASIFICADORActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APIRESTCLASIFICADORActionPerformed
@@ -1756,32 +1770,12 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveFiltersActionPerformed
 
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
-        Servidor cl = new Servidor();
-//        cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
+        String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
+        JFrameWebView.id = id;
         JFrameWebView s = new JFrameWebView();
         this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
-
-    private void TabModelARFFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabModelARFFMouseClicked
-        try {
-            String sql = "SELECT `name_Parklot` FROM `parklot`";
-            int n = 1;
-            String[] temp = cx.select(sql, n, 1);
-            parklots = new String[(temp.length) + 1];
-            this.CreateModel_Parkings.removeAllItems();
-            parklots[0] = "";
-            this.CreateModel_Parkings.addItem(parklots[0]);
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                parklots[i + 1] = substring[0];
-                this.CreateModel_Parkings.addItem(parklots[i + 1]);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_TabModelARFFMouseClicked
 
     /**
      * @param args the command line arguments
