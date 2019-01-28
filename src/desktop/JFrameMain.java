@@ -53,6 +53,7 @@ public class JFrameMain extends javax.swing.JFrame {
     String[] conexion = null;
     String[] config = null;
     String[] filters = null;
+    String[] parklots = null;
     String[] namemixs = null;
     DefaultListModel<String> mix = new DefaultListModel<String>();
     DefaultListModel<String> model = new DefaultListModel<String>();
@@ -118,10 +119,16 @@ public class JFrameMain extends javax.swing.JFrame {
         TabModelARFF = new javax.swing.JTabbedPane();
         TabCreateModel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
+        CreateModel_Start = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        CreateModel_Parkings = new javax.swing.JComboBox<>();
         TabConfigurationModel = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        ConfigurationModel_Url = new javax.swing.JTextField();
+        ConfigurationModel_Save = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        ConfigurationModel_Threads = new javax.swing.JComboBox<>();
         TabFilters = new javax.swing.JTabbedPane();
         TabCreateFilter = new javax.swing.JPanel();
         btnSaveFilters = new javax.swing.JButton();
@@ -345,17 +352,51 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Configuración Clasificador", jPanel3);
 
+        TabModelARFF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabModelARFFMouseClicked(evt);
+            }
+        });
+
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        CreateModel_Start.setText("Empezar");
+        CreateModel_Start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateModel_StartActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel4.setText("Parqueo");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(CreateModel_Start))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addComponent(CreateModel_Parkings, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(CreateModel_Parkings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addComponent(CreateModel_Start)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout TabCreateModelLayout = new javax.swing.GroupLayout(TabCreateModel);
@@ -365,14 +406,14 @@ public class JFrameMain extends javax.swing.JFrame {
             .addGroup(TabCreateModelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(873, Short.MAX_VALUE))
+                .addContainerGap(840, Short.MAX_VALUE))
         );
         TabCreateModelLayout.setVerticalGroup(
             TabCreateModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TabCreateModelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         TabModelARFF.addTab("Crear", TabCreateModel);
@@ -382,16 +423,35 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("URL");
 
+        ConfigurationModel_Url.setText("http://localhost:8080/Servidor/");
+
+        ConfigurationModel_Save.setText("Guardar");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel2.setText("Número de Hilos ");
+
+        ConfigurationModel_Threads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ConfigurationModel_Save))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ConfigurationModel_Url, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 21, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,8 +459,14 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(361, Short.MAX_VALUE))
+                    .addComponent(ConfigurationModel_Url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                .addComponent(ConfigurationModel_Save)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout TabConfigurationModelLayout = new javax.swing.GroupLayout(TabConfigurationModel);
@@ -1296,7 +1362,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_APIRESTCLASIFICADORActionPerformed
 
     private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
-        Cliente cl = new Cliente();
+        Servidor cl = new Servidor();
         cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
         JFrameWebView s = new JFrameWebView();
         this.setVisible(false);
@@ -1342,7 +1408,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 + "`password`='" + passRemote
                 + "'WHERE `type`='externo'";
         String msg = "la configuración de base de datos externa";
-        cx.update(sql, msg);
+        cx.update(sql, msg, 2);
     }//GEN-LAST:event_Remote_SaveActionPerformed
 
     private void Local_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Local_SaveActionPerformed
@@ -1370,14 +1436,14 @@ public class JFrameMain extends javax.swing.JFrame {
                 + "`password`='" + passLocal
                 + "'WHERE `type`='interno'";
         String msg = "la configuración de base de datos interna";
-        cx.update(sql, msg);
+        cx.update(sql, msg, 2);
     }//GEN-LAST:event_Local_SaveActionPerformed
 
     private void TabFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFiltersMouseClicked
         try {
             String sql = "SELECT `name` FROM `filters`";
             int n = 1;
-            String[] temp = cx.select(sql, n);
+            String[] temp = cx.select(sql, n, 2);
             filters = new String[(temp.length) + 1];
             this.EditFilters_JComboFilters.removeAllItems();
             filters[0] = "";
@@ -1389,7 +1455,7 @@ public class JFrameMain extends javax.swing.JFrame {
             }
             sql = "SELECT `name` FROM `filters` WHERE `use_gui`='false'";
             n = 1;
-            temp = cx.select(sql, n);
+            temp = cx.select(sql, n, 2);
             filters = new String[(temp.length) + 1];
             this.CreateMixFilters_ListFilters.removeAll();
             for (int i = 0; i < temp.length; i++) {
@@ -1400,7 +1466,7 @@ public class JFrameMain extends javax.swing.JFrame {
             this.EditMixFilters_Filters.setListData(filters);
             sql = "SELECT `name` FROM `mix`";
             n = 1;
-            temp = cx.select(sql, n);
+            temp = cx.select(sql, n, 2);
             filters = new String[(temp.length) + 1];
             this.EditMixFilters_ListMix.removeAll();
             for (int i = 0; i < temp.length; i++) {
@@ -1428,16 +1494,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private void EditMixFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditMixFilters_SaveActionPerformed
         try {
             String sql = "SELECT `id` FROM `mix` WHERE `name`='" + this.EditMixFilters_Name.getText() + "'";
-            String temp[] = cx.select(sql, 1);
+            String temp[] = cx.select(sql, 1, 2);
             if (this.EditMixFilters_ListFilters.getModel().getSize() <= 1) {
                 JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 String[] id = temp[0].split(" columns ");
-                sql="DELETE FROM mix_filters WHERE mixID="+id[0]+";";
-                cx.delete(sql, " ");
+                sql = "DELETE FROM mix_filters WHERE mixID=" + id[0] + ";";
+                cx.delete(sql, " ", 2);
                 for (int i = 0; i < this.EditMixFilters_ListFilters.getModel().getSize(); i++) {
                     sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.EditMixFilters_ListFilters.getModel().getElementAt(i) + "'";
-                    temp = cx.select(sql, 1);
+                    temp = cx.select(sql, 1, 2);
                     String[] subs = temp[0].split(" columns ");
                     sql = "INSERT INTO `mix_filters`(`mixID`,`filterID`) VALUES (?,?);";
                     String[] c = {
@@ -1445,7 +1511,7 @@ public class JFrameMain extends javax.swing.JFrame {
                         subs[0]
                     };
                     String msg = " ";
-                    cx.insert(sql, c, msg);
+                    cx.insert(sql, c, msg, 2);
                 }
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la combinación de filtro", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 
@@ -1477,7 +1543,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 String sql = "SELECT filters.name FROM filters JOIN mix_filters ON filters.id=mix_filters.filterID JOIN mix ON mix.id=mix_filters.mixID WHERE mix.name='" + name + "';";
                 //Test
                 //            System.out.println(model.size());
-                String[] temp = cx.select(sql, 1);
+                String[] temp = cx.select(sql, 1, 2);
                 for (int i = 0; i < temp.length; i++) {
                     String[] subs = temp[i].split(" columns ");
                     mix.addElement(subs[0]);
@@ -1492,13 +1558,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private void CreateMixFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateMixFilters_SaveActionPerformed
         try {
             String sql = "SELECT `id` FROM `mix` WHERE `name`='" + this.CreateMixFilters_Name.getText() + "'";
-            String temp[] = cx.select(sql, 1);
+            String temp[] = cx.select(sql, 1, 2);
 
             //Test
             //            System.out.println(temp[0]);
             if (temp[0].isEmpty()) {
                 if (cm.isEmpty(this.CreateMixFilters_Name.getText())
-                    && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
+                        && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     sql = "INSERT INTO `mix`(`name`) VALUES (?);";
@@ -1506,14 +1572,14 @@ public class JFrameMain extends javax.swing.JFrame {
                         this.CreateMixFilters_Name.getText()
                     };
                     String msg = "la nueva combinacion de filtro";
-                    cx.insert(sql, columns, msg);
+                    cx.insert(sql, columns, msg, 2);
                     sql = "SELECT MAX(`id`) FROM `mix`";
-                    temp = cx.select(sql, 1);
+                    temp = cx.select(sql, 1, 2);
                     String[] max = temp[0].split(" columns ");
 
                     for (int i = 0; i < this.CreateMixFilters_ListMix.getModel().getSize(); i++) {
                         sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.CreateMixFilters_ListMix.getModel().getElementAt(i) + "'";
-                        temp = cx.select(sql, 1);
+                        temp = cx.select(sql, 1, 2);
                         String[] subs = temp[0].split(" columns ");
                         sql = "INSERT INTO `mix_filters`(`mixID`,`filterID`) VALUES (?,?);";
                         String[] c = {
@@ -1521,7 +1587,7 @@ public class JFrameMain extends javax.swing.JFrame {
                             subs[0]
                         };
                         msg = " ";
-                        cx.insert(sql, c, msg);
+                        cx.insert(sql, c, msg, 2);
                     }
                 }
             } else {
@@ -1560,22 +1626,22 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void UpdateFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFiltersActionPerformed
         String sql = "UPDATE `filters` SET "
-        + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
-        + "`init`='" + this.EditFilter_Init.getText() + "', "
-        + "`gui`='" + this.EditFilter_Gui.getText() + "', "
-        + "`apply`='" + this.EditFilter_Apply.getText() + "', "
-        + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
-        + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
+                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
+                + "`init`='" + this.EditFilter_Init.getText() + "', "
+                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
+                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
+                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
+                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
         String msg = "el filtro";
         //        System.out.println(sql);
-        cx.update(sql, msg);
+        cx.update(sql, msg, 2);
     }//GEN-LAST:event_UpdateFiltersActionPerformed
 
     private void EditFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EditFilters_JComboFiltersItemStateChanged
         String nameFilter = this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex());
         String sql = "SELECT * FROM `filters` WHERE `name`='" + nameFilter + "';";
         try {
-            String temp[] = cx.select(sql, 7);
+            String temp[] = cx.select(sql, 7, 2);
             String[] substring = temp[0].split(" columns ");
             //Test
             //                System.out.println(temp.length);
@@ -1654,18 +1720,18 @@ public class JFrameMain extends javax.swing.JFrame {
     private void btnSaveFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFiltersActionPerformed
         try {
             String sql = "SELECT `id` FROM `filters` WHERE `name`='" + this.CreateFilter_Name.getText() + "'";
-            String temp[] = cx.select(sql, 1);
+            String temp[] = cx.select(sql, 1, 2);
 
             //Test
             //            System.out.println(temp[0]);
             if (temp[0].isEmpty()) {
                 sql = "INSERT INTO `filters`(`name`, `use_gui`, `init`, `gui`, `apply`, `imagefilters_function`) VALUES (?,?,?,?,?,?);";
                 if (cm.isEmpty(this.CreateFilter_Name.getText())
-                    || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
-                    || cm.isEmpty(this.CreateFilter_Init.getText())
-                    || cm.isEmpty(this.CreateFilter_Gui.getText())
-                    || cm.isEmpty(this.CreateFilter_Apply.getText())
-                    || cm.isEmpty(this.CreateFilter_Code.getText())) {
+                        || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
+                        || cm.isEmpty(this.CreateFilter_Init.getText())
+                        || cm.isEmpty(this.CreateFilter_Gui.getText())
+                        || cm.isEmpty(this.CreateFilter_Apply.getText())
+                        || cm.isEmpty(this.CreateFilter_Code.getText())) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
 
@@ -1678,7 +1744,7 @@ public class JFrameMain extends javax.swing.JFrame {
                         this.CreateFilter_Code.getText()
                     };
                     String msg = "el nuevo filtro";
-                    cx.insert(sql, columns, msg);
+                    cx.insert(sql, columns, msg, 2);
 
                 }
             } else {
@@ -1688,6 +1754,34 @@ public class JFrameMain extends javax.swing.JFrame {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSaveFiltersActionPerformed
+
+    private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
+        Servidor cl = new Servidor();
+//        cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
+        JFrameWebView s = new JFrameWebView();
+        this.setVisible(false);
+        s.setVisible(true);
+    }//GEN-LAST:event_CreateModel_StartActionPerformed
+
+    private void TabModelARFFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabModelARFFMouseClicked
+        try {
+            String sql = "SELECT `name_Parklot` FROM `parklot`";
+            int n = 1;
+            String[] temp = cx.select(sql, n, 1);
+            parklots = new String[(temp.length) + 1];
+            this.CreateModel_Parkings.removeAllItems();
+            parklots[0] = "";
+            this.CreateModel_Parkings.addItem(parklots[0]);
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                parklots[i + 1] = substring[0];
+                this.CreateModel_Parkings.addItem(parklots[i + 1]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_TabModelARFFMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1708,6 +1802,9 @@ public class JFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField APIRESTCLASIFICADOR;
     private javax.swing.JTextField Conexion_MyIP;
+    private javax.swing.JButton ConfigurationModel_Save;
+    private javax.swing.JComboBox<String> ConfigurationModel_Threads;
+    private javax.swing.JTextField ConfigurationModel_Url;
     private javax.swing.JTextArea CreateFilter_Apply;
     private javax.swing.JTextArea CreateFilter_Code;
     private javax.swing.JButton CreateFilter_Generate;
@@ -1719,6 +1816,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JList<String> CreateMixFilters_ListMix;
     private javax.swing.JTextField CreateMixFilters_Name;
     private javax.swing.JButton CreateMixFilters_Save;
+    private javax.swing.JComboBox<String> CreateModel_Parkings;
+    private javax.swing.JButton CreateModel_Start;
     private javax.swing.JTextArea EditFilter_Apply;
     private javax.swing.JTextArea EditFilter_Code;
     private javax.swing.JTextArea EditFilter_Gui;
@@ -1767,6 +1866,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1784,6 +1884,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -1824,6 +1925,5 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

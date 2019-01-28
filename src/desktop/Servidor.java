@@ -25,13 +25,13 @@ import javax.ws.rs.client.WebTarget;
  *
  * @author jessi
  */
-public class Cliente {
+public class Servidor {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/Servidor/app";
 
-    public Cliente() {
+    public Servidor() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("descarga");
     }
