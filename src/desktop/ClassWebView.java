@@ -16,6 +16,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -47,6 +48,7 @@ public class ClassWebView extends JFXPanel {
                 });
 
                 VBox root = new VBox();
+                root.setAlignment(Pos.CENTER);
                 root.setPadding(new Insets(5));
                 root.setSpacing(5);
                 root.getChildren().addAll(view,button);
