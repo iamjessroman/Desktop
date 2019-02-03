@@ -67,11 +67,10 @@ public class JFrameMain extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
-            conexion= cm.getConexion();
+            conexion = cm.getConexion();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }
 
@@ -133,7 +132,6 @@ public class JFrameMain extends javax.swing.JFrame {
         TabConfigurationModel = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ConfigurationModel_Url = new javax.swing.JTextField();
         ConfigurationModel_Save = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ConfigurationModel_Threads = new javax.swing.JComboBox<>();
@@ -153,10 +151,10 @@ public class JFrameMain extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         CreateFilter_Apply = new javax.swing.JTextArea();
         jLabel33 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        CreateFilter_Code = new javax.swing.JTextArea();
         jLabel34 = new javax.swing.JLabel();
         CreateFilter_Generate = new javax.swing.JButton();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        CreateFilter_Code = new javax.swing.JTextArea();
         TabEditFilter = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         EditFilters_JComboFilters = new javax.swing.JComboBox<>();
@@ -174,7 +172,8 @@ public class JFrameMain extends javax.swing.JFrame {
         jScrollPane17 = new javax.swing.JScrollPane();
         EditFilter_Code = new javax.swing.JTextArea();
         jLabel45 = new javax.swing.JLabel();
-        UpdateFilters = new javax.swing.JButton();
+        UpdateFilters_Simulation = new javax.swing.JButton();
+        UpdateFilters_Save = new javax.swing.JButton();
         TabMixFilter = new javax.swing.JPanel();
         TabCreateMix = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -186,8 +185,8 @@ public class JFrameMain extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         CreateMixFilters_ListMix = new javax.swing.JList<>();
         CreateMixFilters_Name = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         CreateMixFilters_Save = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         EditMixFilters_ListMix = new javax.swing.JList<>();
@@ -238,6 +237,11 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         Conexion_MyIP2 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        Settings_Url = new javax.swing.JTextField();
+        Settings_Save = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -428,8 +432,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("URL");
 
-        ConfigurationModel_Url.setText("http://localhost:8080/Servidor/");
-
         ConfigurationModel_Save.setText("Guardar");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -452,24 +454,20 @@ public class JFrameMain extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ConfigurationModel_Url, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                        .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 294, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(ConfigurationModel_Url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
                 .addComponent(ConfigurationModel_Save)
                 .addContainerGap())
         );
@@ -495,36 +493,56 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Modelo ARFF", TabModelARFF);
 
+        TabFilters.setBackground(new java.awt.Color(255, 255, 255));
+        TabFilters.setForeground(new java.awt.Color(74, 173, 82));
+        TabFilters.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         TabFilters.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabFiltersMouseClicked(evt);
             }
         });
 
+        TabCreateFilter.setBackground(new java.awt.Color(255, 255, 255));
+        TabCreateFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSaveFilters.setBackground(new java.awt.Color(255, 255, 255));
+        btnSaveFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSaveFilters.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
         btnSaveFilters.setText("Guardar");
         btnSaveFilters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveFiltersActionPerformed(evt);
             }
         });
+        TabCreateFilter.add(btnSaveFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
 
+        CreateFilter_UseGui.setEditable(true);
+        CreateFilter_UseGui.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         CreateFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+        TabCreateFilter.add(CreateFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 51, 167, 28));
 
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(74, 173, 82));
         jLabel10.setText("NOMBRE DEL FILTRO");
+        TabCreateFilter.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 18, 170, 18));
 
-        CreateFilter_Name.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        CreateFilter_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         CreateFilter_Name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CreateFilter_NameKeyTyped(evt);
             }
         });
+        TabCreateFilter.add(CreateFilter_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 15, 230, 26));
 
-        jLabel30.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(74, 173, 82));
         jLabel30.setText("Código");
+        TabCreateFilter.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
 
-        jLabel31.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(74, 173, 82));
         jLabel31.setText("init");
+        TabCreateFilter.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 40, 18));
 
         CreateFilter_Init.setColumns(20);
         CreateFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -533,6 +551,8 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane7.setViewportView(CreateFilter_Init);
 
+        TabCreateFilter.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 410, 84));
+
         CreateFilter_Gui.setColumns(20);
         CreateFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         CreateFilter_Gui.setRows(5);
@@ -540,135 +560,84 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane8.setViewportView(CreateFilter_Gui);
 
-        jLabel32.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        TabCreateFilter.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 410, 81));
+
+        jLabel32.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(74, 173, 82));
         jLabel32.setText("gui");
+        TabCreateFilter.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 50, 18));
 
         CreateFilter_Apply.setColumns(20);
         CreateFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         CreateFilter_Apply.setRows(5);
         CreateFilter_Apply.setText("function(self) {\n          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n        }");
         CreateFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        CreateFilter_Apply.setMinimumSize(new java.awt.Dimension(129, 26));
         jScrollPane9.setViewportView(CreateFilter_Apply);
 
-        jLabel33.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        TabCreateFilter.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 410, 84));
+
+        jLabel33.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(74, 173, 82));
         jLabel33.setText("apply");
+        TabCreateFilter.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 50, 18));
+
+        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel34.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel34.setText("USE_GUI");
+        TabCreateFilter.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, -1, 18));
+
+        CreateFilter_Generate.setBackground(new java.awt.Color(255, 255, 255));
+        CreateFilter_Generate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CreateFilter_Generate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/generate_icon.png"))); // NOI18N
+        CreateFilter_Generate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateFilter_GenerateActionPerformed(evt);
+            }
+        });
+        TabCreateFilter.add(CreateFilter_Generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 60, -1));
 
         CreateFilter_Code.setColumns(20);
         CreateFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         CreateFilter_Code.setRows(5);
         CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n  var srcPixels = srcImageData.data,\n    srcWidth = srcImageData.width,\n    srcHeight = srcImageData.height,\n    srcLength = srcPixels.length,\n    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n    dstPixels = dstImageData.data;\n\n  return dstImageData;\n};");
         CreateFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane4.setViewportView(CreateFilter_Code);
+        jScrollPane18.setViewportView(CreateFilter_Code);
 
-        jLabel34.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel34.setText("USE_GUI");
-
-        CreateFilter_Generate.setText("Generar");
-        CreateFilter_Generate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateFilter_GenerateActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout TabCreateFilterLayout = new javax.swing.GroupLayout(TabCreateFilter);
-        TabCreateFilter.setLayout(TabCreateFilterLayout);
-        TabCreateFilterLayout.setHorizontalGroup(
-            TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CreateFilter_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CreateFilter_Generate))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TabCreateFilterLayout.createSequentialGroup()
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel34)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CreateFilter_UseGui, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
-                        .addGap(12, 12, 12))
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabCreateFilterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSaveFilters)
-                .addContainerGap())
-        );
-        TabCreateFilterLayout.setVerticalGroup(
-            TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabCreateFilterLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CreateFilter_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CreateFilter_Generate)))
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CreateFilter_UseGui, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(TabCreateFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(TabCreateFilterLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSaveFilters)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        TabCreateFilter.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
 
         TabFilters.addTab("Crear", TabCreateFilter);
 
-        jLabel35.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel35.setText("FILTROS");
+        TabEditFilter.setBackground(new java.awt.Color(255, 255, 255));
+        TabEditFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel35.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(38, 91, 145));
+        jLabel35.setText("FILTROS");
+        TabEditFilter.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 78, 30));
+
+        EditFilters_JComboFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         EditFilters_JComboFilters.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 EditFilters_JComboFiltersItemStateChanged(evt);
             }
         });
+        TabEditFilter.add(EditFilters_JComboFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 191, 30));
 
-        jLabel41.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel41.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(74, 173, 82));
         jLabel41.setText("USE_GUI");
+        TabEditFilter.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 87, 18));
 
+        EditFilter_UseGui.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         EditFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+        TabEditFilter.add(EditFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 167, 28));
 
-        jLabel42.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel42.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(74, 173, 82));
         jLabel42.setText("init");
+        TabEditFilter.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 83, 40, 18));
 
         EditFilter_Init.setColumns(20);
         EditFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -676,8 +645,12 @@ public class JFrameMain extends javax.swing.JFrame {
         EditFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane14.setViewportView(EditFilter_Init);
 
-        jLabel43.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        TabEditFilter.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 410, 89));
+
+        jLabel43.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(74, 173, 82));
         jLabel43.setText("gui");
+        TabEditFilter.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 185, 50, 18));
 
         EditFilter_Gui.setColumns(20);
         EditFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -685,8 +658,12 @@ public class JFrameMain extends javax.swing.JFrame {
         EditFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane15.setViewportView(EditFilter_Gui);
 
-        jLabel44.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        TabEditFilter.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 410, 87));
+
+        jLabel44.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(74, 173, 82));
         jLabel44.setText("apply");
+        TabEditFilter.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 296, 50, 18));
 
         EditFilter_Apply.setColumns(20);
         EditFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
@@ -694,110 +671,67 @@ public class JFrameMain extends javax.swing.JFrame {
         EditFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
         jScrollPane16.setViewportView(EditFilter_Apply);
 
+        TabEditFilter.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 410, 84));
+
         EditFilter_Code.setColumns(20);
         EditFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         EditFilter_Code.setRows(5);
         EditFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        EditFilter_Code.setPreferredSize(new java.awt.Dimension(479, 170));
         jScrollPane17.setViewportView(EditFilter_Code);
 
-        jLabel45.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel45.setText("Código");
+        TabEditFilter.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 34, 630, 320));
 
-        UpdateFilters.setText("Guardar");
-        UpdateFilters.addActionListener(new java.awt.event.ActionListener() {
+        jLabel45.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel45.setText("Código");
+        TabEditFilter.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 0, 114, 30));
+
+        UpdateFilters_Simulation.setBackground(new java.awt.Color(255, 255, 255));
+        UpdateFilters_Simulation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UpdateFilters_Simulation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        UpdateFilters_Simulation.setText("Simular");
+        UpdateFilters_Simulation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateFiltersActionPerformed(evt);
+                UpdateFilters_SimulationActionPerformed(evt);
             }
         });
+        TabEditFilter.add(UpdateFilters_Simulation, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 360, -1, -1));
 
-        javax.swing.GroupLayout TabEditFilterLayout = new javax.swing.GroupLayout(TabEditFilter);
-        TabEditFilter.setLayout(TabEditFilterLayout);
-        TabEditFilterLayout.setHorizontalGroup(
-            TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TabEditFilterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(UpdateFilters)
-                    .addGroup(TabEditFilterLayout.createSequentialGroup()
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TabEditFilterLayout.createSequentialGroup()
-                                .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(TabEditFilterLayout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(TabEditFilterLayout.createSequentialGroup()
-                                            .addGap(242, 242, 242)
-                                            .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(EditFilter_UseGui, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jScrollPane15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TabEditFilterLayout.createSequentialGroup()
-                                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(EditFilters_JComboFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
-                            .addGroup(TabEditFilterLayout.createSequentialGroup()
-                                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(24, 24, 24))
-        );
-        TabEditFilterLayout.setVerticalGroup(
-            TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabEditFilterLayout.createSequentialGroup()
-                .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabEditFilterLayout.createSequentialGroup()
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(TabEditFilterLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(EditFilters_JComboFilters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32))
-                            .addGroup(TabEditFilterLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(EditFilter_UseGui, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(TabEditFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(TabEditFilterLayout.createSequentialGroup()
-                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane17)))
-                .addGap(18, 18, 18)
-                .addComponent(UpdateFilters)
-                .addContainerGap())
-        );
+        UpdateFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+        UpdateFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UpdateFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+        UpdateFilters_Save.setText("Guardar");
+        UpdateFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateFilters_SaveActionPerformed(evt);
+            }
+        });
+        TabEditFilter.add(UpdateFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
 
         TabFilters.addTab("Editar", TabEditFilter);
 
+        TabCreateMix.setBackground(new java.awt.Color(255, 255, 255));
+        TabCreateMix.setForeground(new java.awt.Color(38, 91, 145));
+        TabCreateMix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(74, 173, 82));
         jLabel6.setText("FILTROS");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 19, 150, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(74, 173, 82));
         jLabel7.setText("Nombre Combinación");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 26));
 
+        CreateMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         CreateMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CreateMixFilters_ListFiltersMouseClicked(evt);
@@ -805,6 +739,9 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(CreateMixFilters_ListFilters);
 
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 45, 190, 330));
+
+        CreateMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         CreateMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CreateMixFilters_ListMixMouseClicked(evt);
@@ -812,88 +749,48 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(CreateMixFilters_ListMix);
 
+        jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 190, 320));
+
+        CreateMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         CreateMixFilters_Name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CreateMixFilters_NameKeyTyped(evt);
             }
         });
+        jPanel6.add(CreateMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel8.setText(">>");
-
+        CreateMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+        CreateMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CreateMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
         CreateMixFilters_Save.setText("Guardar");
         CreateMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateMixFilters_SaveActionPerformed(evt);
             }
         });
+        jPanel6.add(CreateMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7)
-                        .addComponent(CreateMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(CreateMixFilters_Save)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(CreateMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(146, 146, 146)
-                                        .addComponent(jLabel8))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(CreateMixFilters_Save, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
+        jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 42, 42));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         TabCreateMix.addTab("Crear Combinación", jPanel5);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditMixFilters_ListMix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        EditMixFilters_ListMix.setToolTipText("");
         EditMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditMixFilters_ListMixMouseClicked(evt);
@@ -901,12 +798,18 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(EditMixFilters_ListMix);
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 200, 330));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(74, 173, 82));
         jLabel9.setText("MIX FILTROS");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 25, 150, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel11.setText(">>");
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 42, 42));
 
+        EditMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         EditMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditMixFilters_ListFiltersMouseClicked(evt);
@@ -914,18 +817,29 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(EditMixFilters_ListFilters);
 
+        jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 190, 330));
+
+        EditMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         EditMixFilters_Name.setEnabled(false);
+        jPanel4.add(EditMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 190, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(74, 173, 82));
         jLabel12.setText("Nombre Combinación");
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 160, 26));
 
+        EditMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+        EditMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        EditMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
         EditMixFilters_Save.setText("Guardar");
         EditMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditMixFilters_SaveActionPerformed(evt);
             }
         });
+        jPanel4.add(EditMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
 
+        EditMixFilters_Filters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         EditMixFilters_Filters.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditMixFilters_FiltersMouseClicked(evt);
@@ -933,77 +847,16 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane10.setViewportView(EditMixFilters_Filters);
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel4.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 190, 330));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(74, 173, 82));
         jLabel13.setText("FILTROS");
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 150, -1));
 
+        jSeparator1.setForeground(new java.awt.Color(38, 91, 145));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
-                                .addComponent(jLabel11)
-                                .addGap(86, 86, 86))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(EditMixFilters_Name)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(EditMixFilters_Save)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(EditMixFilters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(EditMixFilters_Save)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel13)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(142, 142, 142)
-                                        .addComponent(jLabel11))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(40, 40, 40))
-        );
+        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 30, 370));
 
         TabCreateMix.addTab("Editar Combinación", jPanel4);
 
@@ -1011,18 +864,18 @@ public class JFrameMain extends javax.swing.JFrame {
         TabMixFilter.setLayout(TabMixFilterLayout);
         TabMixFilterLayout.setHorizontalGroup(
             TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabMixFilterLayout.createSequentialGroup()
-                .addComponent(TabCreateMix, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 243, Short.MAX_VALUE))
+            .addComponent(TabCreateMix)
         );
         TabMixFilterLayout.setVerticalGroup(
             TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabCreateMix)
+            .addGroup(TabMixFilterLayout.createSequentialGroup()
+                .addComponent(TabCreateMix, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        TabFilters.addTab("Combinación de Filtros", TabMixFilter);
+        TabFilters.addTab("Combinación de Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/camera_icon.png")), TabMixFilter); // NOI18N
 
-        jTabbedPane1.addTab("Filtros", TabFilters);
+        jTabbedPane1.addTab("Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/filters_icon.png")), TabFilters); // NOI18N
 
         TabConexion.setBackground(new java.awt.Color(255, 255, 255));
         TabConexion.setForeground(new java.awt.Color(74, 173, 82));
@@ -1063,7 +916,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel11.add(Local_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
 
         Local_Save.setBackground(new java.awt.Color(255, 255, 255));
-        Local_Save.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Local_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Local_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
         Local_Save.setText("Guardar");
         Local_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -1144,7 +997,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel14.add(Remote_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
 
         Remote_Save.setBackground(new java.awt.Color(255, 255, 255));
-        Remote_Save.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Remote_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Remote_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
         Remote_Save.setText("Guardar");
         Remote_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -1205,6 +1058,74 @@ public class JFrameMain extends javax.swing.JFrame {
         TabConexion.addTab("Programa Externo", TabRemoteConexion);
 
         jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel5.setText("URL");
+
+        Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Settings_Url.setText("http://localhost:8080/Servidor/");
+
+        Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
+        Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Settings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+        Settings_Save.setText("Guardar");
+        Settings_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Settings_SaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Settings_Url, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Settings_Save)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(Settings_Url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
+                .addComponent(Settings_Save)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(608, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), jPanel9); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1274,6 +1195,17 @@ public class JFrameMain extends javax.swing.JFrame {
                 this.CreateModel_Parkings.addItem(parklots[i]);
             }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            String sql = "SELECT `url` FROM `settings`";
+            int n = 1;
+            String[] temp = cx.select(sql, n, 2);
+
+            String[] substring = temp[0].split(" columns ");
+            this.Settings_Url.setText(substring[0]);
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1382,16 +1314,17 @@ public class JFrameMain extends javax.swing.JFrame {
             }
             this.CreateMixFilters_ListFilters.setListData(filters);
             this.EditMixFilters_Filters.setListData(filters);
+
             sql = "SELECT `name` FROM `mix`";
             n = 1;
             temp = cx.select(sql, n, 2);
-            filters = new String[(temp.length) + 1];
+            namemixs = new String[(temp.length) + 1];
             this.EditMixFilters_ListMix.removeAll();
             for (int i = 0; i < temp.length; i++) {
                 String[] substring = temp[i].split(" columns ");
-                filters[i] = substring[0];
+                namemixs[i] = substring[0];
             }
-            this.EditMixFilters_ListMix.setListData(filters);
+            this.EditMixFilters_ListMix.setListData(namemixs);
 
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -1475,12 +1408,15 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void CreateMixFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateMixFilters_SaveActionPerformed
         try {
+
             String sql = "SELECT `id` FROM `mix` WHERE `name`='" + this.CreateMixFilters_Name.getText() + "'";
             String temp[] = cx.select(sql, 1, 2);
 
             //Test
-            //            System.out.println(temp[0]);
-            if (temp[0].isEmpty()) {
+//            System.out.println(temp[0]);
+//            System.out.println(this.CreateMixFilters_Name.getText().length());
+            
+            if (temp[0].isEmpty() && this.CreateMixFilters_Name.getText().length() != 0) {
                 if (cm.isEmpty(this.CreateMixFilters_Name.getText())
                         && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1509,7 +1445,7 @@ public class JFrameMain extends javax.swing.JFrame {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El nombre de filtro ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El nombre de la combinación ya existe ó no es permitido", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -1542,18 +1478,13 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CreateMixFilters_ListFiltersMouseClicked
 
-    private void UpdateFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFiltersActionPerformed
-        String sql = "UPDATE `filters` SET "
-                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
-                + "`init`='" + this.EditFilter_Init.getText() + "', "
-                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
-                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
-                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
-                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
-        String msg = "el filtro";
-        //        System.out.println(sql);
-        cx.update(sql, msg, 2);
-    }//GEN-LAST:event_UpdateFiltersActionPerformed
+    private void UpdateFilters_SimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SimulationActionPerformed
+
+        JFrameTest.http = this.Settings_Url.getText();
+        JFrameTest jt = new JFrameTest();
+        jt.setVisible(true);
+
+    }//GEN-LAST:event_UpdateFilters_SimulationActionPerformed
 
     private void EditFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EditFilters_JComboFiltersItemStateChanged
         String nameFilter = this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex());
@@ -1627,7 +1558,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 this.beforeNameFilter = name;
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Se debe llenar el Campo 'Nombre de Filtro' con mínimo 6 caractéres", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se debe llenar el Campo 'Nombre de Filtro' con mínimo 4 caractéres", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_CreateFilter_GenerateActionPerformed
 
@@ -1676,11 +1607,31 @@ public class JFrameMain extends javax.swing.JFrame {
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
         String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
         JFrameWebView.id = id;
-        JFrameWebView.http = this.ConfigurationModel_Url.getText();
+        JFrameWebView.http = this.Settings_Url.getText();
         JFrameWebView s = new JFrameWebView();
         this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
+
+    private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
+        String url = this.Settings_Url.getText();
+        String sql = "UPDATE `settings` SET `url`='" + url + "' WHERE `id`=1;";
+        String msg = "la configuración general";
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_Settings_SaveActionPerformed
+
+    private void UpdateFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SaveActionPerformed
+        String sql = "UPDATE `filters` SET "
+                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
+                + "`init`='" + this.EditFilter_Init.getText() + "', "
+                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
+                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
+                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
+                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
+        String msg = "el filtro";
+        //        System.out.println(sql);
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_UpdateFilters_SaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1703,7 +1654,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField Conexion_MyIP2;
     private javax.swing.JButton ConfigurationModel_Save;
     private javax.swing.JComboBox<String> ConfigurationModel_Threads;
-    private javax.swing.JTextField ConfigurationModel_Url;
     private javax.swing.JTextArea CreateFilter_Apply;
     private javax.swing.JTextArea CreateFilter_Code;
     private javax.swing.JButton CreateFilter_Generate;
@@ -1740,6 +1690,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField Remote_Puerto;
     private javax.swing.JButton Remote_Save;
     private javax.swing.JTextField Remote_User;
+    private javax.swing.JButton Settings_Save;
+    private javax.swing.JTextField Settings_Url;
     private javax.swing.JTabbedPane TabConexion;
     private javax.swing.JPanel TabConfigurationModel;
     private javax.swing.JPanel TabCreateFilter;
@@ -1751,7 +1703,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel TabMixFilter;
     private javax.swing.JTabbedPane TabModelARFF;
     private javax.swing.JPanel TabRemoteConexion;
-    private javax.swing.JButton UpdateFilters;
+    private javax.swing.JButton UpdateFilters_Save;
+    private javax.swing.JButton UpdateFilters_Simulation;
     private javax.swing.JButton btnSaveFilters;
     private javax.swing.JButton btnconfiguracion;
     private javax.swing.JFileChooser chooser;
@@ -1785,6 +1738,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
@@ -1792,11 +1746,12 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -1809,14 +1764,15 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;

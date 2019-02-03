@@ -32,12 +32,12 @@ public class ClassMain {
 
             if (conexion == null) {
                 res = null;
-                JOptionPane.showMessageDialog(null, "No se ha configurado la conexión \n Ir a Pestaña 'Conexión'", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se ha configurado la conexión a base de datos \n Ir a la Pestaña 'Conexión' y 'Guardar'", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 res = conexion;
             }
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "No se ha configurado la conexión \n Ir a Pestaña 'Conexión'", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha configurado la conexión a base de datos \n Ir a la Pestaña 'Conexión' y 'Guardar'", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return res;
     }
