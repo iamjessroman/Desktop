@@ -30,11 +30,12 @@ public class ClassWebView extends JFXPanel {
 
     //Constructor de la clase
     public ClassWebView(String url) {
-        
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 Button button = new Button("Cargar");
+                Button next_button = new Button("Cortar");
                 WebView view = new WebView();
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
@@ -43,7 +44,16 @@ public class ClassWebView extends JFXPanel {
                     @Override
                     public void handle(ActionEvent event) {
                         // Call a JavaScript function of the current page
-                        engine.executeScript("upload('"+url+"');");
+                        engine.executeScript("upload('" + url + "');");
+                    }
+                });
+
+                next_button.setOnAction(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event) {
+                        // Call a JavaScript function of the current page
+                        engine.executeScript("next();");
                     }
                 });
 
@@ -51,7 +61,7 @@ public class ClassWebView extends JFXPanel {
                 root.setAlignment(Pos.CENTER);
                 root.setPadding(new Insets(5));
                 root.setSpacing(5);
-                root.getChildren().addAll(view,button);
+                root.getChildren().addAll(view, button, next_button);
 
                 setScene(new Scene(root));
             }

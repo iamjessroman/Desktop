@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class JFrameWebView extends javax.swing.JFrame {
     public static String id;
-
+    public static String http;
     /**
      * Creates new form Windows
      */
@@ -26,9 +26,9 @@ public class JFrameWebView extends javax.swing.JFrame {
         
         initComponents();
         this.setLocationRelativeTo(null);
-        String url = "http://localhost:8080/Servidor/app/parklot/"+id;
+        String url = http+"app/parklot/"+id;
         ClassWebView browser = new ClassWebView(url);
-        browser.loadURL("http://localhost:8080/Servidor/parklot.jsp");
+        browser.loadURL(http);
         browser.setBounds(1, 1, jPanel1.getWidth() - 1, jPanel1.getHeight() - 1);
         jPanel1.add(browser);
     }
