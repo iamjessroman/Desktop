@@ -5,29 +5,23 @@
  */
 package desktop;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
- * @author jessi
+ * @author Jessica Roman
  */
 public class JFrameWebView extends javax.swing.JFrame {
+
     public static String id;
     public static String http;
+
     /**
-     * Creates new form Windows
+     * Creates new form JFrameWebView
      */
     public JFrameWebView() {
-        
         initComponents();
         this.setDefaultCloseOperation(JFrameTest.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        String url = http+"app/parklot/"+id;
+        String url = http + "app/parklot/" + id;
         ClassWebView browser = new ClassWebView(url);
         browser.loadURL(http);
         browser.setBounds(1, 1, jPanel1.getWidth(), jPanel1.getHeight());
@@ -44,73 +38,39 @@ public class JFrameWebView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnContinuar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(null);
-        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1080, 720));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnContinuar.setBackground(new java.awt.Color(255, 255, 255));
-        btnContinuar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnContinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        btnContinuar.setText("Continuar");
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 951, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1180, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnContinuar)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnContinuar)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-                Conexion c = new Conexion();
-                String string = c.data();
-                JFrameParkings p = new JFrameParkings();
-                this.setVisible(false);
-                p.setVisible(true);
-
-                String ruta = "./data/archivo.txt";
-                File archivo = new File(ruta);
-                BufferedWriter bw;
-                try {
-                if (archivo.exists()) {
-                        bw = new BufferedWriter(new FileWriter(archivo));
-                        bw.write(string);
-                  
-                } else {
-                    bw = new BufferedWriter(new FileWriter(archivo));
-                    bw.write(string);
-                }
-                bw.close();
-                  } catch (IOException ex) {
-                        Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-    }//GEN-LAST:event_btnContinuarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,13 +98,6 @@ public class JFrameWebView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFrameWebView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -155,7 +108,6 @@ public class JFrameWebView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
