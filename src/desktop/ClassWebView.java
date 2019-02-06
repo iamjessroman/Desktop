@@ -36,6 +36,7 @@ public class ClassWebView extends JFXPanel {
             public void run() {
                 Button button = new Button("Cargar");
                 Button next_button = new Button("Cortar");
+                Button refresh_button = new Button("Reiniciar");
                 WebView view = new WebView();
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
@@ -57,11 +58,20 @@ public class ClassWebView extends JFXPanel {
                     }
                 });
 
+                refresh_button.setOnAction(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent event) {
+                        // Call a JavaScript function of the current page
+                        engine.executeScript("refresh();");
+                    }
+                });
+
                 VBox root = new VBox();
                 root.setAlignment(Pos.CENTER);
                 root.setPadding(new Insets(5));
                 root.setSpacing(5);
-                root.getChildren().addAll(view, button, next_button);
+                root.getChildren().addAll(view, button, next_button, refresh_button);
 
                 setScene(new Scene(root));
             }

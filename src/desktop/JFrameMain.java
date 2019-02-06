@@ -169,11 +169,11 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
         EditFilter_Apply = new javax.swing.JTextArea();
-        jScrollPane17 = new javax.swing.JScrollPane();
-        EditFilter_Code = new javax.swing.JTextArea();
         jLabel45 = new javax.swing.JLabel();
         UpdateFilters_Simulation = new javax.swing.JButton();
         UpdateFilters_Save = new javax.swing.JButton();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        EditFilter_Code = new javax.swing.JTextArea();
         TabMixFilter = new javax.swing.JPanel();
         TabCreateMix = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -187,6 +187,7 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateMixFilters_Name = new javax.swing.JTextField();
         CreateMixFilters_Save = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         EditMixFilters_ListMix = new javax.swing.JList<>();
@@ -201,6 +202,7 @@ public class JFrameMain extends javax.swing.JFrame {
         EditMixFilters_Filters = new javax.swing.JList<>();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel40 = new javax.swing.JLabel();
         TabConexion = new javax.swing.JTabbedPane();
         TabLocalConexion = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -242,6 +244,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Settings_Url = new javax.swing.JTextField();
         Settings_Save = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -367,63 +370,37 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Configuración Clasificador", jPanel3);
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TabModelARFF.setBackground(new java.awt.Color(255, 255, 255));
+        TabModelARFF.setForeground(new java.awt.Color(74, 173, 82));
+        TabModelARFF.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        CreateModel_Start.setText("Empezar");
+        TabCreateModel.setBackground(new java.awt.Color(255, 255, 255));
+        TabCreateModel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CreateModel_Start.setBackground(new java.awt.Color(255, 255, 255));
+        CreateModel_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CreateModel_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        CreateModel_Start.setText("Iniciar");
         CreateModel_Start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateModel_StartActionPerformed(evt);
             }
         });
+        jPanel8.add(CreateModel_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(74, 173, 82));
         jLabel4.setText("Parqueo");
+        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(CreateModel_Start))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                        .addComponent(CreateModel_Parkings, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(CreateModel_Parkings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
-                .addComponent(CreateModel_Start)
-                .addContainerGap())
-        );
+        CreateModel_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel8.add(CreateModel_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, -1));
 
-        javax.swing.GroupLayout TabCreateModelLayout = new javax.swing.GroupLayout(TabCreateModel);
-        TabCreateModel.setLayout(TabCreateModelLayout);
-        TabCreateModelLayout.setHorizontalGroup(
-            TabCreateModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabCreateModelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(789, Short.MAX_VALUE))
-        );
-        TabCreateModelLayout.setVerticalGroup(
-            TabCreateModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabCreateModelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        TabCreateModel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 410));
 
         TabModelARFF.addTab("Crear", TabCreateModel);
 
@@ -467,7 +444,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
                 .addComponent(ConfigurationModel_Save)
                 .addContainerGap())
         );
@@ -491,7 +468,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
         TabModelARFF.addTab("Configuración", TabConfigurationModel);
 
-        jTabbedPane1.addTab("Modelo ARFF", TabModelARFF);
+        jTabbedPane1.addTab("ARFF", new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png")), TabModelARFF); // NOI18N
 
         TabFilters.setBackground(new java.awt.Color(255, 255, 255));
         TabFilters.setForeground(new java.awt.Color(74, 173, 82));
@@ -673,19 +650,10 @@ public class JFrameMain extends javax.swing.JFrame {
 
         TabEditFilter.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 410, 84));
 
-        EditFilter_Code.setColumns(20);
-        EditFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        EditFilter_Code.setRows(5);
-        EditFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        EditFilter_Code.setPreferredSize(new java.awt.Dimension(479, 170));
-        jScrollPane17.setViewportView(EditFilter_Code);
-
-        TabEditFilter.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 34, 630, 320));
-
         jLabel45.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(74, 173, 82));
         jLabel45.setText("Código");
-        TabEditFilter.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 0, 114, 30));
+        TabEditFilter.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
 
         UpdateFilters_Simulation.setBackground(new java.awt.Color(255, 255, 255));
         UpdateFilters_Simulation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -709,6 +677,14 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         TabEditFilter.add(UpdateFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
 
+        EditFilter_Code.setColumns(20);
+        EditFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        EditFilter_Code.setRows(5);
+        EditFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jScrollPane19.setViewportView(EditFilter_Code);
+
+        TabEditFilter.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
+
         TabFilters.addTab("Editar", TabEditFilter);
 
         TabCreateMix.setBackground(new java.awt.Color(255, 255, 255));
@@ -724,7 +700,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(74, 173, 82));
         jLabel6.setText("FILTROS");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 19, 150, -1));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(74, 173, 82));
@@ -739,7 +715,7 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(CreateMixFilters_ListFilters);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 45, 190, 330));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 320));
 
         CreateMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         CreateMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -773,6 +749,9 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
         jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 42, 42));
 
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
+        jPanel6.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -789,7 +768,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditMixFilters_ListMix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        EditMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         EditMixFilters_ListMix.setToolTipText("");
         EditMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -798,12 +777,12 @@ public class JFrameMain extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(EditMixFilters_ListMix);
 
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 200, 330));
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 180, 330));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(74, 173, 82));
         jLabel9.setText("MIX FILTROS");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 25, 150, -1));
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
@@ -852,11 +831,14 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(74, 173, 82));
         jLabel13.setText("FILTROS");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 150, -1));
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 150, 20));
 
         jSeparator1.setForeground(new java.awt.Color(38, 91, 145));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 30, 370));
+
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
+        jPanel4.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
 
         TabCreateMix.addTab("Editar Combinación", jPanel4);
 
@@ -1037,7 +1019,6 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
         jLabel15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel15.setPreferredSize(new java.awt.Dimension(150, 150));
         jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
 
         javax.swing.GroupLayout TabRemoteConexionLayout = new javax.swing.GroupLayout(TabRemoteConexion);
@@ -1060,16 +1041,20 @@ public class JFrameMain extends javax.swing.JFrame {
         jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(74, 173, 82));
         jLabel5.setText("URL");
+        jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 18, 93, -1));
 
         Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Settings_Url.setText("http://localhost:8080/Servidor/");
+        jPanel10.add(Settings_Url, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 15, 360, -1));
 
         Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
         Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -1080,50 +1065,12 @@ public class JFrameMain extends javax.swing.JFrame {
                 Settings_SaveActionPerformed(evt);
             }
         });
+        jPanel10.add(Settings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Settings_Url, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Settings_Save)
-                .addContainerGap())
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(Settings_Url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
-                .addComponent(Settings_Save)
-                .addContainerGap())
-        );
+        jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 571, 393));
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(608, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings_logo.png"))); // NOI18N
+        jPanel9.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
 
         jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), jPanel9); // NOI18N
 
@@ -1138,10 +1085,9 @@ public class JFrameMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 26, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1609,7 +1555,6 @@ public class JFrameMain extends javax.swing.JFrame {
         JFrameWebView.id = id;
         JFrameWebView.http = this.Settings_Url.getText();
         JFrameWebView s = new JFrameWebView();
-        this.setVisible(false);
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
@@ -1740,7 +1685,10 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -1770,8 +1718,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
-    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
