@@ -35,11 +35,15 @@ public class ClassWebView extends JFXPanel {
             @Override
             public void run() {
                 Button button = new Button("Cargar");
+                button.setStyle("-fx-font: 18 arial; -fx-base: #265B91;");
                 Button next_button = new Button("Cortar");
+                next_button.setStyle("-fx-font: 18 arial; -fx-base: #265B91;");
                 Button refresh_button = new Button("Reiniciar");
+                refresh_button.setStyle("-fx-font: 18 arial; -fx-base: #265B91;");
                 WebView view = new WebView();
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
+                engine.setUserStyleSheetLocation(getClass().getResource("style.css").toString());
                 button.setOnAction(new EventHandler<ActionEvent>() {
 
                     @Override
