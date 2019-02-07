@@ -47,6 +47,8 @@ public class JFrameParkings extends javax.swing.JFrame {
     private int indice;
     String[] mix = null;
     String[] namemixs = null;
+    String[] id_parklots = null;
+    String[] id = null;
     ClassMain cm = new ClassMain();
 
     /**
@@ -77,23 +79,26 @@ public class JFrameParkings extends javax.swing.JFrame {
             this.Parkings_MixFilters.addItem(namemixs[i]);
         }
 
-        sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` FROM `parklots`";
-        n = 4;
+        sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` ,`id` FROM `parklots`";
+        n = 5;
         temp = cx.select(sql, n, 2);
         String[] data_url = new String[(temp.length)];
-        String name_parking="", path_parking = "";
-        String[] id_parklots = new String[(temp.length)];
+        String name_parking = "", path_parking = "";
+        id_parklots = new String[(temp.length)];
+        id = new String[(temp.length)];
+
         for (int i = 0; i < temp.length; i++) {
             String[] substring = temp[i].split(" columns ");
-            name_parking=substring[0];
-            path_parking=substring[1];
-            id_parklots[i]=substring[2];
+            name_parking = substring[0];
+            path_parking = substring[1];
+            id_parklots[i] = substring[2];
             String[] data_image = substring[3].split("data:image/jpeg;base64,");
             data_url[i] = data_image[1];
             //System.out.println(data_url[i]);
+            id[i] = substring[4];
         }
-        
-        this.Parkings_Tittle.setText(name_parking+" ("+path_parking+")");
+
+        this.Parkings_Tittle.setText(name_parking + " (" + path_parking + ")");
 
         //System.out.println("tamaño "+data_url.length);
         for (int j = 0; j < data_url.length; j++) {
@@ -265,37 +270,29 @@ public class JFrameParkings extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        Conexion c = new Conexion();
-////        c.delete();
-//        try {
-//            String ruta = "./data/estados.txt";
-//            String Text = "";
-//            Binary bn = new Binary();
-//            for (int i = 0; i < estados.size(); i++) {
-//                try {
-//                    JComboBox est = estados.get(i);
-//                    Text += est.getSelectedItem() + ",";
-//
-//                } catch (Exception ex) {
-//                    Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            cm.WriteEstados(Text, ruta);
-//            Conexion cn = new Conexion();
-//            cn.datos();
-//            ReadJson rj = new ReadJson();
-//            Images img = new Images();
-//            Images.getImage(rj.jsonFileRead());
-//
-//            JFrameMain s = new JFrameMain();
-//            this.setVisible(false);
-//            s.setVisible(true);
-//        } catch (JSONException ex) {
-//            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
+        try {
+            String Text = "";
+            for (int i = 0; i < estados.size(); i++) {
+                JComboBox est = estados.get(i);
+                Text = (String) est.getSelectedItem();
+                String sql = "UPDATE `parklots` SET `type`= '" + Text + "'WHERE `id`='" + id[i] + "'";
+                cx.update(sql, " ", 2);
+            }
+            
+            
+            ReadJson rj = new ReadJson();
+            Images img = new Images();
+            Images.getImage(rj.jsonFileRead());
+
+            JFrameMain s = new JFrameMain();
+            this.setVisible(false);
+            s.setVisible(true);
+        } catch (JSONException ex) {
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -127,12 +127,6 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateModel_Start = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         CreateModel_Parkings = new javax.swing.JComboBox<>();
-        TabConfigurationModel = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        ConfigurationModel_Save = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        ConfigurationModel_Threads = new javax.swing.JComboBox<>();
         TabFilters = new javax.swing.JTabbedPane();
         TabCreateFilter = new javax.swing.JPanel();
         btnSaveFilters = new javax.swing.JButton();
@@ -393,70 +387,6 @@ public class JFrameMain extends javax.swing.JFrame {
         TabCreateModel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 410));
 
         TabModelARFF.addTab("Crear", TabCreateModel);
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel1.setText("URL");
-
-        ConfigurationModel_Save.setText("Guardar");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Número de Hilos ");
-
-        ConfigurationModel_Threads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(ConfigurationModel_Save))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 294, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(ConfigurationModel_Threads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-                .addComponent(ConfigurationModel_Save)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout TabConfigurationModelLayout = new javax.swing.GroupLayout(TabConfigurationModel);
-        TabConfigurationModel.setLayout(TabConfigurationModelLayout);
-        TabConfigurationModelLayout.setHorizontalGroup(
-            TabConfigurationModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabConfigurationModelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(687, Short.MAX_VALUE))
-        );
-        TabConfigurationModelLayout.setVerticalGroup(
-            TabConfigurationModelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabConfigurationModelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        TabModelARFF.addTab("Configuración", TabConfigurationModel);
 
         jTabbedPane1.addTab("ARFF", new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png")), TabModelARFF); // NOI18N
 
@@ -1561,14 +1491,6 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveFiltersActionPerformed
 
-    private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
-        String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
-        JFrameWebView.id = id;
-        JFrameWebView.http = this.Settings_Url.getText();
-        JFrameWebView s = new JFrameWebView();
-        s.setVisible(true);
-    }//GEN-LAST:event_CreateModel_StartActionPerformed
-
     private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
         String url = this.Settings_Url.getText();
         String path = this.Settings_PathImagesTemp.getText();
@@ -1613,6 +1535,14 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
+        String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
+        JFrameWebView.id = id;
+        JFrameWebView.http = this.Settings_Url.getText();
+        JFrameWebView s = new JFrameWebView();
+        s.setVisible(true);
+    }//GEN-LAST:event_CreateModel_StartActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1632,8 +1562,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField APIRESTCLASIFICADOR;
     private javax.swing.JTextField Conexion_MyIP;
     private javax.swing.JTextField Conexion_MyIP2;
-    private javax.swing.JButton ConfigurationModel_Save;
-    private javax.swing.JComboBox<String> ConfigurationModel_Threads;
     private javax.swing.JTextArea CreateFilter_Apply;
     private javax.swing.JTextArea CreateFilter_Code;
     private javax.swing.JButton CreateFilter_Generate;
@@ -1674,7 +1602,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton Settings_Save;
     private javax.swing.JTextField Settings_Url;
     private javax.swing.JTabbedPane TabConexion;
-    private javax.swing.JPanel TabConfigurationModel;
     private javax.swing.JPanel TabCreateFilter;
     private javax.swing.JTabbedPane TabCreateMix;
     private javax.swing.JPanel TabCreateModel;
@@ -1691,7 +1618,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton btnconfiguracion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1702,7 +1628,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1747,7 +1672,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;

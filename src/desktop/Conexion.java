@@ -24,7 +24,7 @@ public class Conexion {
         String[] con = null;
         try {
             con = cm.ReadArray(ruta);
-            
+
             //Test
 //            for (int i = 0; i < con.length; i++) {
 //                System.out.println(con[i]);
@@ -61,7 +61,10 @@ public class Conexion {
                     passLocal);
             Statement st = conn.createStatement();
             st.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Se ha actualizado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+            if (!" ".equals(msg)) {
+                 JOptionPane.showMessageDialog(null, "Se ha actualizado " + msg, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }  
         } catch (HeadlessException | SQLException e) {
             System.out.print(e);
             JOptionPane.showMessageDialog(null, "No se ha actualizado " + msg, "Error", JOptionPane.ERROR_MESSAGE);
