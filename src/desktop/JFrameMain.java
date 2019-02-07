@@ -108,8 +108,6 @@ public class JFrameMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chooser = new javax.swing.JFileChooser();
-        jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -239,23 +237,15 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         Conexion_MyIP2 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        TabSettings = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        Settings_Url = new javax.swing.JTextField();
+        Settings_PathImagesTemp = new javax.swing.JTextField();
         Settings_Save = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        Settings_Url = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -1040,8 +1030,8 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        TabSettings.setBackground(new java.awt.Color(255, 255, 255));
+        TabSettings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
@@ -1049,49 +1039,67 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel5.setText("URL");
-        jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 18, 93, -1));
+        jLabel5.setText("PATH Imagenés Temporales ");
+        jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 200, 20));
 
-        Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Settings_Url.setText("http://localhost:8080/Servidor/");
-        jPanel10.add(Settings_Url, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 15, 360, -1));
+        Settings_PathImagesTemp.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Settings_PathImagesTemp.setText("C:\\");
+            jPanel10.add(Settings_PathImagesTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 60, 380, -1));
 
-        Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
-        Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Settings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        Settings_Save.setText("Guardar");
-        Settings_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Settings_SaveActionPerformed(evt);
-            }
-        });
-        jPanel10.add(Settings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
+            Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
+            Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+            Settings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+            Settings_Save.setText("Guardar");
+            Settings_Save.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Settings_SaveActionPerformed(evt);
+                }
+            });
+            jPanel10.add(Settings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
 
-        jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 571, 393));
+            jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel8.setForeground(new java.awt.Color(74, 173, 82));
+            jLabel8.setText("URL");
+            jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 93, 20));
 
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings_logo.png"))); // NOI18N
-        jPanel9.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+            Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+            Settings_Url.setText("http://localhost:8080/Servidor/");
+            jPanel10.add(Settings_Url, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 20, 380, -1));
 
-        jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), jPanel9); // NOI18N
+            jButton2.setBackground(new java.awt.Color(255, 255, 255));
+            jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_icon.png"))); // NOI18N
+            jButton2.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton2ActionPerformed(evt);
+                }
+            });
+            jPanel10.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 60, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+            TabSettings.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 700, 393));
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings_logo.png"))); // NOI18N
+            TabSettings.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+            jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), TabSettings); // NOI18N
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 26, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
+            );
+
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
 
@@ -1146,12 +1154,16 @@ public class JFrameMain extends javax.swing.JFrame {
         }
 
         try {
-            String sql = "SELECT `url` FROM `settings`";
-            int n = 1;
+            String sql = "SELECT `url`,`path` FROM `settings`";
+            int n = 2;
             String[] temp = cx.select(sql, n, 2);
+            String[] substring = null;
+            for (int i = 0; i < temp.length; i++) {
+                substring = temp[i].split(" columns ");
+            }
 
-            String[] substring = temp[0].split(" columns ");
             this.Settings_Url.setText(substring[0]);
+            this.Settings_PathImagesTemp.setText(substring[1]);
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1361,7 +1373,6 @@ public class JFrameMain extends javax.swing.JFrame {
             //Test
 //            System.out.println(temp[0]);
 //            System.out.println(this.CreateMixFilters_Name.getText().length());
-            
             if (temp[0].isEmpty() && this.CreateMixFilters_Name.getText().length() != 0) {
                 if (cm.isEmpty(this.CreateMixFilters_Name.getText())
                         && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
@@ -1426,7 +1437,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void UpdateFilters_SimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SimulationActionPerformed
 
-        JFrameTest.http = this.Settings_Url.getText();
+        JFrameTest.http = this.Settings_PathImagesTemp.getText();
         JFrameTest jt = new JFrameTest();
         jt.setVisible(true);
 
@@ -1553,14 +1564,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
         String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
         JFrameWebView.id = id;
-        JFrameWebView.http = this.Settings_Url.getText();
+        JFrameWebView.http = this.Settings_PathImagesTemp.getText();
         JFrameWebView s = new JFrameWebView();
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
     private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
         String url = this.Settings_Url.getText();
-        String sql = "UPDATE `settings` SET `url`='" + url + "' WHERE `id`=1;";
+        String path = this.Settings_PathImagesTemp.getText();
+        String res = path.replace("\\", "/");
+        String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "'WHERE `id`=1;";
         String msg = "la configuración general";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Settings_SaveActionPerformed
@@ -1577,6 +1590,28 @@ public class JFrameMain extends javax.swing.JFrame {
         //        System.out.println(sql);
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_UpdateFilters_SaveActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("URL Imagenés Temporales");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        //
+        // disable the "All files" option.
+        //
+        chooser.setAcceptAllFileFilterUsed(false);
+        //    
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            this.Settings_PathImagesTemp.setText(chooser.getSelectedFile().toString());
+//            System.out.println("getCurrentDirectory(): "
+//                    + chooser.getCurrentDirectory());
+//            System.out.println("getSelectedFile() : "
+//                    + chooser.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1635,6 +1670,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField Remote_Puerto;
     private javax.swing.JButton Remote_Save;
     private javax.swing.JTextField Remote_User;
+    private javax.swing.JTextField Settings_PathImagesTemp;
     private javax.swing.JButton Settings_Save;
     private javax.swing.JTextField Settings_Url;
     private javax.swing.JTabbedPane TabConexion;
@@ -1648,12 +1684,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel TabMixFilter;
     private javax.swing.JTabbedPane TabModelARFF;
     private javax.swing.JPanel TabRemoteConexion;
+    private javax.swing.JPanel TabSettings;
     private javax.swing.JButton UpdateFilters_Save;
     private javax.swing.JButton UpdateFilters_Simulation;
     private javax.swing.JButton btnSaveFilters;
     private javax.swing.JButton btnconfiguracion;
-    private javax.swing.JFileChooser chooser;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1697,6 +1734,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1705,14 +1743,12 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane14;

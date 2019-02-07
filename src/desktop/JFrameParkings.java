@@ -99,7 +99,14 @@ public class JFrameParkings extends javax.swing.JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            ImageIcon icon = new ImageIcon("C:\\Users\\Jessica Roman\\Documents\\Tesis\\Roman\\Desktop\\data\\image" + (j - 1) + ".png");
+
+            sql = "SELECT `path` FROM `settings`";
+            n = 1;
+            temp = cx.select(sql, n, 2);
+            String[] substring = temp[0].split(" columns ");
+            String res = substring[0];
+            String dir = res.replace("/","\\");
+            ImageIcon icon = new ImageIcon(dir + "\\image" + (j - 1) + ".png");
             JLabel etiqueta = new JLabel("Etiqueta " + indice);
             etiqueta.setText(null);
             etiqueta.setSize(300, 300);
@@ -180,11 +187,6 @@ public class JFrameParkings extends javax.swing.JFrame {
                 jMenu1MouseClicked(evt);
             }
         });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -229,12 +231,6 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-
-//            this.images();
-
-    }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
 
