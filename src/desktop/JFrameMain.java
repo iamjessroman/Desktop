@@ -1564,7 +1564,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
         String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
         JFrameWebView.id = id;
-        JFrameWebView.http = this.Settings_PathImagesTemp.getText();
+        JFrameWebView.http = this.Settings_Url.getText();
         JFrameWebView s = new JFrameWebView();
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
