@@ -239,6 +239,8 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         Settings_Url = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        Settings_Threads = new javax.swing.JComboBox<>();
         jLabel38 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -989,8 +991,8 @@ public class JFrameMain extends javax.swing.JFrame {
 
             jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabel8.setForeground(new java.awt.Color(74, 173, 82));
-            jLabel8.setText("URL");
-            jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 93, 20));
+            jLabel8.setText("NÚMERO DE HILOS");
+            jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 170, 20));
 
             Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
             Settings_Url.setText("http://localhost:8080/Servidor/");
@@ -1004,6 +1006,20 @@ public class JFrameMain extends javax.swing.JFrame {
                 }
             });
             jPanel10.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 60, -1));
+
+            jLabel46.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel46.setForeground(new java.awt.Color(74, 173, 82));
+            jLabel46.setText("URL");
+            jPanel10.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 93, 20));
+
+            Settings_Threads.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+            Settings_Threads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+            Settings_Threads.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Settings_ThreadsActionPerformed(evt);
+                }
+            });
+            jPanel10.add(Settings_Threads, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 70, -1));
 
             TabSettings.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 700, 393));
 
@@ -1024,8 +1040,9 @@ public class JFrameMain extends javax.swing.JFrame {
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 26, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())
             );
 
             pack();
@@ -1543,6 +1560,10 @@ public class JFrameMain extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
+    private void Settings_ThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_ThreadsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Settings_ThreadsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1600,6 +1621,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField Remote_User;
     private javax.swing.JTextField Settings_PathImagesTemp;
     private javax.swing.JButton Settings_Save;
+    private javax.swing.JComboBox<String> Settings_Threads;
     private javax.swing.JTextField Settings_Url;
     private javax.swing.JTabbedPane TabConexion;
     private javax.swing.JPanel TabCreateFilter;
@@ -1656,6 +1678,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

@@ -54,6 +54,7 @@ public class ARFFfile {
         dataRaw = new Instances("Parkings", atts, 0);
     }
 
+
     public static void pixels(Image image, int l) throws IOException, Exception {
 
         int p = 1;

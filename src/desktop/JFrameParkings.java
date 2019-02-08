@@ -44,6 +44,7 @@ public class JFrameParkings extends javax.swing.JFrame {
     private List<JLabel> imagenes;
     private List<JLabel> titulos;
     private List<JComboBox> estados;
+    private List<ImageIcon> images;
     private int indice;
     String[] mix = null;
     String[] namemixs = null;
@@ -60,6 +61,7 @@ public class JFrameParkings extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         imagenes = new ArrayList<>();
         estados = new ArrayList<>();
+        images = new ArrayList<>();
         titulos = new ArrayList<>();
         indice = 0;
 
@@ -100,11 +102,23 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         this.Parkings_Tittle.setText(name_parking + " (" + path_parking + ")");
 
+        sql = "SELECT `path` FROM `settings`";
+        n = 1;
+        temp = cx.select(sql, n, 2);
+        String[] substring = temp[0].split(" columns ");
+        String res = substring[0];
+        String dir = res.replace("/", "\\");
+
+        String path_folder = dir + "\\" + name_parking + "\\" + path_parking+ "\\" ;
+
+        File folder = new File(path_folder);
+        folder.mkdirs();
+
         //System.out.println("tamaño "+data_url.length);
         for (int j = 0; j < data_url.length; j++) {
             //convert base64 string to binary data
             byte[] data = DatatypeConverter.parseBase64Binary(data_url[j]);
-            String path = "./data/image" + id_parklots[j] + ".png";
+            String path = path_folder + "image" + id_parklots[j] + ".png";
             File file = new File(path);
             try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                 outputStream.write(data);
@@ -112,16 +126,12 @@ public class JFrameParkings extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            sql = "SELECT `path` FROM `settings`";
-            n = 1;
-            temp = cx.select(sql, n, 2);
-            String[] substring = temp[0].split(" columns ");
-            String res = substring[0];
-            String dir = res.replace("/", "\\");
             JLabel titulo = new JLabel("Parqueo: " + id_parklots[j]);
             titulo.setFont(this.getFont());
             this.jPanel1.add(titulo);
-            ImageIcon icon = new ImageIcon(dir + "\\image" + id_parklots[j] + ".png");
+            ImageIcon icon = new ImageIcon(path_folder + "image" + id_parklots[j] + ".png");
+            icon.setDescription(path_folder + "image" + id_parklots[j] + ".png");
+            this.images.add(icon);
             JLabel etiqueta = new JLabel("Etiqueta " + indice);
             etiqueta.setText(null);
             etiqueta.setSize(150, 150);
@@ -129,13 +139,6 @@ public class JFrameParkings extends javax.swing.JFrame {
             etiqueta.setIcon(icono);
             this.jPanel1.add(etiqueta);
             imagenes.add(etiqueta);
-//            JLabel text = new JLabel();
-//            etiqueta.setText("ocupado");
-//            this.jPanel1.add(text);
-//            JCheckBox checkBox = new JCheckBox("Check me!");
-//            checkBox.setBounds(etiqueta.getX()-100, etiqueta.getY()-100,100,100);
-//            this.jPanel1.add(checkBox);
-
             JComboBox combo = new JComboBox();
             combo.setFont(this.getFont());
             combo.addItem("Ocupado");
@@ -271,7 +274,7 @@ public class JFrameParkings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try {
+
             String Text = "";
             for (int i = 0; i < estados.size(); i++) {
                 JComboBox est = estados.get(i);
@@ -280,49 +283,25 @@ public class JFrameParkings extends javax.swing.JFrame {
                 cx.update(sql, " ", 2);
             }
             
-            
-            ReadJson rj = new ReadJson();
-            Images img = new Images();
-            Images.getImage(rj.jsonFileRead());
+            ClassExecutors ce = new ClassExecutors();
+            ce.RUN(2,images);
 
-            JFrameMain s = new JFrameMain();
-            this.setVisible(false);
-            s.setVisible(true);
-        } catch (JSONException ex) {
-            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            Images img = new Images();
+//            Images.getImage(null);
+
+//            JFrameMain s = new JFrameMain();
+//            this.setVisible(false);
+//            s.setVisible(true);
+
+
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
-//        String base64String = "data:image/png;base64,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";
-//        String[] strings = base64String.split(",");
-//        String extension;
-//        switch (strings[0]) {//check image's extension
-//            case "data:image/jpeg;base64":
-//                extension = "jpeg";
-//                break;
-//            case "data:image/png;base64":
-//                extension = "png";
-//                break;
-//            default://should write cases for more images types
-//                extension = "jpg";
-//                break;
-//        }
-//        //convert base64 string to binary data
-//        byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-//        String path = "./data/image." + extension;
-//        File file = new File(path);
-//        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-//            outputStream.write(data);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

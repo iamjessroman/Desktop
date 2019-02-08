@@ -9,42 +9,52 @@ package desktop;
  *
  * @author jessi
  */
-import java.io.FileNotFoundException;
+import java.io.File;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 public class ClassExecutors {
 
-    public void RUN() throws FileNotFoundException{
+    List<ImageIcon> imgs;
+    int temp = 0;
+
+    public void RUN(int n, List<ImageIcon> images) {
         List<Runnable> tasks = new ArrayList<>();
+        imgs = images;
+
         System.out.println("Inside : " + Thread.currentThread().getName());
-        ClassMain cm = new ClassMain();
-        String ruta = "./data/configuraciones.txt";
-        String number[] = cm.ReadArray(ruta);
-        System.out.println("Creating Executor Service with a thread pool of Size " + number[0]);
-        ExecutorService executorService = Executors.newFixedThreadPool(Integer.valueOf(number[0]));
-
-        for (int i = 0; i < Integer.valueOf(number[0]); i++) {
-            Runnable task = () -> {
+        System.out.println("Creating Executor Service with a thread pool of Size" + n);
+        ExecutorService executorService = Executors.newFixedThreadPool(n);
+        Runnable task = null;
+        for (int i = 0; i < images.size(); i++) {
+            task = () -> {
                 System.out.println("Executing Task inside : " + Thread.currentThread().getName());
+                this.foo();
+                temp++;
                 try {
-                    Images img = new Images();
-
                     TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException ex) {
-                    throw new IllegalStateException(ex);
+                    Logger.getLogger(ClassExecutors.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             };
+
             tasks.add(task);
         }
-        
-        for (int i = 0; i < tasks.size(); i++) {
-            executorService.submit(tasks.get(i));
-        }
+
+        tasks.stream().forEach(executorService::submit);
 
         executorService.shutdown();
+    }
+
+    public void foo() {
+        out.println(imgs.get(temp).getDescription());
     }
 }
