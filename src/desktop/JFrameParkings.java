@@ -109,7 +109,7 @@ public class JFrameParkings extends javax.swing.JFrame {
         String res = substring[0];
         String dir = res.replace("/", "\\");
 
-        String path_folder = dir + "\\" + name_parking + "\\" + path_parking+ "\\" ;
+        String path_folder = dir + "\\" + name_parking + "\\" + path_parking + "\\";
 
         File folder = new File(path_folder);
         folder.mkdirs();
@@ -274,27 +274,31 @@ public class JFrameParkings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
+        try {
+            String sql = "SELECT `url`,`path` ,`threads` FROM `settings`";
+            int n = 3;
+            String[] temp = cx.select(sql, n, 2);
+            String[] substring = null;
+            
+            
+            for (int i = 0; i < temp.length; i++) {
+                substring = temp[i].split(" columns ");
+            }
+            
             String Text = "";
             for (int i = 0; i < estados.size(); i++) {
                 JComboBox est = estados.get(i);
                 Text = (String) est.getSelectedItem();
-                String sql = "UPDATE `parklots` SET `type`= '" + Text + "'WHERE `id`='" + id[i] + "'";
+                sql = "UPDATE `parklots` SET `type`= '" + Text + "'WHERE `id`='" + id[i] + "'";
                 cx.update(sql, " ", 2);
             }
             
             ClassExecutors ce = new ClassExecutors();
-            ce.RUN(2,images);
+            ce.RUN(Integer.valueOf(substring[2]), images);
 
-//            Images img = new Images();
-//            Images.getImage(null);
-
-//            JFrameMain s = new JFrameMain();
-//            this.setVisible(false);
-//            s.setVisible(true);
-
-
-
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

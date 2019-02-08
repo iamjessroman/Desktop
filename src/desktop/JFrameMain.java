@@ -1019,7 +1019,7 @@ public class JFrameMain extends javax.swing.JFrame {
                     Settings_ThreadsActionPerformed(evt);
                 }
             });
-            jPanel10.add(Settings_Threads, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 70, -1));
+            jPanel10.add(Settings_Threads, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 100, 70, -1));
 
             TabSettings.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 700, 393));
 
@@ -1101,8 +1101,8 @@ public class JFrameMain extends javax.swing.JFrame {
         }
 
         try {
-            String sql = "SELECT `url`,`path` FROM `settings`";
-            int n = 2;
+            String sql = "SELECT `url`,`path` ,`threads` FROM `settings`";
+            int n = 3;
             String[] temp = cx.select(sql, n, 2);
             String[] substring = null;
             for (int i = 0; i < temp.length; i++) {
@@ -1111,6 +1111,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
             this.Settings_Url.setText(substring[0]);
             this.Settings_PathImagesTemp.setText(substring[1]);
+            this.Settings_Threads.setSelectedItem(substring[2]);
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1511,8 +1512,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
         String url = this.Settings_Url.getText();
         String path = this.Settings_PathImagesTemp.getText();
+        String thread = this.Settings_Threads.getSelectedItem().toString();
         String res = path.replace("\\", "/");
-        String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "'WHERE `id`=1;";
+        String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "', `threads`='" + thread + "'WHERE `id`=1;";
         String msg = "la configuración general";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Settings_SaveActionPerformed
