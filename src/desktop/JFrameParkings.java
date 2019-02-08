@@ -184,6 +184,7 @@ public class JFrameParkings extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        setResizable(false);
 
         Parkings_CreateARFF.setBackground(new java.awt.Color(255, 255, 255));
         Parkings_CreateARFF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

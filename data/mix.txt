@@ -1,6 +1,0 @@
-BrightnessCoBrightnessContrast(Photoshop) Channels,Gaussian,BrightnessCoBrightnessContrast(Photoshop) Channels,Dither,Mix1
-StackBlur,Dither,BrightnBrightnessContrast(GIMP),Mix2
-Dither,BrightnessCoBrightnessContrast(Photoshop) Channels,Edge,BrightnessCoBrightnessContrast(Photoshop) Channels,Mix3
-Edge,BrightnBrightnessContrast(GIMP),StackBlur,Gaussian,Mix4
-Binarize,ColorColorTransform,Edge,Transpose,Sharpen,noneSepia,noOil,Mix5
-Binarize,StackBlur,HSLAdjustment,Mosaic,Sharpen,Twril,Transpose,Posterize,noOil,Mix10

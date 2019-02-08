@@ -5,7 +5,6 @@
  */
 package desktop;
 
-import static desktop.ARFFfile.dataRaw;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -1653,6 +1652,10 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
+
+        ARFFfile.Width = Integer.valueOf(this.SettingsARFF_Width.getText());
+        ARFFfile.Height = Integer.valueOf(this.SettingsARFF_Height.getText());
+        ARFFfile ar = new ARFFfile();
         String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
         JFrameWebView.id = id;
         JFrameWebView.http = this.Settings_Url.getText();

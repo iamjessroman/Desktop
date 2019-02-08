@@ -71,7 +71,7 @@ public class ClassExecutors {
 
     public void image(int j) throws Exception {
         Binary b = new Binary();
-        b.transform(imgs.get(j-1),j-1);
+        b.transform(imgs.get(j-1),j-1,states[j-1]);
 
     }
 }

@@ -25,8 +25,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import Test.Test;
-import static Test.Test.getPred;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import org.json.JSONArray;
@@ -37,10 +35,12 @@ import weka.filters.unsupervised.attribute.StringToNominal;
 
 public class ARFFfile {
 
+    public static int Height;
+    public static int Width;
     public static ArrayList<Attribute> atts;
     public static Instances dataRaw;
 
-    public ARFFfile(int Height, int Width) {
+    public ARFFfile() {
         atts = new ArrayList<Attribute>((Height * Width) + 1);
         atts.add(new Attribute("label", (ArrayList<String>) null));
 
@@ -54,46 +54,26 @@ public class ARFFfile {
         dataRaw = new Instances("Parkings", atts, 0);
     }
 
-
-    public static void pixels(Image image, int l) throws IOException, Exception {
+    public static void pixels(Image image, int l, String states) throws IOException, Exception {
 
         int p = 1;
-        int libre = 0;
-        int ocupado = 0;
-        String cadena = " ";
-        String[][] parkings = new String[8][2];
 
         double[] instanceValue1 = new double[dataRaw.numAttributes()];
         instanceValue1[0] = dataRaw.attribute(0).addStringValue(String.valueOf(l));
         for (int i = 0; i < image.getHeight(); i++) {
             for (int j = 0; j < image.getWidth(); j++) {
-                int number = 175;
-                if (image.getColor(j, i).getRed() > number) {
-                    libre++;
-                } else {
-                    ocupado++;
-
-                }
                 instanceValue1[p] = image.getColor(j, i).getRed();
-//                cadena=image.getColor(j, i).getRed()+",";
                 p++;
             }
         }
 
+
         ClassMain cm = new ClassMain();
-        instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("libre"));
+        instanceValue1[(2501)] = dataRaw.attribute(2501).addStringValue(states);
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
         String text = dataRaw.toString();
         System.out.println(text);
-        cm.Write(text, "./data/test.arff",false);
-        ArffSaver saver = new ArffSaver();
-        saver.setInstances(dataRaw);
-        saver.setFile(new File("./data/test.arff"));
-        saver.writeBatch();
-        System.out.println(cadena);
-        getPred(image,l);
-//
-
+        cm.Write(text, "./data/test.arff", false);
     }
 
 }

@@ -16,16 +16,16 @@ public class Binary {
 
     Conexion cx = new Conexion();
 
-    public void transform(Image image, int i) throws Exception {
+    public void transform(Image image, int i, String states) throws Exception {
 
         //Obtiene tamaño para las imagenes del ARFF
-        String sql = "SELECT * FROM `settings_arff` WHERE 'id'=1";
+        String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
         int n = 3;
         String[] temp = cx.select(sql, n, 2);
 
-            String[] substring = temp[0].split(" columns ");
-            String width = substring[1];
-            String height = substring[2];
+        String[] substring = temp[0].split(" columns ");
+        String width = substring[1];
+        String height = substring[2];
 
         image.resize(Integer.valueOf(width), Integer.valueOf(height));
 
@@ -61,8 +61,8 @@ public class Binary {
         }
 
         //Test
-//        image.saveAs("C:\\"+i+".png");
-//        ARFFfile arff = new ARFFfile(image.getHeight(), image.getWidth());
-//        arff.pixels(image, i);
+//        image.saveAs("C:\\test\\"+i+".png");
+
+        ARFFfile.pixels(image, i, states);
     }
 }
