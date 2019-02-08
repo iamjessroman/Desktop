@@ -5,7 +5,7 @@
  */
 package desktop;
 
-import java.awt.Image;
+import javaxt.io.Image;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,12 +44,13 @@ public class JFrameParkings extends javax.swing.JFrame {
     private List<JLabel> imagenes;
     private List<JLabel> titulos;
     private List<JComboBox> estados;
-    private List<ImageIcon> images;
+    private List<Image> images;
     private int indice;
     String[] mix = null;
     String[] namemixs = null;
     String[] id_parklots = null;
     String[] id = null;
+    String[] types = null;
     ClassMain cm = new ClassMain();
 
     /**
@@ -73,9 +74,10 @@ public class JFrameParkings extends javax.swing.JFrame {
         int n = 1;
         String[] temp = cx.select(sql, n, 2);
         namemixs = new String[(temp.length) + 1];
+        namemixs[0]="";
         //this.Parkings_MixFilters.removeAll();
 
-        for (int i = 0; i < temp.length; i++) {
+        for (int i = 1; i < temp.length; i++) {
             String[] substring = temp[i].split(" columns ");
             namemixs[i] = substring[0];
             this.Parkings_MixFilters.addItem(namemixs[i]);
@@ -129,13 +131,15 @@ public class JFrameParkings extends javax.swing.JFrame {
             JLabel titulo = new JLabel("Parqueo: " + id_parklots[j]);
             titulo.setFont(this.getFont());
             this.jPanel1.add(titulo);
+            Image img = new Image(path_folder + "image" + id_parklots[j] + ".png");
+            
             ImageIcon icon = new ImageIcon(path_folder + "image" + id_parklots[j] + ".png");
             icon.setDescription(path_folder + "image" + id_parklots[j] + ".png");
-            this.images.add(icon);
+            this.images.add(img);
             JLabel etiqueta = new JLabel("Etiqueta " + indice);
             etiqueta.setText(null);
             etiqueta.setSize(150, 150);
-            Icon icono = new ImageIcon(icon.getImage().getScaledInstance(etiqueta.getWidth(), etiqueta.getHeight(), Image.SCALE_DEFAULT));
+            Icon icono = new ImageIcon(icon.getImage());
             etiqueta.setIcon(icono);
             this.jPanel1.add(etiqueta);
             imagenes.add(etiqueta);
@@ -176,8 +180,8 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        jButton1.setText("Continuar");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png"))); // NOI18N
+        jButton1.setText("Crear ARFF");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -228,8 +232,8 @@ public class JFrameParkings extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(806, 806, 806)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(785, 785, 785)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1283, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -284,17 +288,18 @@ public class JFrameParkings extends javax.swing.JFrame {
             for (int i = 0; i < temp.length; i++) {
                 substring = temp[i].split(" columns ");
             }
+            int t = Integer.valueOf(substring[2]);
             
-            String Text = "";
+            types = new String[estados.size()];
             for (int i = 0; i < estados.size(); i++) {
                 JComboBox est = estados.get(i);
-                Text = (String) est.getSelectedItem();
-                sql = "UPDATE `parklots` SET `type`= '" + Text + "'WHERE `id`='" + id[i] + "'";
+                types[i] = (String) est.getSelectedItem();
+                sql = "UPDATE `parklots` SET `type`= '" + types[i] + "'WHERE `id`='" + id[i] + "'";
                 cx.update(sql, " ", 2);
             }
             
             ClassExecutors ce = new ClassExecutors();
-            ce.RUN(Integer.valueOf(substring[2]), images);
+            ce.RUN(t, images, types);
 
         } catch (SQLException ex) {
             Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);

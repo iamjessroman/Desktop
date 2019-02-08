@@ -14,10 +14,8 @@ import javaxt.io.Image;
  */
 public class Binary {
 
-    public void transform(int i) throws Exception {
-        Image image = new Image("data/image"+i+".png");
-            image.getImage();
-            System.out.println(image.getWidth());
+    public void transform(Image image, int i) throws Exception {
+        System.out.println("num:"+i);
         for (int j = 0; j < image.getHeight(); j++) {
             for (int k = 0; k < image.getWidth(); k++) {
                 int red = image.getColor(k, j).getRed();
@@ -47,8 +45,10 @@ public class Binary {
             }
 
         }
-        ARFFfile arff = new ARFFfile(image.getHeight(),image.getWidth());
-        arff.pixels(image, i);
+        
+        image.saveAs("C:\\Users\\Jessica Roman\\Documents\\Tesis\\Roman\\Desktop\\data\\ParqueoA\\"+i+".png");
+//        ARFFfile arff = new ARFFfile(image.getHeight(), image.getWidth());
+//        arff.pixels(image, i);
 
     }
 }
