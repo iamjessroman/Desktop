@@ -127,6 +127,19 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateModel_Start = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         CreateModel_Parkings = new javax.swing.JComboBox<>();
+        jLabel52 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        SettingsARFF_Save = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        SettingsARFF_Width = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        SettingsARFF_Height = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
         TabFilters = new javax.swing.JTabbedPane();
         TabCreateFilter = new javax.swing.JPanel();
         btnSaveFilters = new javax.swing.JButton();
@@ -381,14 +394,84 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(74, 173, 82));
         jLabel4.setText("Parqueo");
-        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 40));
 
         CreateModel_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jPanel8.add(CreateModel_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, -1));
+        jPanel8.add(CreateModel_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
 
         TabCreateModel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 410));
 
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
+        TabCreateModel.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
         TabModelARFF.addTab("Crear", TabCreateModel);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SettingsARFF_Save.setBackground(new java.awt.Color(255, 255, 255));
+        SettingsARFF_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SettingsARFF_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+        SettingsARFF_Save.setText("Guardar");
+        SettingsARFF_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsARFF_SaveActionPerformed(evt);
+            }
+        });
+        jPanel9.add(SettingsARFF_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        jLabel47.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel47.setText("Imágenes");
+        jPanel9.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
+
+        SettingsARFF_Width.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SettingsARFF_Width.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SettingsARFF_WidthKeyTyped(evt);
+            }
+        });
+        jPanel9.add(SettingsARFF_Width, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 190, 40));
+
+        jLabel48.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel48.setText("ANCHO ");
+        jPanel9.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 40));
+        jPanel9.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 20));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(38, 91, 145));
+        jLabel2.setText("px");
+        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 40));
+
+        jLabel49.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel49.setText("ALTO");
+        jPanel9.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 50, 40));
+
+        SettingsARFF_Height.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        SettingsARFF_Height.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SettingsARFF_HeightKeyTyped(evt);
+            }
+        });
+        jPanel9.add(SettingsARFF_Height, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 190, 40));
+
+        jLabel50.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(38, 91, 145));
+        jLabel50.setText("px");
+        jPanel9.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 40, 40));
+
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 410));
+
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
+        jPanel2.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+        TabModelARFF.addTab("Configuración ", jPanel2);
 
         jTabbedPane1.addTab("ARFF", new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png")), TabModelARFF); // NOI18N
 
@@ -1115,6 +1198,21 @@ public class JFrameMain extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+            //Obtiene tamaño para las imagenes del ARFF
+            String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
+            int n = 3;
+            String[] temp = cx.select(sql, n, 2);
+
+            String[] substring = temp[0].split(" columns ");
+            this.SettingsARFF_Width.setText(substring[1]);
+            this.SettingsARFF_Height.setText(substring[2]);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
@@ -1566,6 +1664,28 @@ public class JFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Settings_ThreadsActionPerformed
 
+    private void SettingsARFF_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsARFF_SaveActionPerformed
+        String w = this.SettingsARFF_Width.getText();
+        String h = this.SettingsARFF_Height.getText();
+        String sql = "UPDATE `settings_arff` SET `width`='" + w + "', `height`='" + h + "'WHERE `id`=1;";
+        String msg = "la configuración del archivo ARFF";
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_SettingsARFF_SaveActionPerformed
+
+    private void SettingsARFF_WidthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_WidthKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Width.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Width.getText()) && ch != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_SettingsARFF_WidthKeyTyped
+
+    private void SettingsARFF_HeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_HeightKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Height.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Height.getText()) && ch != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_SettingsARFF_HeightKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -1621,6 +1741,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextField Remote_Puerto;
     private javax.swing.JButton Remote_Save;
     private javax.swing.JTextField Remote_User;
+    private javax.swing.JTextField SettingsARFF_Height;
+    private javax.swing.JButton SettingsARFF_Save;
+    private javax.swing.JTextField SettingsARFF_Width;
     private javax.swing.JTextField Settings_PathImagesTemp;
     private javax.swing.JButton Settings_Save;
     private javax.swing.JComboBox<String> Settings_Threads;
@@ -1652,6 +1775,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1681,7 +1805,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1693,11 +1823,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane14;
@@ -1712,6 +1844,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

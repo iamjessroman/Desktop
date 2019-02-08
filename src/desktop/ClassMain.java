@@ -47,6 +47,31 @@ public class ClassMain {
         return r;
     }
 
+    public boolean isNumber(char ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
+    public boolean isValidSignal(char ch, String text) {
+        if ((text == null || "".equals(text.trim())) && ch == '-') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean validatePoint(char ch, String text) {
+        if (ch != '.') {
+            return false;
+        }
+
+        if (text == null || "".equals(text.trim())) {
+            return false;
+        } else if ("-".equals(text)) {
+        }
+
+        return true;
+    }
+
     public String[] ReadArray(String ruta) throws FileNotFoundException {
         String[] arrays = null;
         File archivo = new File(ruta);

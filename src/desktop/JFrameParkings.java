@@ -64,25 +64,27 @@ public class JFrameParkings extends javax.swing.JFrame {
         estados = new ArrayList<>();
         images = new ArrayList<>();
         titulos = new ArrayList<>();
-        indice = 0;
 
     }
 
     public void images() throws MalformedURLException, IOException, SQLException {
-
+        //Obtiene las combinaciones de Filtros
+        
         String sql = "SELECT `name` FROM `mix`";
         int n = 1;
         String[] temp = cx.select(sql, n, 2);
         namemixs = new String[(temp.length) + 1];
         namemixs[0]="";
+        this.Parkings_MixFilters.addItem(namemixs[0]);
         //this.Parkings_MixFilters.removeAll();
 
-        for (int i = 1; i < temp.length; i++) {
+        for (int i = 0; i < temp.length; i++) {
             String[] substring = temp[i].split(" columns ");
-            namemixs[i] = substring[0];
-            this.Parkings_MixFilters.addItem(namemixs[i]);
+            namemixs[i+1] = substring[0];
+            this.Parkings_MixFilters.addItem(namemixs[i+1]);
         }
-
+        
+        //Obtiene las imagenes de Base de Datos
         sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` ,`id` FROM `parklots`";
         n = 5;
         temp = cx.select(sql, n, 2);
@@ -101,9 +103,11 @@ public class JFrameParkings extends javax.swing.JFrame {
             //System.out.println(data_url[i]);
             id[i] = substring[4];
         }
-
+        
+        //set Tittle 
         this.Parkings_Tittle.setText(name_parking + " (" + path_parking + ")");
-
+        
+        //Crea el Folder del Parking
         sql = "SELECT `path` FROM `settings`";
         n = 1;
         temp = cx.select(sql, n, 2);
@@ -115,12 +119,14 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         File folder = new File(path_folder);
         folder.mkdirs();
-
+        
+        //Set imgs Temporales
         //System.out.println("tamaño "+data_url.length);
+        
         for (int j = 0; j < data_url.length; j++) {
             //convert base64 string to binary data
             byte[] data = DatatypeConverter.parseBase64Binary(data_url[j]);
-            String path = path_folder + "image" + id_parklots[j] + ".png";
+            String path = path_folder + "image" + id_parklots[j] + ".jpg";
             File file = new File(path);
             try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                 outputStream.write(data);
@@ -131,25 +137,26 @@ public class JFrameParkings extends javax.swing.JFrame {
             JLabel titulo = new JLabel("Parqueo: " + id_parklots[j]);
             titulo.setFont(this.getFont());
             this.jPanel1.add(titulo);
-            Image img = new Image(path_folder + "image" + id_parklots[j] + ".png");
             
-            ImageIcon icon = new ImageIcon(path_folder + "image" + id_parklots[j] + ".png");
-            icon.setDescription(path_folder + "image" + id_parklots[j] + ".png");
-            this.images.add(img);
-            JLabel etiqueta = new JLabel("Etiqueta " + indice);
-            etiqueta.setText(null);
+            Image img = new Image(path_folder + "image" + id_parklots[j] + ".jpg");
+            images.add(img);
+            
+            ImageIcon icon = new ImageIcon(path_folder + "image" + id_parklots[j] + ".jpg");
+            JLabel etiqueta = new JLabel("Etiqueta " + id_parklots[j]);
             etiqueta.setSize(150, 150);
+            etiqueta.setText(null);
             Icon icono = new ImageIcon(icon.getImage());
             etiqueta.setIcon(icono);
             this.jPanel1.add(etiqueta);
             imagenes.add(etiqueta);
+            
+            //Crea ComboBox Estados
             JComboBox combo = new JComboBox();
             combo.setFont(this.getFont());
             combo.addItem("Ocupado");
             combo.addItem("Libre");
             estados.add(combo);
             this.jPanel1.add(combo);
-            indice++;
             this.jPanel1.updateUI();
 
         }
@@ -164,7 +171,7 @@ public class JFrameParkings extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        Parkings_CreateARFF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -178,13 +185,13 @@ public class JFrameParkings extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png"))); // NOI18N
-        jButton1.setText("Crear ARFF");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Parkings_CreateARFF.setBackground(new java.awt.Color(255, 255, 255));
+        Parkings_CreateARFF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Parkings_CreateARFF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png"))); // NOI18N
+        Parkings_CreateARFF.setText("Crear ARFF");
+        Parkings_CreateARFF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Parkings_CreateARFFActionPerformed(evt);
             }
         });
 
@@ -233,7 +240,7 @@ public class JFrameParkings extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(785, 785, 785)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Parkings_CreateARFF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1283, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -257,7 +264,7 @@ public class JFrameParkings extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                    .addComponent(Parkings_CreateARFF))
                 .addGap(27, 27, 27))
         );
 
@@ -276,7 +283,7 @@ public class JFrameParkings extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Parkings_CreateARFFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Parkings_CreateARFFActionPerformed
 
         try {
             String sql = "SELECT `url`,`path` ,`threads` FROM `settings`";
@@ -305,7 +312,7 @@ public class JFrameParkings extends javax.swing.JFrame {
             Logger.getLogger(JFrameParkings.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Parkings_CreateARFFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,9 +351,9 @@ public class JFrameParkings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Parkings_CreateARFF;
     private javax.swing.JComboBox<String> Parkings_MixFilters;
     private javax.swing.JLabel Parkings_Tittle;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;

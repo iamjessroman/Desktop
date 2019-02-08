@@ -80,22 +80,18 @@ public class ARFFfile {
             }
         }
 
-        Conexion c = new Conexion();
         ClassMain cm = new ClassMain();
-        String ruta = "./data/estados.txt";
-        String est[]=cm.ReadArray(ruta);
         instanceValue1[(5001)] = dataRaw.attribute(5001).addStringValue(String.valueOf("libre"));
-        c.datos();
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
         String text = dataRaw.toString();
         System.out.println(text);
         cm.Write(text, "./data/test.arff",false);
-//        ArffSaver saver = new ArffSaver();
-//        saver.setInstances(dataRaw);
-//        saver.setFile(new File("./data/test.arff"));
-//        saver.writeBatch();
-//        System.out.println(cadena);
-//        getPred(image,l);
+        ArffSaver saver = new ArffSaver();
+        saver.setInstances(dataRaw);
+        saver.setFile(new File("./data/test.arff"));
+        saver.writeBatch();
+        System.out.println(cadena);
+        getPred(image,l);
 //
 
     }

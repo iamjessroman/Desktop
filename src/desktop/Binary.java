@@ -14,8 +14,22 @@ import javaxt.io.Image;
  */
 public class Binary {
 
+    Conexion cx = new Conexion();
+
     public void transform(Image image, int i) throws Exception {
-        System.out.println("num:"+i);
+
+        //Obtiene tamaño para las imagenes del ARFF
+        String sql = "SELECT * FROM `settings_arff` WHERE 'id'=1";
+        int n = 3;
+        String[] temp = cx.select(sql, n, 2);
+
+            String[] substring = temp[0].split(" columns ");
+            String width = substring[1];
+            String height = substring[2];
+
+        image.resize(Integer.valueOf(width), Integer.valueOf(height));
+
+        System.out.println("num:" + i);
         for (int j = 0; j < image.getHeight(); j++) {
             for (int k = 0; k < image.getWidth(); k++) {
                 int red = image.getColor(k, j).getRed();
@@ -45,10 +59,10 @@ public class Binary {
             }
 
         }
-        
-        image.saveAs("C:\\Users\\Jessica Roman\\Documents\\Tesis\\Roman\\Desktop\\data\\ParqueoA\\"+i+".png");
+
+        //Test
+//        image.saveAs("C:\\"+i+".png");
 //        ARFFfile arff = new ARFFfile(image.getHeight(), image.getWidth());
 //        arff.pixels(image, i);
-
     }
 }
