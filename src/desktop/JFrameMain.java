@@ -108,18 +108,15 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        TabClassifiers = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        btnconfiguracion = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        APIRESTCLASIFICADOR = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         TabModelARFF = new javax.swing.JTabbedPane();
         TabCreateModel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -267,6 +264,20 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel14.setText("API REST");
+
+        jTextField2.setText("http://localhost:8080/Servidor/app/descarga/json");
+
+        jTextField1.setText("17/12/2018");
+
+        jLabel17.setText("Fecha");
+
+        jLabel18.setText("Hora");
+
+        jTextField3.setText("12:00");
+
         jButton1.setText("Iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,99 +285,59 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("API REST");
-
-        jTextField2.setText("http://localhost:8080/Servidor/app/descarga/json");
-
-        jLabel17.setText("Fecha");
-
-        jTextField1.setText("17/12/2018");
-
-        jLabel18.setText("Hora");
-
-        jTextField3.setText("12:00");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(785, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
-                .addComponent(jButton1))
-        );
-
-        jTabbedPane1.addTab("Principal", jPanel1);
-
-        btnconfiguracion.setText("Continuar");
-        btnconfiguracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnconfiguracionActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("API REST");
-
-        APIRESTCLASIFICADOR.setText("http://localhost:8080/Servidor/app/descarga/parkings");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(1065, Short.MAX_VALUE)
-                .addComponent(btnconfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(APIRESTCLASIFICADOR, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(768, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(APIRESTCLASIFICADOR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
-                .addComponent(btnconfiguracion)
-                .addContainerGap())
+                    .addComponent(jLabel14)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(22, 22, 22))
         );
 
-        jTabbedPane1.addTab("Configuración Clasificador", jPanel3);
+        javax.swing.GroupLayout TabClassifiersLayout = new javax.swing.GroupLayout(TabClassifiers);
+        TabClassifiers.setLayout(TabClassifiersLayout);
+        TabClassifiersLayout.setHorizontalGroup(
+            TabClassifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        TabClassifiersLayout.setVerticalGroup(
+            TabClassifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Clasificador", new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png")), TabClassifiers); // NOI18N
 
         TabModelARFF.setBackground(new java.awt.Color(255, 255, 255));
         TabModelARFF.setForeground(new java.awt.Color(74, 173, 82));
@@ -693,7 +664,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
         TabCreateMix.setBackground(new java.awt.Color(255, 255, 255));
         TabCreateMix.setForeground(new java.awt.Color(38, 91, 145));
-        TabCreateMix.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        TabCreateMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1136,24 +1107,24 @@ public class JFrameMain extends javax.swing.JFrame {
 
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                    whatismyip.openStream()));
+                whatismyip.openStream()));
 
-            String ip = in.readLine(); //you get the IP as a String
-            this.Conexion_MyIP.setText(ip);
-            this.Conexion_MyIP2.setText(ip);
+        String ip = in.readLine(); //you get the IP as a String
+        this.Conexion_MyIP.setText(ip);
+        this.Conexion_MyIP2.setText(ip);
 
-            String passRemote = (conexion[5].equals("NONE")) ? "" : conexion[5];
-            String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
-            this.Remote_IP.setText(conexion[1]);
-            this.Remote_Puerto.setText(conexion[2]);
-            this.Remote_Name.setText(conexion[3]);
-            this.Remote_User.setText(conexion[4]);
-            this.Remote_Pass.setText(passRemote);
-            this.Local_IP.setText(conexion[7]);
-            this.Local_Puerto.setText(conexion[8]);
-            this.Local_Name.setText(conexion[9]);
-            this.Local_User.setText(conexion[10]);
-            this.Local_Pass.setText(passLocal);
+        String passRemote = (conexion[5].equals("NONE")) ? "" : conexion[5];
+        String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+        this.Remote_IP.setText(conexion[1]);
+        this.Remote_Puerto.setText(conexion[2]);
+        this.Remote_Name.setText(conexion[3]);
+        this.Remote_User.setText(conexion[4]);
+        this.Remote_Pass.setText(passRemote);
+        this.Local_IP.setText(conexion[7]);
+        this.Local_Puerto.setText(conexion[8]);
+        this.Local_Name.setText(conexion[9]);
+        this.Local_User.setText(conexion[10]);
+        this.Local_Pass.setText(passLocal);
 
         } catch (UnknownHostException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -1211,55 +1182,68 @@ public class JFrameMain extends javax.swing.JFrame {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-    private void btnconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfiguracionActionPerformed
-        Servidor cl = new Servidor();
-        cl.downloadJson(this.APIRESTCLASIFICADOR.getText());
-        JFrameWebView s = new JFrameWebView();
-        this.setVisible(false);
-        s.setVisible(true);
-    }//GEN-LAST:event_btnconfiguracionActionPerformed
+    private void Settings_ThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_ThreadsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Settings_ThreadsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        Conexion cn = new Conexion();
-//        cn.datos();
-//        ReadJson rj = new ReadJson();
-//        Images img = new Images();
-//        try {
-//            Images.getImage(rj.jsonFileRead());
-//        } catch (JSONException ex) {
-//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("URL Imagenés Temporales");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        //
+        // disable the "All files" option.
+        //
+        chooser.setAcceptAllFileFilterUsed(false);
+        //
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            this.Settings_PathImagesTemp.setText(chooser.getSelectedFile().toString());
+            //            System.out.println("getCurrentDirectory(): "
+                //                    + chooser.getCurrentDirectory());
+            //            System.out.println("getSelectedFile() : "
+                //                    + chooser.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
+        String url = this.Settings_Url.getText();
+        String path = this.Settings_PathImagesTemp.getText();
+        String thread = this.Settings_Threads.getSelectedItem().toString();
+        String res = path.replace("\\", "/");
+            String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "', `threads`='" + thread + "'WHERE `id`=1;";
+            String msg = "la configuración general";
+            cx.update(sql, msg, 2);
+    }//GEN-LAST:event_Settings_SaveActionPerformed
 
     private void Remote_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Remote_SaveActionPerformed
         String ruta = "./config/conexion.txt";
         String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
         String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
         cm.Write("Remote,"
-                + this.Remote_IP.getText() + ","
-                + this.Remote_Puerto.getText() + ","
-                + this.Remote_Name.getText() + ","
-                + this.Remote_User.getText() + ","
-                + passRemote + ","
-                + "Local,"
-                + this.Local_IP.getText() + ","
-                + this.Local_Puerto.getText() + ","
-                + this.Local_Name.getText() + ","
-                + this.Local_User.getText() + ","
-                + passLocal, ruta, false);
+            + this.Remote_IP.getText() + ","
+            + this.Remote_Puerto.getText() + ","
+            + this.Remote_Name.getText() + ","
+            + this.Remote_User.getText() + ","
+            + passRemote + ","
+            + "Local,"
+            + this.Local_IP.getText() + ","
+            + this.Local_Puerto.getText() + ","
+            + this.Local_Name.getText() + ","
+            + this.Local_User.getText() + ","
+            + passLocal, ruta, false);
 
         String sql = "UPDATE `config` SET "
-                + "`ip`='" + this.Remote_IP.getText() + "', "
-                + "`puerto`='" + this.Remote_Puerto.getText() + "', "
-                + "`name_db`='" + this.Remote_Name.getText() + "', "
-                + "`username`='" + this.Remote_User.getText() + "', "
-                + "`password`='" + passRemote
-                + "'WHERE `type`='externo'";
+        + "`ip`='" + this.Remote_IP.getText() + "', "
+        + "`puerto`='" + this.Remote_Puerto.getText() + "', "
+        + "`name_db`='" + this.Remote_Name.getText() + "', "
+        + "`username`='" + this.Remote_User.getText() + "', "
+        + "`password`='" + passRemote
+        + "'WHERE `type`='externo'";
         String msg = "la configuración de base de datos externa";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Remote_SaveActionPerformed
@@ -1269,25 +1253,25 @@ public class JFrameMain extends javax.swing.JFrame {
         String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
         String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
         cm.Write("Remote,"
-                + this.Remote_IP.getText() + ","
-                + this.Remote_Puerto.getText() + ","
-                + this.Remote_Name.getText() + ","
-                + this.Remote_User.getText() + ","
-                + passRemote + ","
-                + "Local,"
-                + this.Local_IP.getText() + ","
-                + this.Local_Puerto.getText() + ","
-                + this.Local_Name.getText() + ","
-                + this.Local_User.getText() + ","
-                + passLocal, ruta, false);
+            + this.Remote_IP.getText() + ","
+            + this.Remote_Puerto.getText() + ","
+            + this.Remote_Name.getText() + ","
+            + this.Remote_User.getText() + ","
+            + passRemote + ","
+            + "Local,"
+            + this.Local_IP.getText() + ","
+            + this.Local_Puerto.getText() + ","
+            + this.Local_Name.getText() + ","
+            + this.Local_User.getText() + ","
+            + passLocal, ruta, false);
 
         String sql = "UPDATE `config` SET "
-                + "`ip`='" + this.Local_IP.getText() + "', "
-                + "`puerto`='" + this.Local_Puerto.getText() + "', "
-                + "`name_db`='" + this.Local_Name.getText() + "', "
-                + "`username`='" + this.Local_User.getText() + "', "
-                + "`password`='" + passLocal
-                + "'WHERE `type`='interno'";
+        + "`ip`='" + this.Local_IP.getText() + "', "
+        + "`puerto`='" + this.Local_Puerto.getText() + "', "
+        + "`name_db`='" + this.Local_Name.getText() + "', "
+        + "`username`='" + this.Local_User.getText() + "', "
+        + "`password`='" + passLocal
+        + "'WHERE `type`='interno'";
         String msg = "la configuración de base de datos interna";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Local_SaveActionPerformed
@@ -1383,7 +1367,6 @@ public class JFrameMain extends javax.swing.JFrame {
             //            System.out.println(model.size());
             this.EditMixFilters_ListFilters.setModel(mix);
         }
-
     }//GEN-LAST:event_EditMixFilters_ListFiltersMouseClicked
 
     private void EditMixFilters_ListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_ListMixMouseClicked
@@ -1416,11 +1399,11 @@ public class JFrameMain extends javax.swing.JFrame {
             String temp[] = cx.select(sql, 1, 2);
 
             //Test
-//            System.out.println(temp[0]);
-//            System.out.println(this.CreateMixFilters_Name.getText().length());
+            //            System.out.println(temp[0]);
+            //            System.out.println(this.CreateMixFilters_Name.getText().length());
             if (temp[0].isEmpty() && this.CreateMixFilters_Name.getText().length() != 0) {
                 if (cm.isEmpty(this.CreateMixFilters_Name.getText())
-                        && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
+                    && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     sql = "INSERT INTO `mix`(`name`) VALUES (?);";
@@ -1454,6 +1437,10 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CreateMixFilters_SaveActionPerformed
 
+    private void CreateMixFilters_NameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CreateMixFilters_NameKeyTyped
+        this.CreateMixFilters_Name.setText(this.CreateMixFilters_Name.getText().trim());
+    }//GEN-LAST:event_CreateMixFilters_NameKeyTyped
+
     private void CreateMixFilters_ListMixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListMixMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -1464,10 +1451,6 @@ public class JFrameMain extends javax.swing.JFrame {
             this.CreateMixFilters_ListMix.setModel(model);
         }
     }//GEN-LAST:event_CreateMixFilters_ListMixMouseClicked
-
-    private void CreateMixFilters_NameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CreateMixFilters_NameKeyTyped
-        this.CreateMixFilters_Name.setText(this.CreateMixFilters_Name.getText().trim());
-    }//GEN-LAST:event_CreateMixFilters_NameKeyTyped
 
     private void CreateMixFilters_ListFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateMixFilters_ListFiltersMouseClicked
         JList list = (JList) evt.getSource();
@@ -1480,12 +1463,24 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CreateMixFilters_ListFiltersMouseClicked
 
+    private void UpdateFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SaveActionPerformed
+        String sql = "UPDATE `filters` SET "
+        + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
+        + "`init`='" + this.EditFilter_Init.getText() + "', "
+        + "`gui`='" + this.EditFilter_Gui.getText() + "', "
+        + "`apply`='" + this.EditFilter_Apply.getText() + "', "
+        + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
+        + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
+        String msg = "el filtro";
+        //        System.out.println(sql);
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_UpdateFilters_SaveActionPerformed
+
     private void UpdateFilters_SimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SimulationActionPerformed
 
         JFrameTest.http = this.Settings_PathImagesTemp.getText();
         JFrameTest jt = new JFrameTest();
         jt.setVisible(true);
-
     }//GEN-LAST:event_UpdateFilters_SimulationActionPerformed
 
     private void EditFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EditFilters_JComboFiltersItemStateChanged
@@ -1578,11 +1573,11 @@ public class JFrameMain extends javax.swing.JFrame {
             if (temp[0].isEmpty()) {
                 sql = "INSERT INTO `filters`(`name`, `use_gui`, `init`, `gui`, `apply`, `imagefilters_function`) VALUES (?,?,?,?,?,?);";
                 if (cm.isEmpty(this.CreateFilter_Name.getText())
-                        || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
-                        || cm.isEmpty(this.CreateFilter_Init.getText())
-                        || cm.isEmpty(this.CreateFilter_Gui.getText())
-                        || cm.isEmpty(this.CreateFilter_Apply.getText())
-                        || cm.isEmpty(this.CreateFilter_Code.getText())) {
+                    || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
+                    || cm.isEmpty(this.CreateFilter_Init.getText())
+                    || cm.isEmpty(this.CreateFilter_Gui.getText())
+                    || cm.isEmpty(this.CreateFilter_Apply.getText())
+                    || cm.isEmpty(this.CreateFilter_Code.getText())) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
 
@@ -1606,50 +1601,27 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveFiltersActionPerformed
 
-    private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
-        String url = this.Settings_Url.getText();
-        String path = this.Settings_PathImagesTemp.getText();
-        String thread = this.Settings_Threads.getSelectedItem().toString();
-        String res = path.replace("\\", "/");
-        String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "', `threads`='" + thread + "'WHERE `id`=1;";
-        String msg = "la configuración general";
-        cx.update(sql, msg, 2);
-    }//GEN-LAST:event_Settings_SaveActionPerformed
-
-    private void UpdateFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SaveActionPerformed
-        String sql = "UPDATE `filters` SET "
-                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
-                + "`init`='" + this.EditFilter_Init.getText() + "', "
-                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
-                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
-                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
-                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
-        String msg = "el filtro";
-        //        System.out.println(sql);
-        cx.update(sql, msg, 2);
-    }//GEN-LAST:event_UpdateFilters_SaveActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser chooser = new JFileChooser();
-
-        chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("URL Imagenés Temporales");
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //
-        // disable the "All files" option.
-        //
-        chooser.setAcceptAllFileFilterUsed(false);
-        //    
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            this.Settings_PathImagesTemp.setText(chooser.getSelectedFile().toString());
-//            System.out.println("getCurrentDirectory(): "
-//                    + chooser.getCurrentDirectory());
-//            System.out.println("getSelectedFile() : "
-//                    + chooser.getSelectedFile());
-        } else {
-            System.out.println("No Selection ");
+    private void SettingsARFF_HeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_HeightKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Height.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Height.getText()) && ch != '\b') {
+            evt.consume();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SettingsARFF_HeightKeyTyped
+
+    private void SettingsARFF_WidthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_WidthKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Width.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Width.getText()) && ch != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_SettingsARFF_WidthKeyTyped
+
+    private void SettingsARFF_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsARFF_SaveActionPerformed
+        String w = this.SettingsARFF_Width.getText();
+        String h = this.SettingsARFF_Height.getText();
+        String sql = "UPDATE `settings_arff` SET `width`='" + w + "', `height`='" + h + "'WHERE `id`=1;";
+        String msg = "la configuración del archivo ARFF";
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_SettingsARFF_SaveActionPerformed
 
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
 
@@ -1663,31 +1635,19 @@ public class JFrameMain extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
-    private void Settings_ThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_ThreadsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Settings_ThreadsActionPerformed
-
-    private void SettingsARFF_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsARFF_SaveActionPerformed
-        String w = this.SettingsARFF_Width.getText();
-        String h = this.SettingsARFF_Height.getText();
-        String sql = "UPDATE `settings_arff` SET `width`='" + w + "', `height`='" + h + "'WHERE `id`=1;";
-        String msg = "la configuración del archivo ARFF";
-        cx.update(sql, msg, 2);
-    }//GEN-LAST:event_SettingsARFF_SaveActionPerformed
-
-    private void SettingsARFF_WidthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_WidthKeyTyped
-        char ch = evt.getKeyChar();
-        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Width.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Width.getText()) && ch != '\b') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_SettingsARFF_WidthKeyTyped
-
-    private void SettingsARFF_HeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SettingsARFF_HeightKeyTyped
-        char ch = evt.getKeyChar();
-        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.SettingsARFF_Height.getText()) && !cm.validatePoint(ch, this.SettingsARFF_Height.getText()) && ch != '\b') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_SettingsARFF_HeightKeyTyped
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //        Conexion cn = new Conexion();
+        //        cn.datos();
+        //        ReadJson rj = new ReadJson();
+        //        Images img = new Images();
+        //        try {
+            //            Images.getImage(rj.jsonFileRead());
+            //        } catch (JSONException ex) {
+            //            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+            //        } catch (IOException ex) {
+            //            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+            //        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1705,7 +1665,6 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField APIRESTCLASIFICADOR;
     private javax.swing.JTextField Conexion_MyIP;
     private javax.swing.JTextField Conexion_MyIP2;
     private javax.swing.JTextArea CreateFilter_Apply;
@@ -1751,6 +1710,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton Settings_Save;
     private javax.swing.JComboBox<String> Settings_Threads;
     private javax.swing.JTextField Settings_Url;
+    private javax.swing.JPanel TabClassifiers;
     private javax.swing.JTabbedPane TabConexion;
     private javax.swing.JPanel TabCreateFilter;
     private javax.swing.JTabbedPane TabCreateMix;
@@ -1765,7 +1725,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton UpdateFilters_Save;
     private javax.swing.JButton UpdateFilters_Simulation;
     private javax.swing.JButton btnSaveFilters;
-    private javax.swing.JButton btnconfiguracion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
@@ -1789,7 +1748,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1819,7 +1777,6 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;

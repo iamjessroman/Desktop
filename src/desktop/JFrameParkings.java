@@ -5,6 +5,7 @@
  */
 package desktop;
 
+
 import javaxt.io.Image;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -39,7 +40,6 @@ import org.json.JSONException;
  * @author Tesis
  */
 public class JFrameParkings extends javax.swing.JFrame {
-
     Conexion cx = new Conexion();
     private List<JLabel> imagenes;
     private List<JLabel> titulos;
@@ -305,6 +305,8 @@ public class JFrameParkings extends javax.swing.JFrame {
                 sql = "UPDATE `parklots` SET `type`= '" + types[i] + "'WHERE `id`='" + id[i] + "'";
                 cx.update(sql, " ", 2);
             }
+            
+            this.dispose();
             
             ClassExecutors ce = new ClassExecutors();
             ce.RUN(t, images, types);

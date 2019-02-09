@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import weka.core.converters.ArffSaver;
@@ -39,6 +40,8 @@ public class ARFFfile {
     public static int Width;
     public static ArrayList<Attribute> atts;
     public static Instances dataRaw;
+    public static int timer;
+    static JFrameCurrent jc = new JFrameCurrent();
 
     public ARFFfile() {
         atts = new ArrayList<Attribute>((Height * Width) + 1);
@@ -55,7 +58,7 @@ public class ARFFfile {
     }
 
     public static void pixels(Image image, int l, String states) throws IOException, Exception {
-
+        timer++;
         int p = 1;
 
         double[] instanceValue1 = new double[dataRaw.numAttributes()];
@@ -67,13 +70,14 @@ public class ARFFfile {
             }
         }
 
-
-        ClassMain cm = new ClassMain();
         instanceValue1[(2501)] = dataRaw.attribute(2501).addStringValue(states);
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
-        String text = dataRaw.toString();
-        System.out.println(text);
-        cm.Write(text, "./data/test.arff", false);
+
+        if (timer == 5) {
+            JFrameCurrent.ARFF = dataRaw.toString();
+            jc.setVisible(true);
+        }
+
     }
 
 }

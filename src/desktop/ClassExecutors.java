@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javaxt.io.Image;
 
 public class ClassExecutors {
@@ -35,6 +36,7 @@ public class ClassExecutors {
         Runnable task = null;
         imgs = images;
         states = types;
+
         //Test
 //        System.out.println(images.size());
 //        System.out.println(types.length);
@@ -43,7 +45,6 @@ public class ClassExecutors {
 //            
 //            imgs.get(i).saveAs("C:\\Users\\Jessica Roman\\Documents\\Tesis\\Roman\\Desktop\\data\\ParqueoA\\"+i+".jpg");
 //        }
-
         System.out.println("Inside : " + Thread.currentThread().getName());
         System.out.println("Creating Executor Service with a thread pool of Size " + n);
         ExecutorService executorService = Executors.newFixedThreadPool(n);
@@ -65,13 +66,11 @@ public class ClassExecutors {
         }
 
         tasks.stream().forEach(executorService::submit);
-
         executorService.shutdown();
     }
 
     public void image(int j) throws Exception {
         Binary b = new Binary();
-        b.transform(imgs.get(j-1),j-1,states[j-1]);
-
+        b.transform(imgs.get(j - 1), j - 1, states[j - 1]);
     }
 }
