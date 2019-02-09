@@ -90,7 +90,7 @@ public class ClassMain {
             }
             fr.close();
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return arrays;
     }
@@ -116,7 +116,7 @@ public class ClassMain {
             }
             bw.close();
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
     }
@@ -140,7 +140,7 @@ public class ClassMain {
             }
             fr.close();
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return config;
     }
@@ -166,8 +166,7 @@ public class ClassMain {
             bw.close();
 
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class
-                    .getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
@@ -193,8 +192,7 @@ public class ClassMain {
             fr.close();
 
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class
-                    .getName()).log(Level.SEVERE, null, ex);
+
         }
         return config;
     }
@@ -223,8 +221,6 @@ public class ClassMain {
             bw.close();
 
         } catch (IOException ex) {
-            Logger.getLogger(MyApplication.class
-                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
