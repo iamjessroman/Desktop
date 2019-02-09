@@ -58,6 +58,9 @@ public class JFrameMain extends javax.swing.JFrame {
     DefaultListModel<String> mix = new DefaultListModel<String>();
     DefaultListModel<String> model = new DefaultListModel<String>();
     String beforeNameFilter = "";
+    String URL = "";
+    String dir = "";
+    
 
     /**
      * Creates new form Conect
@@ -73,29 +76,90 @@ public class JFrameMain extends javax.swing.JFrame {
 
     }
 
-    public void read(String ruta) throws FileNotFoundException {
-//        cm.Read(ruta);
-//        conexion=cm.ReadArray(ruta);
-//        ClassMain cm = new ClassMain();
-//        String ruta = "./data/configuration.txt";
-//        config = cm.ReadArray(ruta);
-//        if (config != null) {
-//            this.cbThreads.setSelectedIndex(Integer.valueOf(config[0]));
-//            this.jLabel4.setText(config[2]);
-//        }
-//        ruta = "./data/filters.txt";
-//        filters = cm.ReadArray(ruta);
-//        if (filters != null) {
-//            this.jListFilters.setListData(filters);
-//            this.jListFiltersMix.setListData(filters);
-//        }
+    public void Init() {
 
-//        ruta = "./data/mix.txt";
-//        mix = cm.ReadArray(ruta);
-//        if (mix != null) {
-//            this.jListMix.setListData(mix);
-//            this.jListMix.remove(mix.length);
-//        }
+        try {
+
+            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+
+            String ip = in.readLine(); //you get the IP as a String
+            this.Conexion_MyIP.setText(ip);
+            this.Conexion_MyIP2.setText(ip);
+
+            String passRemote = (conexion[5].equals("NONE")) ? "" : conexion[5];
+            String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
+            this.Remote_IP.setText(conexion[1]);
+            this.Remote_Puerto.setText(conexion[2]);
+            this.Remote_Name.setText(conexion[3]);
+            this.Remote_User.setText(conexion[4]);
+            this.Remote_Pass.setText(passRemote);
+            this.Local_IP.setText(conexion[7]);
+            this.Local_Puerto.setText(conexion[8]);
+            this.Local_Name.setText(conexion[9]);
+            this.Local_User.setText(conexion[10]);
+            this.Local_Pass.setText(passLocal);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            String sql = "SELECT `id_Parklot`,`name_Parklot` FROM `parklot`";
+            int n = 2;
+            String[] temp = cx.select(sql, n, 1);
+            parklots = new String[temp.length];
+            id_parklots = new String[temp.length];
+            this.CreateModel_Parkings.removeAllItems();
+            this.Classifiers_Parkings.removeAllItems();
+
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                id_parklots[i] = substring[0];
+                parklots[i] = substring[1];
+                this.CreateModel_Parkings.addItem(parklots[i]);
+                this.Classifiers_Parkings.addItem(parklots[i]);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            String sql = "SELECT `url`,`path` ,`threads` FROM `settings`";
+            int n = 3;
+            String[] temp = cx.select(sql, n, 2);
+            String[] substring = null;
+            for (int i = 0; i < temp.length; i++) {
+                substring = temp[i].split(" columns ");
+            }
+            URL = substring[0];
+            dir = substring[1];
+            this.Settings_Url.setText(substring[0]);
+            this.Settings_PathImagesTemp.setText(substring[1]);
+            this.Settings_Threads.setSelectedItem(substring[2]);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            //Obtiene tamaño para las imagenes del ARFF
+            String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
+            int n = 3;
+            String[] temp = cx.select(sql, n, 2);
+
+            String[] substring = temp[0].split(" columns ");
+            this.SettingsARFF_Width.setText(substring[1]);
+            this.SettingsARFF_Height.setText(substring[2]);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -110,13 +174,10 @@ public class JFrameMain extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         TabClassifiers = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        Classifiers_Start = new javax.swing.JButton();
+        jLabel53 = new javax.swing.JLabel();
+        Classifiers_Parkings = new javax.swing.JComboBox<>();
         TabModelARFF = new javax.swing.JTabbedPane();
         TabCreateModel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -254,6 +315,11 @@ public class JFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(38, 91, 145));
@@ -266,63 +332,43 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setText("API REST");
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField2.setText("http://localhost:8080/Servidor/app/descarga/json");
-
-        jTextField1.setText("17/12/2018");
-
-        jLabel17.setText("Fecha");
-
-        jLabel18.setText("Hora");
-
-        jTextField3.setText("12:00");
-
-        jButton1.setText("Iniciar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Classifiers_Start.setBackground(new java.awt.Color(255, 255, 255));
+        Classifiers_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Classifiers_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        Classifiers_Start.setText("Iniciar");
+        Classifiers_Start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Classifiers_StartActionPerformed(evt);
             }
         });
+        jPanel15.add(Classifiers_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+
+        jLabel53.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel53.setText("Parqueo");
+        jPanel15.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 40));
+
+        Classifiers_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jPanel15.add(Classifiers_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(768, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(744, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
-                .addComponent(jButton1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -1103,84 +1149,6 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
 
-        try {
-
-            URL whatismyip = new URL("http://checkip.amazonaws.com");
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                whatismyip.openStream()));
-
-        String ip = in.readLine(); //you get the IP as a String
-        this.Conexion_MyIP.setText(ip);
-        this.Conexion_MyIP2.setText(ip);
-
-        String passRemote = (conexion[5].equals("NONE")) ? "" : conexion[5];
-        String passLocal = (conexion[11].equals("NONE")) ? "" : conexion[11];
-        this.Remote_IP.setText(conexion[1]);
-        this.Remote_Puerto.setText(conexion[2]);
-        this.Remote_Name.setText(conexion[3]);
-        this.Remote_User.setText(conexion[4]);
-        this.Remote_Pass.setText(passRemote);
-        this.Local_IP.setText(conexion[7]);
-        this.Local_Puerto.setText(conexion[8]);
-        this.Local_Name.setText(conexion[9]);
-        this.Local_User.setText(conexion[10]);
-        this.Local_Pass.setText(passLocal);
-
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            String sql = "SELECT `id_Parklot`,`name_Parklot` FROM `parklot`";
-            int n = 2;
-            String[] temp = cx.select(sql, n, 1);
-            parklots = new String[temp.length];
-            id_parklots = new String[temp.length];
-            this.CreateModel_Parkings.removeAllItems();
-
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                id_parklots[i] = substring[0];
-                parklots[i] = substring[1];
-                this.CreateModel_Parkings.addItem(parklots[i]);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            String sql = "SELECT `url`,`path` ,`threads` FROM `settings`";
-            int n = 3;
-            String[] temp = cx.select(sql, n, 2);
-            String[] substring = null;
-            for (int i = 0; i < temp.length; i++) {
-                substring = temp[i].split(" columns ");
-            }
-
-            this.Settings_Url.setText(substring[0]);
-            this.Settings_PathImagesTemp.setText(substring[1]);
-            this.Settings_Threads.setSelectedItem(substring[2]);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            //Obtiene tamaño para las imagenes del ARFF
-            String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
-            int n = 3;
-            String[] temp = cx.select(sql, n, 2);
-
-            String[] substring = temp[0].split(" columns ");
-            this.SettingsARFF_Width.setText(substring[1]);
-            this.SettingsARFF_Height.setText(substring[2]);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
@@ -1202,22 +1170,22 @@ public class JFrameMain extends javax.swing.JFrame {
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             this.Settings_PathImagesTemp.setText(chooser.getSelectedFile().toString());
             //            System.out.println("getCurrentDirectory(): "
-                //                    + chooser.getCurrentDirectory());
+            //                    + chooser.getCurrentDirectory());
             //            System.out.println("getSelectedFile() : "
-                //                    + chooser.getSelectedFile());
+            //                    + chooser.getSelectedFile());
         } else {
             System.out.println("No Selection ");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Settings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_SaveActionPerformed
-        String url = this.Settings_Url.getText();
+        URL = this.Settings_Url.getText();
         String path = this.Settings_PathImagesTemp.getText();
         String thread = this.Settings_Threads.getSelectedItem().toString();
         String res = path.replace("\\", "/");
-            String sql = "UPDATE `settings` SET `url`='" + url + "', `path`='" + res + "', `threads`='" + thread + "'WHERE `id`=1;";
-            String msg = "la configuración general";
-            cx.update(sql, msg, 2);
+        String sql = "UPDATE `settings` SET `url`='" + URL + "', `path`='" + res + "', `threads`='" + thread + "'WHERE `id`=1;";
+        String msg = "la configuración general";
+        cx.update(sql, msg, 2);
     }//GEN-LAST:event_Settings_SaveActionPerformed
 
     private void Remote_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Remote_SaveActionPerformed
@@ -1225,25 +1193,25 @@ public class JFrameMain extends javax.swing.JFrame {
         String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
         String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
         cm.Write("Remote,"
-            + this.Remote_IP.getText() + ","
-            + this.Remote_Puerto.getText() + ","
-            + this.Remote_Name.getText() + ","
-            + this.Remote_User.getText() + ","
-            + passRemote + ","
-            + "Local,"
-            + this.Local_IP.getText() + ","
-            + this.Local_Puerto.getText() + ","
-            + this.Local_Name.getText() + ","
-            + this.Local_User.getText() + ","
-            + passLocal, ruta, false);
+                + this.Remote_IP.getText() + ","
+                + this.Remote_Puerto.getText() + ","
+                + this.Remote_Name.getText() + ","
+                + this.Remote_User.getText() + ","
+                + passRemote + ","
+                + "Local,"
+                + this.Local_IP.getText() + ","
+                + this.Local_Puerto.getText() + ","
+                + this.Local_Name.getText() + ","
+                + this.Local_User.getText() + ","
+                + passLocal, ruta, false);
 
         String sql = "UPDATE `config` SET "
-        + "`ip`='" + this.Remote_IP.getText() + "', "
-        + "`puerto`='" + this.Remote_Puerto.getText() + "', "
-        + "`name_db`='" + this.Remote_Name.getText() + "', "
-        + "`username`='" + this.Remote_User.getText() + "', "
-        + "`password`='" + passRemote
-        + "'WHERE `type`='externo'";
+                + "`ip`='" + this.Remote_IP.getText() + "', "
+                + "`puerto`='" + this.Remote_Puerto.getText() + "', "
+                + "`name_db`='" + this.Remote_Name.getText() + "', "
+                + "`username`='" + this.Remote_User.getText() + "', "
+                + "`password`='" + passRemote
+                + "'WHERE `type`='externo'";
         String msg = "la configuración de base de datos externa";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Remote_SaveActionPerformed
@@ -1253,25 +1221,25 @@ public class JFrameMain extends javax.swing.JFrame {
         String passRemote = (String.valueOf(this.Remote_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Remote_Pass.getPassword());
         String passLocal = (String.valueOf(this.Local_Pass.getPassword()).equals("")) ? "NONE" : String.valueOf(this.Local_Pass.getPassword());
         cm.Write("Remote,"
-            + this.Remote_IP.getText() + ","
-            + this.Remote_Puerto.getText() + ","
-            + this.Remote_Name.getText() + ","
-            + this.Remote_User.getText() + ","
-            + passRemote + ","
-            + "Local,"
-            + this.Local_IP.getText() + ","
-            + this.Local_Puerto.getText() + ","
-            + this.Local_Name.getText() + ","
-            + this.Local_User.getText() + ","
-            + passLocal, ruta, false);
+                + this.Remote_IP.getText() + ","
+                + this.Remote_Puerto.getText() + ","
+                + this.Remote_Name.getText() + ","
+                + this.Remote_User.getText() + ","
+                + passRemote + ","
+                + "Local,"
+                + this.Local_IP.getText() + ","
+                + this.Local_Puerto.getText() + ","
+                + this.Local_Name.getText() + ","
+                + this.Local_User.getText() + ","
+                + passLocal, ruta, false);
 
         String sql = "UPDATE `config` SET "
-        + "`ip`='" + this.Local_IP.getText() + "', "
-        + "`puerto`='" + this.Local_Puerto.getText() + "', "
-        + "`name_db`='" + this.Local_Name.getText() + "', "
-        + "`username`='" + this.Local_User.getText() + "', "
-        + "`password`='" + passLocal
-        + "'WHERE `type`='interno'";
+                + "`ip`='" + this.Local_IP.getText() + "', "
+                + "`puerto`='" + this.Local_Puerto.getText() + "', "
+                + "`name_db`='" + this.Local_Name.getText() + "', "
+                + "`username`='" + this.Local_User.getText() + "', "
+                + "`password`='" + passLocal
+                + "'WHERE `type`='interno'";
         String msg = "la configuración de base de datos interna";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Local_SaveActionPerformed
@@ -1403,7 +1371,7 @@ public class JFrameMain extends javax.swing.JFrame {
             //            System.out.println(this.CreateMixFilters_Name.getText().length());
             if (temp[0].isEmpty() && this.CreateMixFilters_Name.getText().length() != 0) {
                 if (cm.isEmpty(this.CreateMixFilters_Name.getText())
-                    && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
+                        && this.CreateMixFilters_ListMix.getModel().getSize() <= 1) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     sql = "INSERT INTO `mix`(`name`) VALUES (?);";
@@ -1465,12 +1433,12 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void UpdateFilters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SaveActionPerformed
         String sql = "UPDATE `filters` SET "
-        + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
-        + "`init`='" + this.EditFilter_Init.getText() + "', "
-        + "`gui`='" + this.EditFilter_Gui.getText() + "', "
-        + "`apply`='" + this.EditFilter_Apply.getText() + "', "
-        + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
-        + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
+                + "`use_gui`='" + this.EditFilter_UseGui.getItemAt(this.EditFilter_UseGui.getSelectedIndex()) + "', "
+                + "`init`='" + this.EditFilter_Init.getText() + "', "
+                + "`gui`='" + this.EditFilter_Gui.getText() + "', "
+                + "`apply`='" + this.EditFilter_Apply.getText() + "', "
+                + "`imagefilters_function`='" + this.EditFilter_Code.getText() + "' "
+                + "WHERE `name`='" + this.EditFilters_JComboFilters.getItemAt(this.EditFilters_JComboFilters.getSelectedIndex()) + "'";
         String msg = "el filtro";
         //        System.out.println(sql);
         cx.update(sql, msg, 2);
@@ -1573,11 +1541,11 @@ public class JFrameMain extends javax.swing.JFrame {
             if (temp[0].isEmpty()) {
                 sql = "INSERT INTO `filters`(`name`, `use_gui`, `init`, `gui`, `apply`, `imagefilters_function`) VALUES (?,?,?,?,?,?);";
                 if (cm.isEmpty(this.CreateFilter_Name.getText())
-                    || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
-                    || cm.isEmpty(this.CreateFilter_Init.getText())
-                    || cm.isEmpty(this.CreateFilter_Gui.getText())
-                    || cm.isEmpty(this.CreateFilter_Apply.getText())
-                    || cm.isEmpty(this.CreateFilter_Code.getText())) {
+                        || cm.isEmpty(this.CreateFilter_UseGui.getItemAt(this.CreateFilter_UseGui.getSelectedIndex()))
+                        || cm.isEmpty(this.CreateFilter_Init.getText())
+                        || cm.isEmpty(this.CreateFilter_Gui.getText())
+                        || cm.isEmpty(this.CreateFilter_Apply.getText())
+                        || cm.isEmpty(this.CreateFilter_Code.getText())) {
                     JOptionPane.showMessageDialog(null, "Llenar Todos Los Campos ", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
 
@@ -1635,27 +1603,32 @@ public class JFrameMain extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //        Conexion cn = new Conexion();
-        //        cn.datos();
-        //        ReadJson rj = new ReadJson();
-        //        Images img = new Images();
-        //        try {
-            //            Images.getImage(rj.jsonFileRead());
-            //        } catch (JSONException ex) {
-            //            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-            //        } catch (IOException ex) {
-            //            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void Classifiers_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StartActionPerformed
+        
+        try {
+            GetParking.BASE_URI = URL + "app";
+            GetParking gp = new GetParking();
+            String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];
+            GetJson gj = new GetJson();
+            gj.get(gp.getParklot(id),dir);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Classifiers_StartActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.Init();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1665,6 +1638,8 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Classifiers_Parkings;
+    private javax.swing.JButton Classifiers_Start;
     private javax.swing.JTextField Conexion_MyIP;
     private javax.swing.JTextField Conexion_MyIP2;
     private javax.swing.JTextArea CreateFilter_Apply;
@@ -1725,17 +1700,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton UpdateFilters_Save;
     private javax.swing.JButton UpdateFilters_Simulation;
     private javax.swing.JButton btnSaveFilters;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1773,6 +1744,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1782,6 +1754,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1806,8 +1779,5 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
