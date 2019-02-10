@@ -25,11 +25,11 @@ import sun.misc.BASE64Encoder;
  * @author Jessica Roman
  */
 public class GetJson {
-    
+
     List<Image> imgs;
     Image img = null;
 
-    public void get(String content, String path) throws IOException, JSONException {
+    public void get(String content, String path, int Threads) throws IOException, JSONException {
 
         JSONObject json = new JSONObject(content);
 
@@ -41,18 +41,9 @@ public class GetJson {
         String[] src = substring.split("data:image/jpeg;base64,");
         getImageParking(src[1], path);
         //System.out.println(json.toString());
-        
-        for (int i = 1; i < objects.length(); i++) {
-            int x = objects.getJSONObject(i).getInt("left");
-            int y = objects.getJSONObject(i).getInt("top");
-            int width = objects.getJSONObject(i).getInt("width");
-            int height = objects.getJSONObject(i).getInt("height");
-            double scaleX=objects.getJSONObject(i).getDouble("scaleX");
-            double scaleY=objects.getJSONObject(i).getDouble("scaleY");
-                      
-            img.copyRect(x, y, Math.round(width*(float) scaleX),Math.round(height*(float) scaleY)).saveAs(path + "\\" + (i) + ".jpg");
-        }
 
+        ClassExecutorsClassifiers cef = new ClassExecutorsClassifiers();
+        cef.RUN(objects, Threads, img);
     }
 
     public void getImageParking(String src, String dir) {
@@ -65,25 +56,6 @@ public class GetJson {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        img =new Image(data);
+        img = new Image(data);
     }
-
-    public static String encodeToString(BufferedImage image, String type) {
-        String imageString = null;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-        try {
-            ImageIO.write(image, type, bos);
-            byte[] imageBytes = bos.toByteArray();
-
-            BASE64Encoder encoder = new BASE64Encoder();
-            imageString = "data:image/jpeg;base64," + encoder.encode(imageBytes);
-
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return imageString;
-    }
-
 }

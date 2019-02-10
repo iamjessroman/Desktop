@@ -45,7 +45,7 @@ public class ARFFfile {
 
     public ARFFfile() {
         atts = new ArrayList<Attribute>((Height * Width) + 1);
-        atts.add(new Attribute("label", (ArrayList<String>) null));
+        atts.add(new Attribute("label", Attribute.NUMERIC));
 
         for (int i = 1; i <= Height; i++) {
             for (int j = 1; j <= Width; j++) {
@@ -53,7 +53,7 @@ public class ARFFfile {
             }
         }
 
-        atts.add(new Attribute("estado", (ArrayList<String>) null));
+        atts.add(new Attribute("estado", Attribute.NUMERIC));
         dataRaw = new Instances("Parkings", atts, 0);
     }
 
@@ -62,15 +62,20 @@ public class ARFFfile {
         int p = 1;
 
         double[] instanceValue1 = new double[dataRaw.numAttributes()];
-        instanceValue1[0] = dataRaw.attribute(0).addStringValue(String.valueOf(l));
+        instanceValue1[0] = l;
         for (int i = 0; i < image.getHeight(); i++) {
             for (int j = 0; j < image.getWidth(); j++) {
                 instanceValue1[p] = image.getColor(j, i).getRed();
                 p++;
             }
         }
-
-        instanceValue1[(2501)] = dataRaw.attribute(2501).addStringValue(states);
+        if (states.equals("Ocupado")) {
+            instanceValue1[(2501)] = 0;
+        }else
+        {
+            instanceValue1[(2501)] = 1;
+        }
+        
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
 
         if (timer == 5) {

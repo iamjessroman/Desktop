@@ -39,6 +39,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -60,7 +61,8 @@ public class JFrameMain extends javax.swing.JFrame {
     String beforeNameFilter = "";
     String URL = "";
     String dir = "";
-    
+    int Threads = 0;
+    int State = 0;
 
     /**
      * Creates new form Conect
@@ -140,6 +142,7 @@ public class JFrameMain extends javax.swing.JFrame {
             }
             URL = substring[0];
             dir = substring[1];
+            Threads = Integer.valueOf(substring[2]);
             this.Settings_Url.setText(substring[0]);
             this.Settings_PathImagesTemp.setText(substring[1]);
             this.Settings_Threads.setSelectedItem(substring[2]);
@@ -150,12 +153,28 @@ public class JFrameMain extends javax.swing.JFrame {
         try {
             //Obtiene tamaño para las imagenes del ARFF
             String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
-            int n = 3;
+            int n = 5;
             String[] temp = cx.select(sql, n, 2);
 
             String[] substring = temp[0].split(" columns ");
             this.SettingsARFF_Width.setText(substring[1]);
             this.SettingsARFF_Height.setText(substring[2]);
+
+            sql = "SELECT * FROM `settings_arff` WHERE `id`=2";
+            n = 5;
+            temp = cx.select(sql, n, 2);
+
+            substring = temp[0].split(" columns ");
+
+            this.ClassifiersSettings_Width.setText(substring[1]);
+            this.ClassifiersSettings_Height.setText(substring[2]);
+
+            String m = substring[3];
+            String arff = substring[4];
+
+            this.ClassifiersSettings_PathModel.setText(m.replace("/", "\\"));
+            this.ClassifiersSettings_PathArff.setText(arff.replace("/", "\\"));
+
         } catch (SQLException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,12 +191,33 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        TabClassifiers = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        TabClassifiers = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        Classifiers_Start = new javax.swing.JButton();
+        Classifiers_Stop = new javax.swing.JButton();
         jLabel53 = new javax.swing.JLabel();
         Classifiers_Parkings = new javax.swing.JComboBox<>();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        Classifiers_Start1 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        ClassifiersSettings_Save = new javax.swing.JButton();
+        jLabel54 = new javax.swing.JLabel();
+        ClassifiersSettings_Width = new javax.swing.JTextField();
+        jLabel55 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        ClassifiersSettings_Height = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel14 = new javax.swing.JLabel();
+        ClassifiersSettings_PathModel = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        ClassifiersSettings_PathArff = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         TabModelARFF = new javax.swing.JTabbedPane();
         TabCreateModel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -330,22 +370,26 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        TabClassifiers.setForeground(new java.awt.Color(38, 91, 145));
+        TabClassifiers.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Classifiers_Start.setBackground(new java.awt.Color(255, 255, 255));
-        Classifiers_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Classifiers_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        Classifiers_Start.setText("Iniciar");
-        Classifiers_Start.addActionListener(new java.awt.event.ActionListener() {
+        Classifiers_Stop.setBackground(new java.awt.Color(255, 255, 255));
+        Classifiers_Stop.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Classifiers_Stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        Classifiers_Stop.setText("Iniciar");
+        Classifiers_Stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Classifiers_StartActionPerformed(evt);
+                Classifiers_StopActionPerformed(evt);
             }
         });
-        jPanel15.add(Classifiers_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+        jPanel15.add(Classifiers_Stop, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 120, -1));
 
         jLabel53.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(74, 173, 82));
@@ -354,802 +398,895 @@ public class JFrameMain extends javax.swing.JFrame {
 
         Classifiers_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jPanel15.add(Classifiers_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
+        jPanel15.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(744, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
-
-        javax.swing.GroupLayout TabClassifiersLayout = new javax.swing.GroupLayout(TabClassifiers);
-        TabClassifiers.setLayout(TabClassifiersLayout);
-        TabClassifiersLayout.setHorizontalGroup(
-            TabClassifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        TabClassifiersLayout.setVerticalGroup(
-            TabClassifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Clasificador", new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png")), TabClassifiers); // NOI18N
-
-        TabModelARFF.setBackground(new java.awt.Color(255, 255, 255));
-        TabModelARFF.setForeground(new java.awt.Color(74, 173, 82));
-        TabModelARFF.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        TabCreateModel.setBackground(new java.awt.Color(255, 255, 255));
-        TabCreateModel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        CreateModel_Start.setBackground(new java.awt.Color(255, 255, 255));
-        CreateModel_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateModel_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        CreateModel_Start.setText("Iniciar");
-        CreateModel_Start.addActionListener(new java.awt.event.ActionListener() {
+        Classifiers_Start1.setBackground(new java.awt.Color(255, 255, 255));
+        Classifiers_Start1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Classifiers_Start1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        Classifiers_Start1.setText("Parar");
+        Classifiers_Start1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateModel_StartActionPerformed(evt);
+                Classifiers_Start1ActionPerformed(evt);
             }
         });
-        jPanel8.add(CreateModel_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+        jPanel15.add(Classifiers_Start1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 120, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel4.setText("Parqueo");
-        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 40));
+        jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 430, 410));
 
-        CreateModel_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jPanel8.add(CreateModel_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
+        TabClassifiers.addTab("Proceso", jPanel1);
 
-        TabCreateModel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 410));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
-        TabCreateModel.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TabModelARFF.addTab("Crear", TabCreateModel);
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        SettingsARFF_Save.setBackground(new java.awt.Color(255, 255, 255));
-        SettingsARFF_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        SettingsARFF_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        SettingsARFF_Save.setText("Guardar");
-        SettingsARFF_Save.addActionListener(new java.awt.event.ActionListener() {
+        ClassifiersSettings_Save.setBackground(new java.awt.Color(255, 255, 255));
+        ClassifiersSettings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ClassifiersSettings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+        ClassifiersSettings_Save.setText("Guardar");
+        ClassifiersSettings_Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SettingsARFF_SaveActionPerformed(evt);
+                ClassifiersSettings_SaveActionPerformed(evt);
             }
         });
-        jPanel9.add(SettingsARFF_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+        jPanel17.add(ClassifiersSettings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
 
-        jLabel47.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel47.setText("Imágenes");
-        jPanel9.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
+        jLabel54.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel54.setText("Imágenes");
+        jPanel17.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 40));
 
-        SettingsARFF_Width.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        SettingsARFF_Width.addKeyListener(new java.awt.event.KeyAdapter() {
+        ClassifiersSettings_Width.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ClassifiersSettings_Width.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                SettingsARFF_WidthKeyTyped(evt);
+                ClassifiersSettings_WidthKeyTyped(evt);
             }
         });
-        jPanel9.add(SettingsARFF_Width, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 190, 40));
+        jPanel17.add(ClassifiersSettings_Width, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 190, 40));
 
-        jLabel48.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel48.setText("ANCHO ");
-        jPanel9.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 40));
-        jPanel9.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 20));
+        jLabel55.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel55.setText("ANCHO ");
+        jPanel17.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, 40));
+        jPanel17.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 360, 20));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(38, 91, 145));
-        jLabel2.setText("px");
-        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 40));
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(38, 91, 145));
+        jLabel3.setText("px");
+        jPanel17.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 40, 40));
 
-        jLabel49.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel49.setText("ALTO");
-        jPanel9.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 50, 40));
+        jLabel56.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel56.setText("ALTO");
+        jPanel17.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 50, 40));
 
-        SettingsARFF_Height.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        SettingsARFF_Height.addKeyListener(new java.awt.event.KeyAdapter() {
+        ClassifiersSettings_Height.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ClassifiersSettings_Height.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                SettingsARFF_HeightKeyTyped(evt);
+                ClassifiersSettings_HeightKeyTyped(evt);
             }
         });
-        jPanel9.add(SettingsARFF_Height, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 190, 40));
-
-        jLabel50.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(38, 91, 145));
-        jLabel50.setText("px");
-        jPanel9.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 40, 40));
-
-        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 410));
-
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
-        jPanel2.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
-
-        TabModelARFF.addTab("Configuración ", jPanel2);
-
-        jTabbedPane1.addTab("ARFF", new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png")), TabModelARFF); // NOI18N
-
-        TabFilters.setBackground(new java.awt.Color(255, 255, 255));
-        TabFilters.setForeground(new java.awt.Color(74, 173, 82));
-        TabFilters.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        TabFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabFiltersMouseClicked(evt);
-            }
-        });
-
-        TabCreateFilter.setBackground(new java.awt.Color(255, 255, 255));
-        TabCreateFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnSaveFilters.setBackground(new java.awt.Color(255, 255, 255));
-        btnSaveFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnSaveFilters.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        btnSaveFilters.setText("Guardar");
-        btnSaveFilters.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveFiltersActionPerformed(evt);
-            }
-        });
-        TabCreateFilter.add(btnSaveFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
-
-        CreateFilter_UseGui.setEditable(true);
-        CreateFilter_UseGui.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        CreateFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
-        TabCreateFilter.add(CreateFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 51, 167, 28));
-
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel10.setText("NOMBRE DEL FILTRO");
-        TabCreateFilter.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 18, 170, 18));
-
-        CreateFilter_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateFilter_Name.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CreateFilter_NameKeyTyped(evt);
-            }
-        });
-        TabCreateFilter.add(CreateFilter_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 15, 230, 26));
-
-        jLabel30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel30.setText("Código");
-        TabCreateFilter.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
-
-        jLabel31.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel31.setText("init");
-        TabCreateFilter.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 40, 18));
-
-        CreateFilter_Init.setColumns(20);
-        CreateFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        CreateFilter_Init.setRows(5);
-        CreateFilter_Init.setText("function(self) {}");
-        CreateFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane7.setViewportView(CreateFilter_Init);
-
-        TabCreateFilter.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 410, 84));
-
-        CreateFilter_Gui.setColumns(20);
-        CreateFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        CreateFilter_Gui.setRows(5);
-        CreateFilter_Gui.setText("function(self) {}");
-        CreateFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane8.setViewportView(CreateFilter_Gui);
-
-        TabCreateFilter.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 410, 81));
-
-        jLabel32.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel32.setText("gui");
-        TabCreateFilter.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 50, 18));
-
-        CreateFilter_Apply.setColumns(20);
-        CreateFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        CreateFilter_Apply.setRows(5);
-        CreateFilter_Apply.setText("function(self) {\n          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n        }");
-        CreateFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        CreateFilter_Apply.setMinimumSize(new java.awt.Dimension(129, 26));
-        jScrollPane9.setViewportView(CreateFilter_Apply);
-
-        TabCreateFilter.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 410, 84));
-
-        jLabel33.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel33.setText("apply");
-        TabCreateFilter.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 50, 18));
-
-        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel34.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel34.setText("USE_GUI");
-        TabCreateFilter.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, -1, 18));
-
-        CreateFilter_Generate.setBackground(new java.awt.Color(255, 255, 255));
-        CreateFilter_Generate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateFilter_Generate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/generate_icon.png"))); // NOI18N
-        CreateFilter_Generate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateFilter_GenerateActionPerformed(evt);
-            }
-        });
-        TabCreateFilter.add(CreateFilter_Generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 60, -1));
-
-        CreateFilter_Code.setColumns(20);
-        CreateFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        CreateFilter_Code.setRows(5);
-        CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n  var srcPixels = srcImageData.data,\n    srcWidth = srcImageData.width,\n    srcHeight = srcImageData.height,\n    srcLength = srcPixels.length,\n    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n    dstPixels = dstImageData.data;\n\n  return dstImageData;\n};");
-        CreateFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane18.setViewportView(CreateFilter_Code);
-
-        TabCreateFilter.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
-
-        TabFilters.addTab("Crear", TabCreateFilter);
-
-        TabEditFilter.setBackground(new java.awt.Color(255, 255, 255));
-        TabEditFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel35.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(38, 91, 145));
-        jLabel35.setText("FILTROS");
-        TabEditFilter.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 78, 30));
-
-        EditFilters_JComboFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditFilters_JComboFilters.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                EditFilters_JComboFiltersItemStateChanged(evt);
-            }
-        });
-        TabEditFilter.add(EditFilters_JComboFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 191, 30));
-
-        jLabel41.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel41.setText("USE_GUI");
-        TabEditFilter.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 87, 18));
-
-        EditFilter_UseGui.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
-        TabEditFilter.add(EditFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 167, 28));
-
-        jLabel42.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel42.setText("init");
-        TabEditFilter.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 83, 40, 18));
-
-        EditFilter_Init.setColumns(20);
-        EditFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        EditFilter_Init.setRows(5);
-        EditFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane14.setViewportView(EditFilter_Init);
-
-        TabEditFilter.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 410, 89));
-
-        jLabel43.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel43.setText("gui");
-        TabEditFilter.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 185, 50, 18));
-
-        EditFilter_Gui.setColumns(20);
-        EditFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        EditFilter_Gui.setRows(5);
-        EditFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane15.setViewportView(EditFilter_Gui);
-
-        TabEditFilter.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 410, 87));
-
-        jLabel44.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel44.setText("apply");
-        TabEditFilter.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 296, 50, 18));
-
-        EditFilter_Apply.setColumns(20);
-        EditFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        EditFilter_Apply.setRows(5);
-        EditFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane16.setViewportView(EditFilter_Apply);
-
-        TabEditFilter.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 410, 84));
-
-        jLabel45.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel45.setText("Código");
-        TabEditFilter.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
-
-        UpdateFilters_Simulation.setBackground(new java.awt.Color(255, 255, 255));
-        UpdateFilters_Simulation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        UpdateFilters_Simulation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        UpdateFilters_Simulation.setText("Simular");
-        UpdateFilters_Simulation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateFilters_SimulationActionPerformed(evt);
-            }
-        });
-        TabEditFilter.add(UpdateFilters_Simulation, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 360, -1, -1));
-
-        UpdateFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
-        UpdateFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        UpdateFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        UpdateFilters_Save.setText("Guardar");
-        UpdateFilters_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateFilters_SaveActionPerformed(evt);
-            }
-        });
-        TabEditFilter.add(UpdateFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
-
-        EditFilter_Code.setColumns(20);
-        EditFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        EditFilter_Code.setRows(5);
-        EditFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
-        jScrollPane19.setViewportView(EditFilter_Code);
-
-        TabEditFilter.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
-
-        TabFilters.addTab("Editar", TabEditFilter);
-
-        TabCreateMix.setBackground(new java.awt.Color(255, 255, 255));
-        TabCreateMix.setForeground(new java.awt.Color(38, 91, 145));
-        TabCreateMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel6.setText("FILTROS");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
-
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel7.setText("Nombre Combinación");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 26));
-
-        CreateMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CreateMixFilters_ListFiltersMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(CreateMixFilters_ListFilters);
-
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 320));
-
-        CreateMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        CreateMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CreateMixFilters_ListMixMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(CreateMixFilters_ListMix);
-
-        jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 190, 320));
-
-        CreateMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateMixFilters_Name.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CreateMixFilters_NameKeyTyped(evt);
-            }
-        });
-        jPanel6.add(CreateMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, -1));
-
-        CreateMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
-        CreateMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CreateMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        CreateMixFilters_Save.setText("Guardar");
-        CreateMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateMixFilters_SaveActionPerformed(evt);
-            }
-        });
-        jPanel6.add(CreateMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
-
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
-        jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 42, 42));
-
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
-        jPanel6.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        TabCreateMix.addTab("Crear Combinación", jPanel5);
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        EditMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        EditMixFilters_ListMix.setToolTipText("");
-        EditMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EditMixFilters_ListMixMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(EditMixFilters_ListMix);
-
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 180, 330));
-
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel9.setText("MIX FILTROS");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, 20));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 42, 42));
-
-        EditMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EditMixFilters_ListFiltersMouseClicked(evt);
-            }
-        });
-        jScrollPane6.setViewportView(EditMixFilters_ListFilters);
-
-        jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 190, 330));
-
-        EditMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditMixFilters_Name.setEnabled(false);
-        jPanel4.add(EditMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 190, -1));
-
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel12.setText("Nombre Combinación");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 160, 26));
-
-        EditMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
-        EditMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        EditMixFilters_Save.setText("Guardar");
-        EditMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditMixFilters_SaveActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EditMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
-
-        EditMixFilters_Filters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        EditMixFilters_Filters.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EditMixFilters_FiltersMouseClicked(evt);
-            }
-        });
-        jScrollPane10.setViewportView(EditMixFilters_Filters);
-
-        jPanel4.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 190, 330));
-
-        jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel13.setText("FILTROS");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 150, 20));
-
-        jSeparator1.setForeground(new java.awt.Color(38, 91, 145));
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 30, 370));
-
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
-        jPanel4.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
-
-        TabCreateMix.addTab("Editar Combinación", jPanel4);
-
-        javax.swing.GroupLayout TabMixFilterLayout = new javax.swing.GroupLayout(TabMixFilter);
-        TabMixFilter.setLayout(TabMixFilterLayout);
-        TabMixFilterLayout.setHorizontalGroup(
-            TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabCreateMix)
-        );
-        TabMixFilterLayout.setVerticalGroup(
-            TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabMixFilterLayout.createSequentialGroup()
-                .addComponent(TabCreateMix, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        TabFilters.addTab("Combinación de Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/camera_icon.png")), TabMixFilter); // NOI18N
-
-        jTabbedPane1.addTab("Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/filters_icon.png")), TabFilters); // NOI18N
-
-        TabConexion.setBackground(new java.awt.Color(255, 255, 255));
-        TabConexion.setForeground(new java.awt.Color(74, 173, 82));
-        TabConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        TabLocalConexion.setBackground(new java.awt.Color(255, 255, 255));
-        TabLocalConexion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel22.setText("Nombre de la Base de Datos");
-        jLabel22.setToolTipText("");
-        jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
-
-        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel19.setText("IP");
-        jLabel19.setToolTipText("");
-        jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
-
-        Local_IP.setText("166.62.78.1");
-        jPanel11.add(Local_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
-
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel20.setText("Puerto");
-        jLabel20.setToolTipText("");
-        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
-
-        Local_Puerto.setText("3306");
-        jPanel11.add(Local_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 200, -1));
-
-        Local_Name.setText("server-administrator");
-        jPanel11.add(Local_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
-
-        Local_Save.setBackground(new java.awt.Color(255, 255, 255));
-        Local_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Local_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        Local_Save.setText("Guardar");
-        Local_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Local_SaveActionPerformed(evt);
-            }
-        });
-        jPanel11.add(Local_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
-
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel12.setForeground(new java.awt.Color(74, 173, 82));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel21.setText("USERNAME");
-        jLabel21.setToolTipText("");
-        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
-
-        jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel23.setText("PASSWORD");
-        jLabel23.setToolTipText("");
-        jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
-
-        Local_User.setText("jessicaroman");
-        jPanel12.add(Local_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
-
-        Local_Pass.setText("12345");
-        jPanel12.add(Local_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
-
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
-
-        TabLocalConexion.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
-        TabLocalConexion.add(Conexion_MyIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
-
-        jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel29.setText("IP EXTERNA");
-        jLabel29.setToolTipText("");
-        TabLocalConexion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
-        TabLocalConexion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
-
-        TabConexion.addTab("Programa Interno", TabLocalConexion);
-
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel24.setText("Nombre de la Base de Datos");
-        jPanel14.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
-
-        jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel25.setText("IP");
-        jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
-
-        Remote_IP.setText("127.0.0.1");
-        jPanel14.add(Remote_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
-
-        jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel26.setText("Puerto");
-        jPanel14.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
-
-        Remote_Puerto.setText("3306");
-        jPanel14.add(Remote_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 201, -1));
-
-        Remote_Name.setText("parkingdb");
-        jPanel14.add(Remote_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
-
-        Remote_Save.setBackground(new java.awt.Color(255, 255, 255));
-        Remote_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Remote_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-        Remote_Save.setText("Guardar");
-        Remote_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Remote_SaveActionPerformed(evt);
-            }
-        });
-        jPanel14.add(Remote_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
-
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel27.setText("USERNAME");
-        jPanel16.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
-
-        jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel28.setText("PASSWORD");
-        jPanel16.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
-
-        Remote_User.setText("root");
-        jPanel16.add(Remote_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
-        jPanel16.add(Remote_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
-
-        jPanel14.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
-
-        jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
-
-        jLabel37.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel37.setText("IP EXTERNA");
-        jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
-        jPanel13.add(Conexion_MyIP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
-
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
-        jLabel15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
-
-        javax.swing.GroupLayout TabRemoteConexionLayout = new javax.swing.GroupLayout(TabRemoteConexion);
-        TabRemoteConexion.setLayout(TabRemoteConexionLayout);
-        TabRemoteConexionLayout.setHorizontalGroup(
-            TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabRemoteConexionLayout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
-        );
-        TabRemoteConexionLayout.setVerticalGroup(
-            TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabRemoteConexionLayout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
-        );
-
-        TabConexion.addTab("Programa Externo", TabRemoteConexion);
-
-        jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
-
-        TabSettings.setBackground(new java.awt.Color(255, 255, 255));
-        TabSettings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(74, 173, 82));
-        jLabel5.setText("PATH Imagenés Temporales ");
-        jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 200, 20));
-
-        Settings_PathImagesTemp.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Settings_PathImagesTemp.setText("C:\\");
-            jPanel10.add(Settings_PathImagesTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 60, 380, -1));
-
-            Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
-            Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-            Settings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-            Settings_Save.setText("Guardar");
-            Settings_Save.addActionListener(new java.awt.event.ActionListener() {
+        jPanel17.add(ClassifiersSettings_Height, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 190, 40));
+
+        jLabel57.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(38, 91, 145));
+        jLabel57.setText("px");
+        jPanel17.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 40, 40));
+
+        jLabel58.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel58.setText("Weka");
+        jPanel17.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
+        jPanel17.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 770, 20));
+
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(74, 173, 82));
+        jLabel14.setText("PATH Model");
+        jPanel17.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 200, 20));
+
+        ClassifiersSettings_PathModel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ClassifiersSettings_PathModel.setText("C:\\");
+            jPanel17.add(ClassifiersSettings_PathModel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 540, -1));
+
+            jButton3.setBackground(new java.awt.Color(255, 255, 255));
+            jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_icon.png"))); // NOI18N
+            jButton3.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    Settings_SaveActionPerformed(evt);
+                    jButton3ActionPerformed(evt);
                 }
             });
-            jPanel10.add(Settings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
+            jPanel17.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 60, -1));
 
-            jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-            jLabel8.setForeground(new java.awt.Color(74, 173, 82));
-            jLabel8.setText("NÚMERO DE HILOS");
-            jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 170, 20));
+            jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+            jLabel17.setForeground(new java.awt.Color(74, 173, 82));
+            jLabel17.setText("PATH ARFF");
+            jPanel17.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 200, 20));
 
-            Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-            Settings_Url.setText("http://localhost:8080/Servidor/");
-            jPanel10.add(Settings_Url, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 20, 380, -1));
+            ClassifiersSettings_PathArff.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+            ClassifiersSettings_PathArff.setText("C:\\");
+                jPanel17.add(ClassifiersSettings_PathArff, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 540, -1));
 
-            jButton2.setBackground(new java.awt.Color(255, 255, 255));
-            jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_icon.png"))); // NOI18N
-            jButton2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton2ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 60, -1));
+                jButton4.setBackground(new java.awt.Color(255, 255, 255));
+                jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_icon.png"))); // NOI18N
+                jButton4.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton4ActionPerformed(evt);
+                    }
+                });
+                jPanel17.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 60, -1));
 
-            jLabel46.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-            jLabel46.setForeground(new java.awt.Color(74, 173, 82));
-            jLabel46.setText("URL");
-            jPanel10.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 93, 20));
+                jPanel7.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 820, 410));
 
-            Settings_Threads.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-            Settings_Threads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-            Settings_Threads.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    Settings_ThreadsActionPerformed(evt);
-                }
-            });
-            jPanel10.add(Settings_Threads, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 100, 70, -1));
+                TabClassifiers.addTab("Configuración", jPanel7);
 
-            TabSettings.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 700, 393));
+                jTabbedPane1.addTab("Calsificador", new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png")), TabClassifiers); // NOI18N
 
-            jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings_logo.png"))); // NOI18N
-            TabSettings.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+                TabModelARFF.setBackground(new java.awt.Color(255, 255, 255));
+                TabModelARFF.setForeground(new java.awt.Color(74, 173, 82));
+                TabModelARFF.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-            jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), TabSettings); // NOI18N
+                TabCreateModel.setBackground(new java.awt.Color(255, 255, 255));
+                TabCreateModel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap())
-            );
+                jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+                CreateModel_Start.setBackground(new java.awt.Color(255, 255, 255));
+                CreateModel_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateModel_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+                CreateModel_Start.setText("Iniciar");
+                CreateModel_Start.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        CreateModel_StartActionPerformed(evt);
+                    }
+                });
+                jPanel8.add(CreateModel_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+
+                jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel4.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel4.setText("Parqueo");
+                jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 40));
+
+                CreateModel_Parkings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                jPanel8.add(CreateModel_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
+
+                TabCreateModel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 410));
+
+                jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
+                TabCreateModel.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                TabModelARFF.addTab("Crear", TabCreateModel);
+
+                jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                SettingsARFF_Save.setBackground(new java.awt.Color(255, 255, 255));
+                SettingsARFF_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                SettingsARFF_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                SettingsARFF_Save.setText("Guardar");
+                SettingsARFF_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        SettingsARFF_SaveActionPerformed(evt);
+                    }
+                });
+                jPanel9.add(SettingsARFF_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+                jLabel47.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel47.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel47.setText("Imágenes");
+                jPanel9.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
+
+                SettingsARFF_Width.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                SettingsARFF_Width.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyTyped(java.awt.event.KeyEvent evt) {
+                        SettingsARFF_WidthKeyTyped(evt);
+                    }
+                });
+                jPanel9.add(SettingsARFF_Width, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 190, 40));
+
+                jLabel48.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel48.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel48.setText("ANCHO ");
+                jPanel9.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 40));
+                jPanel9.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 20));
+
+                jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel2.setForeground(new java.awt.Color(38, 91, 145));
+                jLabel2.setText("px");
+                jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 40));
+
+                jLabel49.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel49.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel49.setText("ALTO");
+                jPanel9.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 50, 40));
+
+                SettingsARFF_Height.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                SettingsARFF_Height.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyTyped(java.awt.event.KeyEvent evt) {
+                        SettingsARFF_HeightKeyTyped(evt);
+                    }
+                });
+                jPanel9.add(SettingsARFF_Height, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 190, 40));
+
+                jLabel50.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel50.setForeground(new java.awt.Color(38, 91, 145));
+                jLabel50.setText("px");
+                jPanel9.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 40, 40));
+
+                jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 410));
+
+                jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ARFF_logo.png"))); // NOI18N
+                jPanel2.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                TabModelARFF.addTab("Configuración ", jPanel2);
+
+                jTabbedPane1.addTab("ARFF", new javax.swing.ImageIcon(getClass().getResource("/images/arff_icon.png")), TabModelARFF); // NOI18N
+
+                TabFilters.setBackground(new java.awt.Color(255, 255, 255));
+                TabFilters.setForeground(new java.awt.Color(74, 173, 82));
+                TabFilters.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                TabFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        TabFiltersMouseClicked(evt);
+                    }
+                });
+
+                TabCreateFilter.setBackground(new java.awt.Color(255, 255, 255));
+                TabCreateFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                btnSaveFilters.setBackground(new java.awt.Color(255, 255, 255));
+                btnSaveFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                btnSaveFilters.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                btnSaveFilters.setText("Guardar");
+                btnSaveFilters.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        btnSaveFiltersActionPerformed(evt);
+                    }
+                });
+                TabCreateFilter.add(btnSaveFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
+
+                CreateFilter_UseGui.setEditable(true);
+                CreateFilter_UseGui.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                CreateFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+                TabCreateFilter.add(CreateFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 51, 167, 28));
+
+                jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel10.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel10.setText("NOMBRE DEL FILTRO");
+                TabCreateFilter.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 18, 170, 18));
+
+                CreateFilter_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateFilter_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyTyped(java.awt.event.KeyEvent evt) {
+                        CreateFilter_NameKeyTyped(evt);
+                    }
+                });
+                TabCreateFilter.add(CreateFilter_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 15, 230, 26));
+
+                jLabel30.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel30.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel30.setText("Código");
+                TabCreateFilter.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
+
+                jLabel31.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel31.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel31.setText("init");
+                TabCreateFilter.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 40, 18));
+
+                CreateFilter_Init.setColumns(20);
+                CreateFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                CreateFilter_Init.setRows(5);
+                CreateFilter_Init.setText("function(self) {}");
+                CreateFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane7.setViewportView(CreateFilter_Init);
+
+                TabCreateFilter.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 410, 84));
+
+                CreateFilter_Gui.setColumns(20);
+                CreateFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                CreateFilter_Gui.setRows(5);
+                CreateFilter_Gui.setText("function(self) {}");
+                CreateFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane8.setViewportView(CreateFilter_Gui);
+
+                TabCreateFilter.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 410, 81));
+
+                jLabel32.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel32.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel32.setText("gui");
+                TabCreateFilter.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 50, 18));
+
+                CreateFilter_Apply.setColumns(20);
+                CreateFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                CreateFilter_Apply.setRows(5);
+                CreateFilter_Apply.setText("function(self) {\n          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n        }");
+                CreateFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                CreateFilter_Apply.setMinimumSize(new java.awt.Dimension(129, 26));
+                jScrollPane9.setViewportView(CreateFilter_Apply);
+
+                TabCreateFilter.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 410, 84));
+
+                jLabel33.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel33.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel33.setText("apply");
+                TabCreateFilter.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 50, 18));
+
+                jLabel34.setBackground(new java.awt.Color(255, 255, 255));
+                jLabel34.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel34.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel34.setText("USE_GUI");
+                TabCreateFilter.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, -1, 18));
+
+                CreateFilter_Generate.setBackground(new java.awt.Color(255, 255, 255));
+                CreateFilter_Generate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateFilter_Generate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/generate_icon.png"))); // NOI18N
+                CreateFilter_Generate.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        CreateFilter_GenerateActionPerformed(evt);
+                    }
+                });
+                TabCreateFilter.add(CreateFilter_Generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 60, -1));
+
+                CreateFilter_Code.setColumns(20);
+                CreateFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                CreateFilter_Code.setRows(5);
+                CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n  var srcPixels = srcImageData.data,\n    srcWidth = srcImageData.width,\n    srcHeight = srcImageData.height,\n    srcLength = srcPixels.length,\n    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n    dstPixels = dstImageData.data;\n\n  return dstImageData;\n};");
+                CreateFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane18.setViewportView(CreateFilter_Code);
+
+                TabCreateFilter.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
+
+                TabFilters.addTab("Crear", TabCreateFilter);
+
+                TabEditFilter.setBackground(new java.awt.Color(255, 255, 255));
+                TabEditFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel35.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel35.setForeground(new java.awt.Color(38, 91, 145));
+                jLabel35.setText("FILTROS");
+                TabEditFilter.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 78, 30));
+
+                EditFilters_JComboFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditFilters_JComboFilters.addItemListener(new java.awt.event.ItemListener() {
+                    public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                        EditFilters_JComboFiltersItemStateChanged(evt);
+                    }
+                });
+                TabEditFilter.add(EditFilters_JComboFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 191, 30));
+
+                jLabel41.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel41.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel41.setText("USE_GUI");
+                TabEditFilter.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 87, 18));
+
+                EditFilter_UseGui.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditFilter_UseGui.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "true", "false" }));
+                TabEditFilter.add(EditFilter_UseGui, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 167, 28));
+
+                jLabel42.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel42.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel42.setText("init");
+                TabEditFilter.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 83, 40, 18));
+
+                EditFilter_Init.setColumns(20);
+                EditFilter_Init.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                EditFilter_Init.setRows(5);
+                EditFilter_Init.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane14.setViewportView(EditFilter_Init);
+
+                TabEditFilter.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 410, 89));
+
+                jLabel43.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel43.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel43.setText("gui");
+                TabEditFilter.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 185, 50, 18));
+
+                EditFilter_Gui.setColumns(20);
+                EditFilter_Gui.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                EditFilter_Gui.setRows(5);
+                EditFilter_Gui.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane15.setViewportView(EditFilter_Gui);
+
+                TabEditFilter.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 410, 87));
+
+                jLabel44.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel44.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel44.setText("apply");
+                TabEditFilter.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 296, 50, 18));
+
+                EditFilter_Apply.setColumns(20);
+                EditFilter_Apply.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                EditFilter_Apply.setRows(5);
+                EditFilter_Apply.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane16.setViewportView(EditFilter_Apply);
+
+                TabEditFilter.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 410, 84));
+
+                jLabel45.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel45.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel45.setText("Código");
+                TabEditFilter.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 114, 30));
+
+                UpdateFilters_Simulation.setBackground(new java.awt.Color(255, 255, 255));
+                UpdateFilters_Simulation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                UpdateFilters_Simulation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+                UpdateFilters_Simulation.setText("Simular");
+                UpdateFilters_Simulation.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        UpdateFilters_SimulationActionPerformed(evt);
+                    }
+                });
+                TabEditFilter.add(UpdateFilters_Simulation, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 360, -1, -1));
+
+                UpdateFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+                UpdateFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                UpdateFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                UpdateFilters_Save.setText("Guardar");
+                UpdateFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        UpdateFilters_SaveActionPerformed(evt);
+                    }
+                });
+                TabEditFilter.add(UpdateFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 360, -1, -1));
+
+                EditFilter_Code.setColumns(20);
+                EditFilter_Code.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+                EditFilter_Code.setRows(5);
+                EditFilter_Code.setMargin(new java.awt.Insets(5, 5, 5, 5));
+                jScrollPane19.setViewportView(EditFilter_Code);
+
+                TabEditFilter.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
+
+                TabFilters.addTab("Editar", TabEditFilter);
+
+                TabCreateMix.setBackground(new java.awt.Color(255, 255, 255));
+                TabCreateMix.setForeground(new java.awt.Color(38, 91, 145));
+                TabCreateMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+                jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+                jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel6.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel6.setText("FILTROS");
+                jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
+
+                jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel7.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel7.setText("Nombre Combinación");
+                jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 26));
+
+                CreateMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        CreateMixFilters_ListFiltersMouseClicked(evt);
+                    }
+                });
+                jScrollPane1.setViewportView(CreateMixFilters_ListFilters);
+
+                jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 320));
+
+                CreateMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                CreateMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        CreateMixFilters_ListMixMouseClicked(evt);
+                    }
+                });
+                jScrollPane3.setViewportView(CreateMixFilters_ListMix);
+
+                jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 190, 320));
+
+                CreateMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateMixFilters_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyTyped(java.awt.event.KeyEvent evt) {
+                        CreateMixFilters_NameKeyTyped(evt);
+                    }
+                });
+                jPanel6.add(CreateMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, -1));
+
+                CreateMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+                CreateMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                CreateMixFilters_Save.setText("Guardar");
+                CreateMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        CreateMixFilters_SaveActionPerformed(evt);
+                    }
+                });
+                jPanel6.add(CreateMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
+
+                jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
+                jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 42, 42));
+
+                jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
+                jPanel6.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
+
+                javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+                jPanel5.setLayout(jPanel5Layout);
+                jPanel5Layout.setHorizontalGroup(
+                    jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                );
+                jPanel5Layout.setVerticalGroup(
+                    jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                );
+
+                TabCreateMix.addTab("Crear Combinación", jPanel5);
+
+                jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                EditMixFilters_ListMix.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                EditMixFilters_ListMix.setToolTipText("");
+                EditMixFilters_ListMix.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        EditMixFilters_ListMixMouseClicked(evt);
+                    }
+                });
+                jScrollPane5.setViewportView(EditMixFilters_ListMix);
+
+                jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 180, 330));
+
+                jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel9.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel9.setText("MIX FILTROS");
+                jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, 20));
+
+                jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+                jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next_icon.png"))); // NOI18N
+                jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 42, 42));
+
+                EditMixFilters_ListFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditMixFilters_ListFilters.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        EditMixFilters_ListFiltersMouseClicked(evt);
+                    }
+                });
+                jScrollPane6.setViewportView(EditMixFilters_ListFilters);
+
+                jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 190, 330));
+
+                EditMixFilters_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditMixFilters_Name.setEnabled(false);
+                jPanel4.add(EditMixFilters_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 190, -1));
+
+                jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel12.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel12.setText("Nombre Combinación");
+                jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 160, 26));
+
+                EditMixFilters_Save.setBackground(new java.awt.Color(255, 255, 255));
+                EditMixFilters_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditMixFilters_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                EditMixFilters_Save.setText("Guardar");
+                EditMixFilters_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        EditMixFilters_SaveActionPerformed(evt);
+                    }
+                });
+                jPanel4.add(EditMixFilters_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, -1, -1));
+
+                EditMixFilters_Filters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                EditMixFilters_Filters.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        EditMixFilters_FiltersMouseClicked(evt);
+                    }
+                });
+                jScrollPane10.setViewportView(EditMixFilters_Filters);
+
+                jPanel4.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 190, 330));
+
+                jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel13.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel13.setText("FILTROS");
+                jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 150, 20));
+
+                jSeparator1.setForeground(new java.awt.Color(38, 91, 145));
+                jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+                jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 30, 370));
+
+                jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/camera_logo.png"))); // NOI18N
+                jPanel4.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 150, -1, -1));
+
+                TabCreateMix.addTab("Editar Combinación", jPanel4);
+
+                javax.swing.GroupLayout TabMixFilterLayout = new javax.swing.GroupLayout(TabMixFilter);
+                TabMixFilter.setLayout(TabMixFilterLayout);
+                TabMixFilterLayout.setHorizontalGroup(
+                    TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TabCreateMix)
+                );
+                TabMixFilterLayout.setVerticalGroup(
+                    TabMixFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabMixFilterLayout.createSequentialGroup()
+                        .addComponent(TabCreateMix, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                );
+
+                TabFilters.addTab("Combinación de Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/camera_icon.png")), TabMixFilter); // NOI18N
+
+                jTabbedPane1.addTab("Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/filters_icon.png")), TabFilters); // NOI18N
+
+                TabConexion.setBackground(new java.awt.Color(255, 255, 255));
+                TabConexion.setForeground(new java.awt.Color(74, 173, 82));
+                TabConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+                TabLocalConexion.setBackground(new java.awt.Color(255, 255, 255));
+                TabLocalConexion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel22.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel22.setText("Nombre de la Base de Datos");
+                jLabel22.setToolTipText("");
+                jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
+
+                jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel19.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel19.setText("IP");
+                jLabel19.setToolTipText("");
+                jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
+
+                Local_IP.setText("166.62.78.1");
+                jPanel11.add(Local_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
+
+                jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel20.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel20.setText("Puerto");
+                jLabel20.setToolTipText("");
+                jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
+
+                Local_Puerto.setText("3306");
+                jPanel11.add(Local_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 200, -1));
+
+                Local_Name.setText("server-administrator");
+                jPanel11.add(Local_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
+
+                Local_Save.setBackground(new java.awt.Color(255, 255, 255));
+                Local_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                Local_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                Local_Save.setText("Guardar");
+                Local_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        Local_SaveActionPerformed(evt);
+                    }
+                });
+                jPanel11.add(Local_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+                jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel12.setForeground(new java.awt.Color(74, 173, 82));
+                jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel21.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel21.setText("USERNAME");
+                jLabel21.setToolTipText("");
+                jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
+
+                jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel23.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel23.setText("PASSWORD");
+                jLabel23.setToolTipText("");
+                jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
+
+                Local_User.setText("jessicaroman");
+                jPanel12.add(Local_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
+
+                Local_Pass.setText("12345");
+                jPanel12.add(Local_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
+
+                jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
+
+                TabLocalConexion.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
+                TabLocalConexion.add(Conexion_MyIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
+
+                jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel29.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel29.setText("IP EXTERNA");
+                jLabel29.setToolTipText("");
+                TabLocalConexion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
+
+                jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
+                TabLocalConexion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                TabConexion.addTab("Programa Interno", TabLocalConexion);
+
+                jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel24.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel24.setText("Nombre de la Base de Datos");
+                jPanel14.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
+
+                jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel25.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel25.setText("IP");
+                jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
+
+                Remote_IP.setText("127.0.0.1");
+                jPanel14.add(Remote_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
+
+                jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel26.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel26.setText("Puerto");
+                jPanel14.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
+
+                Remote_Puerto.setText("3306");
+                jPanel14.add(Remote_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 201, -1));
+
+                Remote_Name.setText("parkingdb");
+                jPanel14.add(Remote_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
+
+                Remote_Save.setBackground(new java.awt.Color(255, 255, 255));
+                Remote_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                Remote_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                Remote_Save.setText("Guardar");
+                Remote_Save.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        Remote_SaveActionPerformed(evt);
+                    }
+                });
+                jPanel14.add(Remote_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+                jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel27.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel27.setText("USERNAME");
+                jPanel16.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
+
+                jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel28.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel28.setText("PASSWORD");
+                jPanel16.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
+
+                Remote_User.setText("root");
+                jPanel16.add(Remote_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
+                jPanel16.add(Remote_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
+
+                jPanel14.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
+
+                jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
+
+                jLabel37.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel37.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel37.setText("IP EXTERNA");
+                jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
+                jPanel13.add(Conexion_MyIP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
+
+                jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
+                jLabel15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+                jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                javax.swing.GroupLayout TabRemoteConexionLayout = new javax.swing.GroupLayout(TabRemoteConexion);
+                TabRemoteConexion.setLayout(TabRemoteConexionLayout);
+                TabRemoteConexionLayout.setHorizontalGroup(
+                    TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabRemoteConexionLayout.createSequentialGroup()
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                );
+                TabRemoteConexionLayout.setVerticalGroup(
+                    TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TabRemoteConexionLayout.createSequentialGroup()
+                        .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0))
+                );
+
+                TabConexion.addTab("Programa Externo", TabRemoteConexion);
+
+                jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
+
+                TabSettings.setBackground(new java.awt.Color(255, 255, 255));
+                TabSettings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                jLabel5.setForeground(new java.awt.Color(74, 173, 82));
+                jLabel5.setText("PATH Imagenés Temporales ");
+                jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 200, 20));
+
+                Settings_PathImagesTemp.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                Settings_PathImagesTemp.setText("C:\\");
+                    jPanel10.add(Settings_PathImagesTemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 60, 380, -1));
+
+                    Settings_Save.setBackground(new java.awt.Color(255, 255, 255));
+                    Settings_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                    Settings_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                    Settings_Save.setText("Guardar");
+                    Settings_Save.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            Settings_SaveActionPerformed(evt);
+                        }
+                    });
+                    jPanel10.add(Settings_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
+
+                    jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel8.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel8.setText("NÚMERO DE HILOS");
+                    jPanel10.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 170, 20));
+
+                    Settings_Url.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                    Settings_Url.setText("http://localhost:8080/Servidor/");
+                    jPanel10.add(Settings_Url, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 20, 380, -1));
+
+                    jButton2.setBackground(new java.awt.Color(255, 255, 255));
+                    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder_icon.png"))); // NOI18N
+                    jButton2.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton2ActionPerformed(evt);
+                        }
+                    });
+                    jPanel10.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 60, -1));
+
+                    jLabel46.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel46.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel46.setText("URL");
+                    jPanel10.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 93, 20));
+
+                    Settings_Threads.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                    Settings_Threads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+                    Settings_Threads.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            Settings_ThreadsActionPerformed(evt);
+                        }
+                    });
+                    jPanel10.add(Settings_Threads, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 100, 70, -1));
+
+                    TabSettings.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 24, 700, 393));
+
+                    jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings_logo.png"))); // NOI18N
+                    TabSettings.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                    jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), TabSettings); // NOI18N
+
+                    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                    getContentPane().setLayout(layout);
+                    layout.setHorizontalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    );
+                    layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                    );
+
+                    pack();
+                }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-
-
+        Init();
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void Settings_ThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_ThreadsActionPerformed
@@ -1603,24 +1740,109 @@ public class JFrameMain extends javax.swing.JFrame {
         s.setVisible(true);
     }//GEN-LAST:event_CreateModel_StartActionPerformed
 
-    private void Classifiers_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StartActionPerformed
-        
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.Init();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void Classifiers_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StopActionPerformed
+
         try {
-            GetParking.BASE_URI = URL + "app";
-            GetParking gp = new GetParking();
             String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];
-            GetJson gj = new GetJson();
-            gj.get(gp.getParklot(id),dir);
+            ClassExecutorsWhile cew=new ClassExecutorsWhile();
+            cew.RUN(id, Threads, URL, dir);
+            
         } catch (IOException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JSONException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_Classifiers_StartActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.Init();
-    }//GEN-LAST:event_formWindowOpened
+           
+
+    }//GEN-LAST:event_Classifiers_StopActionPerformed
+
+    private void ClassifiersSettings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassifiersSettings_SaveActionPerformed
+        String w = this.ClassifiersSettings_Width.getText();
+        String h = this.ClassifiersSettings_Height.getText();
+        String model = this.ClassifiersSettings_PathModel.getText();
+        String arff = this.ClassifiersSettings_PathArff.getText();
+
+        String res_model = model.replace("\\", "/");
+        String res_arff = arff.replace("\\", "/");
+
+        String sql = "UPDATE `settings_arff` SET `width`='" + w + "', `height`='" + h + "', `path_model`='" + res_model + "',`path_arff`='" + res_arff + "' WHERE `id`=2;";
+        String msg = "la configuración del clasificador";
+        cx.update(sql, msg, 2);
+    }//GEN-LAST:event_ClassifiersSettings_SaveActionPerformed
+
+    private void ClassifiersSettings_WidthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ClassifiersSettings_WidthKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.ClassifiersSettings_Width.getText()) && !cm.validatePoint(ch, this.ClassifiersSettings_Width.getText()) && ch != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_ClassifiersSettings_WidthKeyTyped
+
+    private void ClassifiersSettings_HeightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ClassifiersSettings_HeightKeyTyped
+        char ch = evt.getKeyChar();
+        if (!cm.isNumber(ch) && !cm.isValidSignal(ch, this.ClassifiersSettings_Height.getText()) && !cm.validatePoint(ch, this.ClassifiersSettings_Height.getText()) && ch != '\b') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_ClassifiersSettings_HeightKeyTyped
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("PATH Modelo");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        chooser.setSelectedFile(new File("*.model"));
+        FileFilter filter = new FileNameExtensionFilter("Archivo Model", "model");
+        chooser.setFileFilter(filter);
+        //
+        // disable the "All files" option.
+        //
+        //chooser.setAcceptAllFileFilterUsed(false);
+        //
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            this.ClassifiersSettings_PathModel.setText(chooser.getSelectedFile().toString());
+            //            System.out.println("getCurrentDirectory(): "
+            //                    + chooser.getCurrentDirectory());
+            //            System.out.println("getSelectedFile() : "
+            //                    + chooser.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("PATH Archivo ARFF");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setSelectedFile(new File("*.arff"));
+        FileFilter filter = new FileNameExtensionFilter("Archivo ARFF", "arff");
+        chooser.setFileFilter(filter);
+        //
+        // disable the "All files" option.
+        //
+        //chooser.setAcceptAllFileFilterUsed(false);
+        //
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            this.ClassifiersSettings_PathArff.setText(chooser.getSelectedFile().toString());
+            //            System.out.println("getCurrentDirectory(): "
+            //                    + chooser.getCurrentDirectory());
+            //            System.out.println("getSelectedFile() : "
+            //                    + chooser.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void Classifiers_Start1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_Start1ActionPerformed
+        this.State = 0;
+    }//GEN-LAST:event_Classifiers_Start1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1638,8 +1860,14 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ClassifiersSettings_Height;
+    private javax.swing.JTextField ClassifiersSettings_PathArff;
+    private javax.swing.JTextField ClassifiersSettings_PathModel;
+    private javax.swing.JButton ClassifiersSettings_Save;
+    private javax.swing.JTextField ClassifiersSettings_Width;
     private javax.swing.JComboBox<String> Classifiers_Parkings;
-    private javax.swing.JButton Classifiers_Start;
+    private javax.swing.JButton Classifiers_Start1;
+    private javax.swing.JButton Classifiers_Stop;
     private javax.swing.JTextField Conexion_MyIP;
     private javax.swing.JTextField Conexion_MyIP2;
     private javax.swing.JTextArea CreateFilter_Apply;
@@ -1685,7 +1913,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton Settings_Save;
     private javax.swing.JComboBox<String> Settings_Threads;
     private javax.swing.JTextField Settings_Url;
-    private javax.swing.JPanel TabClassifiers;
+    private javax.swing.JTabbedPane TabClassifiers;
     private javax.swing.JTabbedPane TabConexion;
     private javax.swing.JPanel TabCreateFilter;
     private javax.swing.JTabbedPane TabCreateMix;
@@ -1701,12 +1929,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton UpdateFilters_Simulation;
     private javax.swing.JButton btnSaveFilters;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1719,6 +1951,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1745,10 +1978,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -1756,11 +1995,12 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1778,6 +2018,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables
 }

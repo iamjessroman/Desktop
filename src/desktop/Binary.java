@@ -19,13 +19,34 @@ public class Binary {
     public void transform(Image image, int i, String states) throws Exception {
 
         //Obtiene tamaño para las imagenes del ARFF
-        String sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
-        int n = 3;
-        String[] temp = cx.select(sql, n, 2);
+        String sql = "";
+        String width = "";
+        String height = "";
+        String path_model = "";
+        String path_arff = "";
+        if (states == null) {
+            sql = "SELECT * FROM `settings_arff` WHERE `id`=2";
+            int n = 5;
+            String[] temp = cx.select(sql, n, 2);
 
-        String[] substring = temp[0].split(" columns ");
-        String width = substring[1];
-        String height = substring[2];
+            String[] substring = temp[0].split(" columns ");
+            width = substring[1];
+            height = substring[2];
+            String model=substring[3];
+            String arff=substring[4];
+            
+            path_model = model.replace("/", "\\");
+            path_arff = arff.replace("/", "\\");
+
+        } else {
+            sql = "SELECT * FROM `settings_arff` WHERE `id`=1";
+            int n = 5;
+            String[] temp = cx.select(sql, n, 2);
+
+            String[] substring = temp[0].split(" columns ");
+            width = substring[1];
+            height = substring[2];
+        }
 
         image.resize(Integer.valueOf(width), Integer.valueOf(height));
 
@@ -62,7 +83,23 @@ public class Binary {
 
         //Test
 //        image.saveAs("C:\\test\\"+i+".png");
+        if (states == null) {
+            String cadena = "";
+            for (i = 0; i < image.getHeight(); i++) {
+                for (int j = 0; j < image.getWidth(); j++) {
+                    cadena += image.getColor(j, i).getRed() + ",";
+                }
+            }
+            Clasificador.MODEL=path_model;
+            Clasificador.STRUCTURE=path_arff;
+            
+            Clasificador c = new Clasificador(cadena);
+            c.predecir();
+            //System.out.println(cadena);
 
-        ARFFfile.pixels(image, i, states);
+        } else {
+            ARFFfile.pixels(image, i, states);
+        }
+
     }
 }
