@@ -1747,9 +1747,12 @@ public class JFrameMain extends javax.swing.JFrame {
     private void Classifiers_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StopActionPerformed
 
         try {
+            ClassExecutorsWhile.state=10000000;
+            
             String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];
             ClassExecutorsWhile cew=new ClassExecutorsWhile();
             cew.RUN(id, Threads, URL, dir);
+            
             
         } catch (IOException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -1841,7 +1844,8 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void Classifiers_Start1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_Start1ActionPerformed
-        this.State = 0;
+            ClassExecutorsWhile cew = new ClassExecutorsWhile();
+            cew.stop();
     }//GEN-LAST:event_Classifiers_Start1ActionPerformed
 
     /**
