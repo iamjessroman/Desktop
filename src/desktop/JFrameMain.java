@@ -1583,8 +1583,9 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void UpdateFilters_SimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateFilters_SimulationActionPerformed
 
-        JFrameTest.http = this.Settings_PathImagesTemp.getText();
+        JFrameTest.http = this.Settings_Url.getText();
         JFrameTest jt = new JFrameTest();
+        jt.setDefaultCloseOperation(JFrameTest.DISPOSE_ON_CLOSE);
         jt.setVisible(true);
     }//GEN-LAST:event_UpdateFilters_SimulationActionPerformed
 
@@ -1747,6 +1748,9 @@ public class JFrameMain extends javax.swing.JFrame {
     private void Classifiers_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StopActionPerformed
 
         try {
+            
+            String sql = "DELETE FROM `detailparklot`";
+            cx.delete(sql, " ", 1);
             ClassExecutorsWhile.state=10000000;
             
             String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];

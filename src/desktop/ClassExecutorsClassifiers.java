@@ -73,6 +73,6 @@ public class ClassExecutorsClassifiers {
 
     public void image(Image j) throws Exception {
         Binary b = new Binary();
-        b.transform(j, temp, null);
+        b.transform(j, temp, null,0);
     }
 }

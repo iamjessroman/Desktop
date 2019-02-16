@@ -50,9 +50,16 @@ public class Clasificador {
 
             //clasifica la instancia según el modelo
             double pred = cls.classifyInstance(inst);
-            System.out.println(pred);
+//            System.out.println(pred);
             //presenta la clasificación
-            System.out.println("Predicción: " + inst.classAttribute().value((int) pred));
+            String state = "" ;
+            if (pred<1) {
+                state="Ocupado";
+            }else
+            {
+                 state="Libre";
+            }
+            System.out.println("Predicción: " + state);
 
             return (int) pred;
         } catch (Exception e) {

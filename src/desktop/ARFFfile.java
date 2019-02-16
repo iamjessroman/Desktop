@@ -57,7 +57,7 @@ public class ARFFfile {
         dataRaw = new Instances("Parkings", atts, 0);
     }
 
-    public static void pixels(Image image, int l, String states) throws IOException, Exception {
+    public static void pixels(Image image, int l, String states,int total) throws IOException, Exception {
         timer++;
         int p = 1;
 
@@ -69,16 +69,18 @@ public class ARFFfile {
                 p++;
             }
         }
+        int a =(Height * Width) + 1;
         if (states.equals("Ocupado")) {
-            instanceValue1[(2501)] = 0;
+            instanceValue1[(a)] = 0;
         }else
         {
-            instanceValue1[(2501)] = 1;
+            instanceValue1[(a)] = 1;
         }
         
         dataRaw.add(new DenseInstance(1.0, instanceValue1));
 
-        if (timer == 5) {
+        if (timer == total) {
+            JFrameCurrent.t = total;
             JFrameCurrent.ARFF = dataRaw.toString();
             jc.setVisible(true);
         }

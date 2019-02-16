@@ -16,7 +16,7 @@ public class Binary {
 
     Conexion cx = new Conexion();
 
-    public void transform(Image image, int i, String states) throws Exception {
+    public void transform(Image image, int i, String states, int total) throws Exception {
 
         //Obtiene tamaño para las imagenes del ARFF
         String sql = "";
@@ -98,7 +98,7 @@ public class Binary {
             //System.out.println(cadena);
 
         } else {
-            ARFFfile.pixels(image, i, states);
+            ARFFfile.pixels(image, i, states, total);
         }
 
     }

@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class JFrameCurrent extends javax.swing.JFrame {
 
     public static String ARFF;
+    public static int t;
 
     /**
      * Creates new form JFrameCurrent
@@ -124,7 +125,7 @@ public class JFrameCurrent extends javax.swing.JFrame {
         chooser.setFileFilter(filter);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            ARFFfile.timer = (ARFFfile.timer - 5);
+            ARFFfile.timer = (ARFFfile.timer - t);
             File archivo = chooser.getSelectedFile();
             cm.Write(ARFF, archivo.getAbsolutePath(), false);
             this.setVisible(false);
@@ -134,7 +135,7 @@ public class JFrameCurrent extends javax.swing.JFrame {
     }//GEN-LAST:event_ARFF_SaveActionPerformed
 
     private void ARFF_ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ARFF_ContinueActionPerformed
-        ARFFfile.timer = (ARFFfile.timer - 5);
+        ARFFfile.timer = (ARFFfile.timer - t);
         JFrameWebView jf = new JFrameWebView();
         jf.repaint();
         this.dispose();
