@@ -237,23 +237,6 @@ public class Conexion {
         return id;
     }
 
-    public void datos() {
-        testMySQLDriver();
-        try {
-//            delete();
-            GetNames gn = new GetNames();
-            String path = gn.listFolder();
-            int id = getParking();
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/parkingdb", "root", "");
-            Statement st = conn.createStatement();
-
-            int i = st.executeUpdate("INSERT INTO `detailparklot` (`id_DetailParklot`, `pathImg_DetailParklot`, `pathSegm_DetailParklot`, `id_Park`, `status_DetailParklot`, `dateCreate_DetailParklot`) VALUES ('1', ' " + path + ".jpg', '" + path + ".json', '" + id + "', '1', CURRENT_TIMESTAMP);");
-            out.println("Estado Insertado");
-        } catch (Exception e) {
-            System.out.print(e);
-            e.printStackTrace();
-        }
-    }
 
     private static void testMySQLDriver() {
         try {

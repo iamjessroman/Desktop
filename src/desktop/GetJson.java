@@ -29,7 +29,7 @@ public class GetJson {
     List<Image> imgs;
     Image img = null;
 
-    public void get(String content, String path, int Threads) throws IOException, JSONException {
+    public void get(String content, String path, int Threads, int id, String URL) throws IOException, JSONException {
 
         JSONObject json = new JSONObject(content);
 
@@ -37,13 +37,14 @@ public class GetJson {
 
         objects = json.getJSONArray("objects");
 
+        String name = objects.getJSONObject(0).get("path").toString();
         String substring = objects.getJSONObject(0).get("src").toString();
         String[] src = substring.split("data:image/jpeg;base64,");
         getImageParking(src[1], path);
         //System.out.println(json.toString());
 
         ClassExecutorsClassifiers cef = new ClassExecutorsClassifiers();
-        cef.RUN(objects, Threads, img);
+        cef.RUN(objects, Threads, img, name, id, URL);
     }
 
     public void getImageParking(String src, String dir) {

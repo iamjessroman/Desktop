@@ -5,7 +5,6 @@
  */
 package desktop;
 
-
 import javaxt.io.Image;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -40,10 +39,12 @@ import org.json.JSONException;
  * @author Tesis
  */
 public class JFrameParkings extends javax.swing.JFrame {
+
     Conexion cx = new Conexion();
     private List<JLabel> imagenes;
     private List<JLabel> titulos;
     private List<JComboBox> estados;
+    private List<JCheckBox> states;
     private List<Image> images;
     private int indice;
     String[] mix = null;
@@ -64,26 +65,27 @@ public class JFrameParkings extends javax.swing.JFrame {
         estados = new ArrayList<>();
         images = new ArrayList<>();
         titulos = new ArrayList<>();
+        states = new ArrayList<>();
 
     }
 
     public void images() throws MalformedURLException, IOException, SQLException {
         //Obtiene las combinaciones de Filtros
-        
+
         String sql = "SELECT `name` FROM `mix`";
         int n = 1;
         String[] temp = cx.select(sql, n, 2);
         namemixs = new String[(temp.length) + 1];
-        namemixs[0]="";
+        namemixs[0] = "";
         this.Parkings_MixFilters.addItem(namemixs[0]);
         //this.Parkings_MixFilters.removeAll();
 
         for (int i = 0; i < temp.length; i++) {
             String[] substring = temp[i].split(" columns ");
-            namemixs[i+1] = substring[0];
-            this.Parkings_MixFilters.addItem(namemixs[i+1]);
+            namemixs[i + 1] = substring[0];
+            this.Parkings_MixFilters.addItem(namemixs[i + 1]);
         }
-        
+
         //Obtiene las imagenes de Base de Datos
         sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` ,`id` FROM `parklots`";
         n = 5;
@@ -103,10 +105,10 @@ public class JFrameParkings extends javax.swing.JFrame {
             //System.out.println(data_url[i]);
             id[i] = substring[4];
         }
-        
+
         //set Tittle 
         this.Parkings_Tittle.setText(name_parking + " (" + path_parking + ")");
-        
+
         //Crea el Folder del Parking
         sql = "SELECT `path` FROM `settings`";
         n = 1;
@@ -119,10 +121,9 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         File folder = new File(path_folder);
         folder.mkdirs();
-        
+
         //Set imgs Temporales
         //System.out.println("tamaño "+data_url.length);
-        
         for (int j = 0; j < data_url.length; j++) {
             //convert base64 string to binary data
             byte[] data = DatatypeConverter.parseBase64Binary(data_url[j]);
@@ -137,26 +138,34 @@ public class JFrameParkings extends javax.swing.JFrame {
             JLabel titulo = new JLabel("Parqueo: " + id_parklots[j]);
             titulo.setFont(this.getFont());
             this.jPanel1.add(titulo);
-            
+
             Image img = new Image(path_folder + "image" + id_parklots[j] + ".jpg");
             images.add(img);
-            
+
             ImageIcon icon = new ImageIcon(path_folder + "image" + id_parklots[j] + ".jpg");
             JLabel etiqueta = new JLabel("Etiqueta " + id_parklots[j]);
-            etiqueta.setSize(150, 150);
+            etiqueta.setSize(100, 100);
             etiqueta.setText(null);
             Icon icono = new ImageIcon(icon.getImage());
             etiqueta.setIcon(icono);
             this.jPanel1.add(etiqueta);
             imagenes.add(etiqueta);
-            
+
             //Crea ComboBox Estados
-            JComboBox combo = new JComboBox();
-            combo.setFont(this.getFont());
-            combo.addItem("Ocupado");
-            combo.addItem("Libre");
-            estados.add(combo);
-            this.jPanel1.add(combo);
+//            JComboBox combo = new JComboBox();
+//            combo.setFont(this.getFont());
+//            combo.addItem("Ocupado");
+//            combo.addItem("Libre");
+//            estados.add(combo);
+//            this.jPanel1.add(combo);
+            //Crea Checkbox Estados
+            JCheckBox check = new JCheckBox();
+            check.setFont(this.getFont());
+            check.setText("Ocupado");
+            check.setSelected(true);
+            states.add(check);
+            this.jPanel1.add(check);
+
             this.jPanel1.updateUI();
 
         }
@@ -178,6 +187,7 @@ public class JFrameParkings extends javax.swing.JFrame {
         Parkings_MixFilters = new javax.swing.JComboBox<>();
         Parkings_Tittle = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        Parkings_Select = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -212,6 +222,13 @@ public class JFrameParkings extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png"))); // NOI18N
 
+        Parkings_Select.setText("Seleccionar Todos");
+        Parkings_Select.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                Parkings_SelectItemStateChanged(evt);
+            }
+        });
+
         jMenu1.setBackground(new java.awt.Color(255, 255, 255));
         jMenu1.setForeground(new java.awt.Color(38, 91, 145));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/upload_icon.png"))); // NOI18N
@@ -232,41 +249,46 @@ public class JFrameParkings extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(785, 785, 785)
-                                .addComponent(Parkings_CreateARFF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1283, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Parkings_Tittle, javax.swing.GroupLayout.PREFERRED_SIZE, 1155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addComponent(Parkings_Tittle, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(Parkings_Select, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(785, 785, 785)
+                        .addComponent(Parkings_CreateARFF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1283, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Parkings_Tittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(Parkings_Tittle, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(Parkings_Select)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addComponent(Parkings_MixFilters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Parkings_CreateARFF))
-                .addGap(27, 27, 27))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,23 +313,33 @@ public class JFrameParkings extends javax.swing.JFrame {
             int n = 3;
             String[] temp = cx.select(sql, n, 2);
             String[] substring = null;
-            
-            
+
             for (int i = 0; i < temp.length; i++) {
                 substring = temp[i].split(" columns ");
             }
             int t = Integer.valueOf(substring[2]);
-            
-            types = new String[estados.size()];
-            for (int i = 0; i < estados.size(); i++) {
-                JComboBox est = estados.get(i);
-                types[i] = (String) est.getSelectedItem();
+
+//            types = new String[estados.size()];
+//            for (int i = 0; i < estados.size(); i++) {
+//                JComboBox est = estados.get(i);
+//                types[i] = (String) est.getSelectedItem();
+//                sql = "UPDATE `parklots` SET `type`= '" + types[i] + "'WHERE `id`='" + id[i] + "'";
+//                cx.update(sql, " ", 2);
+            types = new String[states.size()];
+            for (int i = 0; i < states.size(); i++) {
+                JCheckBox est = states.get(i);
+                if (est.isSelected()) {
+                    types[i] = "Ocupado";
+                } else {
+                    types[i] = "Libre";
+                }
+
                 sql = "UPDATE `parklots` SET `type`= '" + types[i] + "'WHERE `id`='" + id[i] + "'";
                 cx.update(sql, " ", 2);
             }
-            
+
             this.dispose();
-            
+
             ClassExecutors ce = new ClassExecutors();
             ce.RUN(t, images, types);
 
@@ -316,6 +348,20 @@ public class JFrameParkings extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_Parkings_CreateARFFActionPerformed
+
+    private void Parkings_SelectItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Parkings_SelectItemStateChanged
+        if (this.Parkings_Select.isSelected()) {
+            for (int i = 0; i < states.size(); i++) {
+                JCheckBox est = states.get(i);
+                est.setSelected(true);
+            }
+        } else {
+            for (int i = 0; i < states.size(); i++) {
+                JCheckBox est = states.get(i);
+                est.setSelected(false);
+            }
+        }
+    }//GEN-LAST:event_Parkings_SelectItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -356,6 +402,7 @@ public class JFrameParkings extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Parkings_CreateARFF;
     private javax.swing.JComboBox<String> Parkings_MixFilters;
+    private javax.swing.JCheckBox Parkings_Select;
     private javax.swing.JLabel Parkings_Tittle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

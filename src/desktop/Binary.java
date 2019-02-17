@@ -16,7 +16,7 @@ public class Binary {
 
     Conexion cx = new Conexion();
 
-    public void transform(Image image, int i, String states, int total) throws Exception {
+    public void transform(Image image, int i, String states, int total, String name, int id, String id_parking, String URL) throws Exception {
 
         //Obtiene tamaño para las imagenes del ARFF
         String sql = "";
@@ -32,9 +32,9 @@ public class Binary {
             String[] substring = temp[0].split(" columns ");
             width = substring[1];
             height = substring[2];
-            String model=substring[3];
-            String arff=substring[4];
-            
+            String model = substring[3];
+            String arff = substring[4];
+
             path_model = model.replace("/", "\\");
             path_arff = arff.replace("/", "\\");
 
@@ -50,7 +50,6 @@ public class Binary {
 
         image.resize(Integer.valueOf(width), Integer.valueOf(height));
 
-        System.out.println("num:" + i);
         for (int j = 0; j < image.getHeight(); j++) {
             for (int k = 0; k < image.getWidth(); k++) {
                 int red = image.getColor(k, j).getRed();
@@ -90,11 +89,11 @@ public class Binary {
                     cadena += image.getColor(j, i).getRed() + ",";
                 }
             }
-            Clasificador.MODEL=path_model;
-            Clasificador.STRUCTURE=path_arff;
-            
+            Clasificador.MODEL = path_model;
+            Clasificador.STRUCTURE = path_arff;
+
             Clasificador c = new Clasificador(cadena);
-            c.predecir();
+            c.predecir(name, id, id_parking, URL);
             //System.out.println(cadena);
 
         } else {

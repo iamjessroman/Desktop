@@ -37,7 +37,7 @@ public class ClassExecutorsWhile {
     List<Runnable> tasks = new ArrayList<>();
 
     ScheduledExecutorService scheduler = null;
-    public static ScheduledFuture<?> beeperHandle ;
+    public static ScheduledFuture<?> beeperHandle;
 
     public void RUN(String id, int n, String URL, String path) throws IOException, JSONException {
 
@@ -54,7 +54,7 @@ public class ClassExecutorsWhile {
             public void run() {
                 try {
                     System.out.println("Executing Task inside : " + Thread.currentThread().getName());
-                    gj.get(gp.getParklot(id), path, n);
+                    gj.get(gp.getParklot(id), path, n, Integer.valueOf(id), URL);
                     TimeUnit.SECONDS.sleep(1);
                 } catch (Exception ex) {
                     Logger.getLogger(ClassExecutorsWhile.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +62,7 @@ public class ClassExecutorsWhile {
             }
         };
 
-       beeperHandle = scheduler.scheduleAtFixedRate(task, 1, 1, SECONDS);
+        beeperHandle = scheduler.scheduleAtFixedRate(task, 1, 1, SECONDS);
         scheduler.schedule(new Runnable() {
             public void run() {
                 beeperHandle.cancel(true);
@@ -74,11 +74,10 @@ public class ClassExecutorsWhile {
 //        tasks.stream().forEach(executorService::submit);
 //        executorService.shutdown();
     }
-    
-    
-    public void stop(){
-     beeperHandle.cancel(false);
-    
+
+    public void stop() {
+        beeperHandle.cancel(false);
+
     }
 
 }

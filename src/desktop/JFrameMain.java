@@ -179,6 +179,49 @@ public class JFrameMain extends javax.swing.JFrame {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        try {
+            String sql = "SELECT `name` FROM `filters`";
+            int n = 1;
+            String[] temp = cx.select(sql, n, 2);
+            filters = new String[(temp.length) + 1];
+            this.EditFilters_JComboFilters.removeAllItems();
+            this.CreateFilters_JComboFilters.removeAllItems();
+            filters[0] = "";
+            this.EditFilters_JComboFilters.addItem(filters[0]);
+            this.CreateFilters_JComboFilters.addItem(filters[0]);
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                filters[i + 1] = substring[0];
+                this.EditFilters_JComboFilters.addItem(filters[i + 1]);
+                this.CreateFilters_JComboFilters.addItem(filters[i + 1]);
+            }
+            sql = "SELECT `name` FROM `filters` WHERE `use_gui`='false'";
+            n = 1;
+            temp = cx.select(sql, n, 2);
+            filters = new String[(temp.length) + 1];
+            this.CreateMixFilters_ListFilters.removeAll();
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                filters[i] = substring[0];
+            }
+            this.CreateMixFilters_ListFilters.setListData(filters);
+            this.EditMixFilters_Filters.setListData(filters);
+
+            sql = "SELECT `name` FROM `mix`";
+            n = 1;
+            temp = cx.select(sql, n, 2);
+            namemixs = new String[(temp.length) + 1];
+            this.EditMixFilters_ListMix.removeAll();
+            for (int i = 0; i < temp.length; i++) {
+                String[] substring = temp[i].split(" columns ");
+                namemixs[i] = substring[0];
+            }
+            this.EditMixFilters_ListMix.setListData(namemixs);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -194,11 +237,11 @@ public class JFrameMain extends javax.swing.JFrame {
         TabClassifiers = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        Classifiers_Stop = new javax.swing.JButton();
+        Classifiers_Start = new javax.swing.JButton();
         jLabel53 = new javax.swing.JLabel();
         Classifiers_Parkings = new javax.swing.JComboBox<>();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        Classifiers_Start1 = new javax.swing.JButton();
+        Classifiers_Stop = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         ClassifiersSettings_Save = new javax.swing.JButton();
@@ -257,6 +300,8 @@ public class JFrameMain extends javax.swing.JFrame {
         CreateFilter_Generate = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
         CreateFilter_Code = new javax.swing.JTextArea();
+        CreateFilters_Copy = new javax.swing.JCheckBox();
+        CreateFilters_JComboFilters = new javax.swing.JComboBox<>();
         TabEditFilter = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         EditFilters_JComboFilters = new javax.swing.JComboBox<>();
@@ -364,11 +409,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(38, 91, 145));
         jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-        });
 
         TabClassifiers.setForeground(new java.awt.Color(38, 91, 145));
         TabClassifiers.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -380,16 +420,16 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Classifiers_Stop.setBackground(new java.awt.Color(255, 255, 255));
-        Classifiers_Stop.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Classifiers_Stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        Classifiers_Stop.setText("Iniciar");
-        Classifiers_Stop.addActionListener(new java.awt.event.ActionListener() {
+        Classifiers_Start.setBackground(new java.awt.Color(255, 255, 255));
+        Classifiers_Start.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Classifiers_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
+        Classifiers_Start.setText("Iniciar");
+        Classifiers_Start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Classifiers_StopActionPerformed(evt);
+                Classifiers_StartActionPerformed(evt);
             }
         });
-        jPanel15.add(Classifiers_Stop, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 120, -1));
+        jPanel15.add(Classifiers_Start, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 120, -1));
 
         jLabel53.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(74, 173, 82));
@@ -400,16 +440,17 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel15.add(Classifiers_Parkings, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 25, 250, 30));
         jPanel15.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
 
-        Classifiers_Start1.setBackground(new java.awt.Color(255, 255, 255));
-        Classifiers_Start1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Classifiers_Start1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play_icon.png"))); // NOI18N
-        Classifiers_Start1.setText("Parar");
-        Classifiers_Start1.addActionListener(new java.awt.event.ActionListener() {
+        Classifiers_Stop.setBackground(new java.awt.Color(255, 255, 255));
+        Classifiers_Stop.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Classifiers_Stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop_icon.png"))); // NOI18N
+        Classifiers_Stop.setText("Parar");
+        Classifiers_Stop.setEnabled(false);
+        Classifiers_Stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Classifiers_Start1ActionPerformed(evt);
+                Classifiers_StopActionPerformed(evt);
             }
         });
-        jPanel15.add(Classifiers_Start1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 120, -1));
+        jPanel15.add(Classifiers_Stop, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 120, -1));
 
         jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 430, 410));
 
@@ -521,7 +562,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
                 TabClassifiers.addTab("Configuración", jPanel7);
 
-                jTabbedPane1.addTab("Calsificador", new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png")), TabClassifiers); // NOI18N
+                jTabbedPane1.addTab("Clasificador", new javax.swing.ImageIcon(getClass().getResource("/images/car_icon.png")), TabClassifiers); // NOI18N
 
                 TabModelARFF.setBackground(new java.awt.Color(255, 255, 255));
                 TabModelARFF.setForeground(new java.awt.Color(74, 173, 82));
@@ -742,6 +783,24 @@ public class JFrameMain extends javax.swing.JFrame {
                 jScrollPane18.setViewportView(CreateFilter_Code);
 
                 TabCreateFilter.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 630, 300));
+
+                CreateFilters_Copy.setBackground(new java.awt.Color(255, 255, 255));
+                CreateFilters_Copy.setText("Copiar Filtro");
+                CreateFilters_Copy.addChangeListener(new javax.swing.event.ChangeListener() {
+                    public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                        CreateFilters_CopyStateChanged(evt);
+                    }
+                });
+                TabCreateFilter.add(CreateFilters_Copy, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 140, 30));
+
+                CreateFilters_JComboFilters.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                CreateFilters_JComboFilters.setEnabled(false);
+                CreateFilters_JComboFilters.addItemListener(new java.awt.event.ItemListener() {
+                    public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                        CreateFilters_JComboFiltersItemStateChanged(evt);
+                    }
+                });
+                TabCreateFilter.add(CreateFilters_JComboFilters, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 191, 30));
 
                 TabFilters.addTab("Crear", TabCreateFilter);
 
@@ -1285,10 +1344,6 @@ public class JFrameMain extends javax.swing.JFrame {
                     pack();
                 }// </editor-fold>//GEN-END:initComponents
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        Init();
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
-
     private void Settings_ThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Settings_ThreadsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Settings_ThreadsActionPerformed
@@ -1382,45 +1437,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_Local_SaveActionPerformed
 
     private void TabFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFiltersMouseClicked
-        try {
-            String sql = "SELECT `name` FROM `filters`";
-            int n = 1;
-            String[] temp = cx.select(sql, n, 2);
-            filters = new String[(temp.length) + 1];
-            this.EditFilters_JComboFilters.removeAllItems();
-            filters[0] = "";
-            this.EditFilters_JComboFilters.addItem(filters[0]);
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                filters[i + 1] = substring[0];
-                this.EditFilters_JComboFilters.addItem(filters[i + 1]);
-            }
-            sql = "SELECT `name` FROM `filters` WHERE `use_gui`='false'";
-            n = 1;
-            temp = cx.select(sql, n, 2);
-            filters = new String[(temp.length) + 1];
-            this.CreateMixFilters_ListFilters.removeAll();
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                filters[i] = substring[0];
-            }
-            this.CreateMixFilters_ListFilters.setListData(filters);
-            this.EditMixFilters_Filters.setListData(filters);
 
-            sql = "SELECT `name` FROM `mix`";
-            n = 1;
-            temp = cx.select(sql, n, 2);
-            namemixs = new String[(temp.length) + 1];
-            this.EditMixFilters_ListMix.removeAll();
-            for (int i = 0; i < temp.length; i++) {
-                String[] substring = temp[i].split(" columns ");
-                namemixs[i] = substring[0];
-            }
-            this.EditMixFilters_ListMix.setListData(namemixs);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_TabFiltersMouseClicked
 
     private void EditMixFilters_FiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_FiltersMouseClicked
@@ -1745,28 +1762,37 @@ public class JFrameMain extends javax.swing.JFrame {
         this.Init();
     }//GEN-LAST:event_formWindowOpened
 
-    private void Classifiers_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StopActionPerformed
-
+    private void Classifiers_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StartActionPerformed
         try {
-            
+
             String sql = "DELETE FROM `detailparklot`";
             cx.delete(sql, " ", 1);
-            ClassExecutorsWhile.state=10000000;
-            
+            ClassExecutorsWhile.state = 10000000;
+
             String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];
-            ClassExecutorsWhile cew=new ClassExecutorsWhile();
+
+            sql = sql = "SELECT pathImg_Parklot FROM `parklot` WHERE id_Parklot ='" + id + "'";
+            String[] temp = cx.select(sql, 1, 1);
+            String[] sub = temp[0].split(".jpg columns");
+            String path_parklot = sub[0].substring(0, sub[0].length() - 19);
+
+            Clasificador.PATH = path_parklot;
+
+            ClassExecutorsWhile cew = new ClassExecutorsWhile();
             cew.RUN(id, Threads, URL, dir);
-            
-            
+            this.Classifiers_Start.setEnabled(false);
+            this.Classifiers_Stop.setEnabled(true);
+
         } catch (IOException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JSONException ex) {
             Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-           
 
-    }//GEN-LAST:event_Classifiers_StopActionPerformed
+    }//GEN-LAST:event_Classifiers_StartActionPerformed
 
     private void ClassifiersSettings_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassifiersSettings_SaveActionPerformed
         String w = this.ClassifiersSettings_Width.getText();
@@ -1847,10 +1873,94 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void Classifiers_Start1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_Start1ActionPerformed
-            ClassExecutorsWhile cew = new ClassExecutorsWhile();
-            cew.stop();
-    }//GEN-LAST:event_Classifiers_Start1ActionPerformed
+    private void Classifiers_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StopActionPerformed
+        ClassExecutorsWhile cew = new ClassExecutorsWhile();
+        cew.stop();
+        this.Classifiers_Start.setEnabled(true);
+        this.Classifiers_Stop.setEnabled(false);
+    }//GEN-LAST:event_Classifiers_StopActionPerformed
+
+    private void CreateFilters_CopyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CreateFilters_CopyStateChanged
+        if (this.CreateFilters_Copy.isSelected()) {
+            this.CreateFilters_JComboFilters.setEnabled(true);
+        } else {
+            this.CreateFilters_JComboFilters.setEnabled(false);
+            this.CreateFilter_UseGui.setSelectedIndex(0);
+            this.CreateFilter_Init.setText("function(self) {}");
+            this.CreateFilter_Gui.setText("function(self) {}");
+            this.CreateFilter_Apply.setText("function(self) {\n"
+                    + "          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n"
+                    + "        }");
+            this.CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n"
+                    + "  var srcPixels = srcImageData.data,\n"
+                    + "    srcWidth = srcImageData.width,\n"
+                    + "    srcHeight = srcImageData.height,\n"
+                    + "    srcLength = srcPixels.length,\n"
+                    + "    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n"
+                    + "    dstPixels = dstImageData.data;\n"
+                    + "\n"
+                    + "  return dstImageData;\n"
+                    + "};");
+        }
+    }//GEN-LAST:event_CreateFilters_CopyStateChanged
+
+    private void CreateFilters_JComboFiltersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CreateFilters_JComboFiltersItemStateChanged
+        String nameFilter = this.CreateFilters_JComboFilters.getItemAt(this.CreateFilters_JComboFilters.getSelectedIndex());
+        String sql = "SELECT * FROM `filters` WHERE `name`='" + nameFilter + "';";
+        try {
+            String temp[] = cx.select(sql, 7, 2);
+            String[] substring = temp[0].split(" columns ");
+            //Test
+//                            System.out.println(temp.length);
+//                            System.out.println(substring.length);
+            if (substring.length > 1) {
+                this.CreateFilter_UseGui.setSelectedIndex(substring[2].equals("true") ? 0 : 1);
+                this.CreateFilter_Init.setText(substring[3]);
+                this.CreateFilter_Gui.setText(substring[4]);
+                this.CreateFilter_Apply.setText(substring[5]);
+                this.CreateFilter_Code.setText(substring[6]);
+            }
+
+            if (substring.length == 1) {
+
+                this.CreateFilter_UseGui.setSelectedIndex(0);
+                this.CreateFilter_Init.setText("function(self) {}");
+                this.CreateFilter_Gui.setText("function(self) {}");
+                this.CreateFilter_Apply.setText("function(self) {\n"
+                        + "          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n"
+                        + "        }");
+                this.CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n"
+                        + "  var srcPixels = srcImageData.data,\n"
+                        + "    srcWidth = srcImageData.width,\n"
+                        + "    srcHeight = srcImageData.height,\n"
+                        + "    srcLength = srcPixels.length,\n"
+                        + "    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n"
+                        + "    dstPixels = dstImageData.data;\n"
+                        + "\n"
+                        + "  return dstImageData;\n"
+                        + "};");
+
+            }
+
+        } catch (SQLException ex) {
+            this.CreateFilter_UseGui.setSelectedIndex(0);
+            this.CreateFilter_Init.setText("function(self) {}");
+            this.CreateFilter_Gui.setText("function(self) {}");
+            this.CreateFilter_Apply.setText("function(self) {\n"
+                    + "          TestCanvas.apply(\"Nombre_del_Filtro\", []);\n"
+                    + "        }");
+            this.CreateFilter_Code.setText("ImageFilters.Nombre_del_Filtro = function(srcImageData) {\n"
+                    + "  var srcPixels = srcImageData.data,\n"
+                    + "    srcWidth = srcImageData.width,\n"
+                    + "    srcHeight = srcImageData.height,\n"
+                    + "    srcLength = srcPixels.length,\n"
+                    + "    dstImageData = this.utils.createImageData(srcWidth, srcHeight),\n"
+                    + "    dstPixels = dstImageData.data;\n"
+                    + "\n"
+                    + "  return dstImageData;\n"
+                    + "};");
+        }
+    }//GEN-LAST:event_CreateFilters_JComboFiltersItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1874,7 +1984,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton ClassifiersSettings_Save;
     private javax.swing.JTextField ClassifiersSettings_Width;
     private javax.swing.JComboBox<String> Classifiers_Parkings;
-    private javax.swing.JButton Classifiers_Start1;
+    private javax.swing.JButton Classifiers_Start;
     private javax.swing.JButton Classifiers_Stop;
     private javax.swing.JTextField Conexion_MyIP;
     private javax.swing.JTextField Conexion_MyIP2;
@@ -1885,6 +1995,8 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JTextArea CreateFilter_Init;
     private javax.swing.JTextField CreateFilter_Name;
     private javax.swing.JComboBox<String> CreateFilter_UseGui;
+    private javax.swing.JCheckBox CreateFilters_Copy;
+    private javax.swing.JComboBox<String> CreateFilters_JComboFilters;
     private javax.swing.JList<String> CreateMixFilters_ListFilters;
     private javax.swing.JList<String> CreateMixFilters_ListMix;
     private javax.swing.JTextField CreateMixFilters_Name;
