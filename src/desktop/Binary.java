@@ -7,12 +7,17 @@ package desktop;
 
 import java.awt.Color;
 import javaxt.io.Image;
+import org.json.*;
 
 /**
  *
  * @author jessi
  */
 public class Binary {
+
+    public static String URL = "";
+    public static String id_parklot = "";
+    public static String name_path = "";
 
     Conexion cx = new Conexion();
 
@@ -24,6 +29,7 @@ public class Binary {
         String height = "";
         String path_model = "";
         String path_arff = "";
+
         if (states == null) {
             sql = "SELECT * FROM `settings_arff` WHERE `id`=2";
             int n = 5;
@@ -46,10 +52,25 @@ public class Binary {
             String[] substring = temp[0].split(" columns ");
             width = substring[1];
             height = substring[2];
+
+//            System.out.println(this.URL+" "+this.id_parklot+" "+this.name_path);
+            GetParking.BASE_URI = this.URL + "app";
+            GetParking gp = new GetParking();
+            String json = gp.getParkings(id_parklot, name_path);
+//            System.out.println(json);
+
+            JSONObject objects = new JSONObject(json);
+            JSONArray array = objects.getJSONArray("objects");
+//            System.out.println(array.getJSONObject(i+1).getJSONArray("objects").getJSONObject(1).getString("text")+" "+i);
+            double w = array.getJSONObject(i + 1).getDouble("width");
+            double h = array.getJSONObject(i + 1).getDouble("height");
+            double scaleX = array.getJSONObject(i + 1).getDouble("scaleX");
+            double scaleY = array.getJSONObject(i + 1).getDouble("scaleY");
+            image.crop(0, 0, (int) (w*scaleX), (int) (h*scaleY));
         }
 
         image.resize(Integer.valueOf(width), Integer.valueOf(height));
-
+        
         for (int j = 0; j < image.getHeight(); j++) {
             for (int k = 0; k < image.getWidth(); k++) {
                 int red = image.getColor(k, j).getRed();
@@ -81,7 +102,7 @@ public class Binary {
         }
 
         //Test
-//        image.saveAs("C:\\test\\"+i+".png");
+//        image.saveAs("C:\\test\\" + i + ".png");
         if (states == null) {
             String cadena = "";
             for (i = 0; i < image.getHeight(); i++) {

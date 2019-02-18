@@ -53,6 +53,7 @@ public class JFrameParkings extends javax.swing.JFrame {
     String[] id = null;
     String[] types = null;
     ClassMain cm = new ClassMain();
+    public static String URL="";
 
     /**
      * Creates new form Parqueos
@@ -87,16 +88,16 @@ public class JFrameParkings extends javax.swing.JFrame {
         }
 
         //Obtiene las imagenes de Base de Datos
-        sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` ,`id` FROM `parklots`";
-        n = 5;
+        sql = "SELECT `name_parking`, `path_parking`, `id_parklot`, `data_url` ,`id`,`id_parking` FROM `parklots`";
+        n = 6;
         temp = cx.select(sql, n, 2);
         String[] data_url = new String[(temp.length)];
-        String name_parking = "", path_parking = "";
+        String name_parking = "", path_parking = "",id_parking="";
         id_parklots = new String[(temp.length)];
         id = new String[(temp.length)];
-
+        String[] substring= null;
         for (int i = 0; i < temp.length; i++) {
-            String[] substring = temp[i].split(" columns ");
+            substring = temp[i].split(" columns ");
             name_parking = substring[0];
             path_parking = substring[1];
             id_parklots[i] = substring[2];
@@ -104,7 +105,11 @@ public class JFrameParkings extends javax.swing.JFrame {
             data_url[i] = data_image[1];
             //System.out.println(data_url[i]);
             id[i] = substring[4];
+            id_parking=substring[5];
         }
+        
+        Binary.id_parklot=id_parking;
+        Binary.name_path=path_parking;
 
         //set Tittle 
         this.Parkings_Tittle.setText(name_parking + " (" + path_parking + ")");
@@ -113,7 +118,7 @@ public class JFrameParkings extends javax.swing.JFrame {
         sql = "SELECT `path` FROM `settings`";
         n = 1;
         temp = cx.select(sql, n, 2);
-        String[] substring = temp[0].split(" columns ");
+        substring = temp[0].split(" columns ");
         String res = substring[0];
         String dir = res.replace("/", "\\");
 

@@ -350,6 +350,17 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel40 = new javax.swing.JLabel();
+        TabSettings = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        Settings_PathImagesTemp = new javax.swing.JTextField();
+        Settings_Save = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        Settings_Url = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        Settings_Threads = new javax.swing.JComboBox<>();
+        jLabel38 = new javax.swing.JLabel();
         TabConexion = new javax.swing.JTabbedPane();
         TabLocalConexion = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -386,17 +397,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         Conexion_MyIP2 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        TabSettings = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        Settings_PathImagesTemp = new javax.swing.JTextField();
-        Settings_Save = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        Settings_Url = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel46 = new javax.swing.JLabel();
-        Settings_Threads = new javax.swing.JComboBox<>();
-        jLabel38 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -673,11 +673,6 @@ public class JFrameMain extends javax.swing.JFrame {
                 TabFilters.setBackground(new java.awt.Color(255, 255, 255));
                 TabFilters.setForeground(new java.awt.Color(74, 173, 82));
                 TabFilters.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                TabFilters.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        TabFiltersMouseClicked(evt);
-                    }
-                });
 
                 TabCreateFilter.setBackground(new java.awt.Color(255, 255, 255));
                 TabCreateFilter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1077,187 +1072,6 @@ public class JFrameMain extends javax.swing.JFrame {
 
                 jTabbedPane1.addTab("Filtros", new javax.swing.ImageIcon(getClass().getResource("/images/filters_icon.png")), TabFilters); // NOI18N
 
-                TabConexion.setBackground(new java.awt.Color(255, 255, 255));
-                TabConexion.setForeground(new java.awt.Color(74, 173, 82));
-                TabConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-                TabLocalConexion.setBackground(new java.awt.Color(255, 255, 255));
-                TabLocalConexion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-                jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-                jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel22.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel22.setText("Nombre de la Base de Datos");
-                jLabel22.setToolTipText("");
-                jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
-
-                jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel19.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel19.setText("IP");
-                jLabel19.setToolTipText("");
-                jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
-
-                Local_IP.setText("166.62.78.1");
-                jPanel11.add(Local_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
-
-                jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel20.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel20.setText("Puerto");
-                jLabel20.setToolTipText("");
-                jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
-
-                Local_Puerto.setText("3306");
-                jPanel11.add(Local_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 200, -1));
-
-                Local_Name.setText("server-administrator");
-                jPanel11.add(Local_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
-
-                Local_Save.setBackground(new java.awt.Color(255, 255, 255));
-                Local_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                Local_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-                Local_Save.setText("Guardar");
-                Local_Save.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        Local_SaveActionPerformed(evt);
-                    }
-                });
-                jPanel11.add(Local_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
-
-                jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-                jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-                jPanel12.setForeground(new java.awt.Color(74, 173, 82));
-                jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel21.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel21.setText("USERNAME");
-                jLabel21.setToolTipText("");
-                jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
-
-                jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel23.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel23.setText("PASSWORD");
-                jLabel23.setToolTipText("");
-                jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
-
-                Local_User.setText("jessicaroman");
-                jPanel12.add(Local_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
-
-                Local_Pass.setText("12345");
-                jPanel12.add(Local_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
-
-                jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
-
-                TabLocalConexion.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
-                TabLocalConexion.add(Conexion_MyIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
-
-                jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel29.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel29.setText("IP EXTERNA");
-                jLabel29.setToolTipText("");
-                TabLocalConexion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
-
-                jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
-                TabLocalConexion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
-
-                TabConexion.addTab("Programa Interno", TabLocalConexion);
-
-                jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-                jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-                jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-                jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel24.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel24.setText("Nombre de la Base de Datos");
-                jPanel14.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
-
-                jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel25.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel25.setText("IP");
-                jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
-
-                Remote_IP.setText("127.0.0.1");
-                jPanel14.add(Remote_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
-
-                jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel26.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel26.setText("Puerto");
-                jPanel14.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
-
-                Remote_Puerto.setText("3306");
-                jPanel14.add(Remote_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 201, -1));
-
-                Remote_Name.setText("parkingdb");
-                jPanel14.add(Remote_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
-
-                Remote_Save.setBackground(new java.awt.Color(255, 255, 255));
-                Remote_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                Remote_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
-                Remote_Save.setText("Guardar");
-                Remote_Save.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        Remote_SaveActionPerformed(evt);
-                    }
-                });
-                jPanel14.add(Remote_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
-
-                jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-                jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
-                jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-                jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel27.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel27.setText("USERNAME");
-                jPanel16.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
-
-                jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel28.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel28.setText("PASSWORD");
-                jPanel16.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
-
-                Remote_User.setText("root");
-                jPanel16.add(Remote_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
-                jPanel16.add(Remote_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
-
-                jPanel14.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
-
-                jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
-
-                jLabel37.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-                jLabel37.setForeground(new java.awt.Color(74, 173, 82));
-                jLabel37.setText("IP EXTERNA");
-                jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
-                jPanel13.add(Conexion_MyIP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
-
-                jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
-                jLabel15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-                jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
-
-                javax.swing.GroupLayout TabRemoteConexionLayout = new javax.swing.GroupLayout(TabRemoteConexion);
-                TabRemoteConexion.setLayout(TabRemoteConexionLayout);
-                TabRemoteConexionLayout.setHorizontalGroup(
-                    TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabRemoteConexionLayout.createSequentialGroup()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE))
-                );
-                TabRemoteConexionLayout.setVerticalGroup(
-                    TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TabRemoteConexionLayout.createSequentialGroup()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
-                );
-
-                TabConexion.addTab("Programa Externo", TabRemoteConexion);
-
-                jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
-
                 TabSettings.setBackground(new java.awt.Color(255, 255, 255));
                 TabSettings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1324,14 +1138,195 @@ public class JFrameMain extends javax.swing.JFrame {
 
                     jTabbedPane1.addTab("Configuración", new javax.swing.ImageIcon(getClass().getResource("/images/settings_icon.png")), TabSettings); // NOI18N
 
+                    TabConexion.setBackground(new java.awt.Color(255, 255, 255));
+                    TabConexion.setForeground(new java.awt.Color(74, 173, 82));
+                    TabConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+                    TabLocalConexion.setBackground(new java.awt.Color(255, 255, 255));
+                    TabLocalConexion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+                    jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                    jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel22.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel22.setText("Nombre de la Base de Datos");
+                    jLabel22.setToolTipText("");
+                    jPanel11.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
+
+                    jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel19.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel19.setText("IP");
+                    jLabel19.setToolTipText("");
+                    jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
+
+                    Local_IP.setText("166.62.78.1");
+                    jPanel11.add(Local_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
+
+                    jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel20.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel20.setText("Puerto");
+                    jLabel20.setToolTipText("");
+                    jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
+
+                    Local_Puerto.setText("3306");
+                    jPanel11.add(Local_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 200, -1));
+
+                    Local_Name.setText("server-administrator");
+                    jPanel11.add(Local_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
+
+                    Local_Save.setBackground(new java.awt.Color(255, 255, 255));
+                    Local_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                    Local_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                    Local_Save.setText("Guardar");
+                    Local_Save.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            Local_SaveActionPerformed(evt);
+                        }
+                    });
+                    jPanel11.add(Local_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+                    jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+                    jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                    jPanel12.setForeground(new java.awt.Color(74, 173, 82));
+                    jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel21.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel21.setText("USERNAME");
+                    jLabel21.setToolTipText("");
+                    jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
+
+                    jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel23.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel23.setText("PASSWORD");
+                    jLabel23.setToolTipText("");
+                    jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
+
+                    Local_User.setText("jessicaroman");
+                    jPanel12.add(Local_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
+
+                    Local_Pass.setText("12345");
+                    jPanel12.add(Local_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
+
+                    jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
+
+                    TabLocalConexion.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
+                    TabLocalConexion.add(Conexion_MyIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
+
+                    jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel29.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel29.setText("IP EXTERNA");
+                    jLabel29.setToolTipText("");
+                    TabLocalConexion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
+
+                    jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
+                    TabLocalConexion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                    TabConexion.addTab("Programa Interno", TabLocalConexion);
+
+                    jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+                    jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+                    jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                    jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel24.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel24.setText("Nombre de la Base de Datos");
+                    jPanel14.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 86, -1, 20));
+
+                    jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel25.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel25.setText("IP");
+                    jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, 135, -1));
+
+                    Remote_IP.setText("127.0.0.1");
+                    jPanel14.add(Remote_IP, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 15, 201, -1));
+
+                    jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel26.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel26.setText("Puerto");
+                    jPanel14.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 53, -1, -1));
+
+                    Remote_Puerto.setText("3306");
+                    jPanel14.add(Remote_Puerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 50, 201, -1));
+
+                    Remote_Name.setText("parkingdb");
+                    jPanel14.add(Remote_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 85, 201, -1));
+
+                    Remote_Save.setBackground(new java.awt.Color(255, 255, 255));
+                    Remote_Save.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                    Remote_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_icon.png"))); // NOI18N
+                    Remote_Save.setText("Guardar");
+                    Remote_Save.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            Remote_SaveActionPerformed(evt);
+                        }
+                    });
+                    jPanel14.add(Remote_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+                    jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+                    jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(38, 91, 145), new java.awt.Color(38, 91, 145)));
+                    jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+                    jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel27.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel27.setText("USERNAME");
+                    jPanel16.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 18, -1, -1));
+
+                    jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel28.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel28.setText("PASSWORD");
+                    jPanel16.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 73, -1, -1));
+
+                    Remote_User.setText("root");
+                    jPanel16.add(Remote_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 15, 142, -1));
+                    jPanel16.add(Remote_Pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 70, 142, -1));
+
+                    jPanel14.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 125, 360, 120));
+
+                    jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 450, 330));
+
+                    jLabel37.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+                    jLabel37.setForeground(new java.awt.Color(74, 173, 82));
+                    jLabel37.setText("IP EXTERNA");
+                    jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, 39));
+                    jPanel13.add(Conexion_MyIP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 250, 39));
+
+                    jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/conexion_logo.png"))); // NOI18N
+                    jLabel15.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+                    jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, -1, -1));
+
+                    javax.swing.GroupLayout TabRemoteConexionLayout = new javax.swing.GroupLayout(TabRemoteConexion);
+                    TabRemoteConexion.setLayout(TabRemoteConexionLayout);
+                    TabRemoteConexionLayout.setHorizontalGroup(
+                        TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TabRemoteConexionLayout.createSequentialGroup()
+                            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 8, Short.MAX_VALUE))
+                    );
+                    TabRemoteConexionLayout.setVerticalGroup(
+                        TabRemoteConexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TabRemoteConexionLayout.createSequentialGroup()
+                            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(0, 0, 0))
+                    );
+
+                    TabConexion.addTab("Programa Externo", TabRemoteConexion);
+
+                    jTabbedPane1.addTab("Conexión", new javax.swing.ImageIcon(getClass().getResource("/images/conexion_icon.png")), TabConexion); // NOI18N
+
                     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                     getContentPane().setLayout(layout);
                     layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap())
                     );
                     layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1435,10 +1430,6 @@ public class JFrameMain extends javax.swing.JFrame {
         String msg = "la configuración de base de datos interna";
         cx.update(sql, msg, 2);
     }//GEN-LAST:event_Local_SaveActionPerformed
-
-    private void TabFiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFiltersMouseClicked
-
-    }//GEN-LAST:event_TabFiltersMouseClicked
 
     private void EditMixFilters_FiltersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditMixFilters_FiltersMouseClicked
         JList list = (JList) evt.getSource();
@@ -1747,10 +1738,11 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_SettingsARFF_SaveActionPerformed
 
     private void CreateModel_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateModel_StartActionPerformed
-
+         
         ARFFfile.Width = Integer.valueOf(this.SettingsARFF_Width.getText());
         ARFFfile.Height = Integer.valueOf(this.SettingsARFF_Height.getText());
         ARFFfile ar = new ARFFfile();
+        Binary.URL=URL;
         String id = this.id_parklots[this.CreateModel_Parkings.getSelectedIndex()];
         JFrameWebView.id = id;
         JFrameWebView.http = this.Settings_Url.getText();
@@ -1765,13 +1757,15 @@ public class JFrameMain extends javax.swing.JFrame {
     private void Classifiers_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Classifiers_StartActionPerformed
         try {
 
-            String sql = "DELETE FROM `detailparklot`";
-            cx.delete(sql, " ", 1);
+            
             ClassExecutorsWhile.state = 10000000;
 
             String id = this.id_parklots[this.Classifiers_Parkings.getSelectedIndex()];
+            
+            String sql = "DELETE FROM `detailparklot` WHERE `id_park` ='"+id+"'";
+            cx.delete(sql, " ", 1);
 
-            sql = sql = "SELECT pathImg_Parklot FROM `parklot` WHERE id_Parklot ='" + id + "'";
+            sql = "SELECT pathImg_Parklot FROM `parklot` WHERE id_Parklot ='" + id + "'";
             String[] temp = cx.select(sql, 1, 1);
             String[] sub = temp[0].split(".jpg columns");
             String path_parklot = sub[0].substring(0, sub[0].length() - 19);

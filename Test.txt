@@ -1,0 +1,4 @@
+
+<button onclick="upload('http://localhost:8080/Servidor/app/parklot/37');">Cargar</button>
+<button onclick="next()">Cortar</button>
+<button onclick="refresh()">Reiniciar</button>
